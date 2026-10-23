@@ -12,7 +12,7 @@ $imports = $helper->imports([
 
 <?= $imports->render() ?>
 
-require dirname(__DIR__).'/vendor/autoload.php';
+require __DIR__.'/../vendor/autoload.php';
 
 // a kernel reuses the container compiled by a previous run: the code of the bundle building it
 // (the extension, the compiler passes) would not run, and would be missing from the code coverage
