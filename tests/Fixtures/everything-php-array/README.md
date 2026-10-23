@@ -68,6 +68,16 @@ php bin/console doctrine:migrations:diff
 php bin/console doctrine:migrations:migrate
 ```
 
+### Install the Assets
+
+Install the web assets of the bundle in the `public/bundles/acmeeverythingphparray/`
+directory of your application (Symfony Flex runs this command after each
+`composer require` and `composer update`):
+
+```console
+php bin/console assets:install
+```
+
 ## Configuration
 
 The bundle works without configuration. To change its defaults, configure the

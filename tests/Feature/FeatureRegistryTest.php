@@ -23,6 +23,7 @@ use Tito10047\BundleMaker\Feature\FeatureGroup;
 use Tito10047\BundleMaker\Feature\FeatureInterface;
 use Tito10047\BundleMaker\Feature\FeatureRegistry;
 use Tito10047\BundleMaker\Feature\FeatureSelection;
+use Tito10047\BundleMaker\Feature\PublicAssetsFeature;
 use Tito10047\BundleMaker\Feature\SemanticConfigFeature;
 use Tito10047\BundleMaker\Feature\TranslationsFeature;
 use Tito10047\BundleMaker\Feature\TwigFeature;
@@ -106,6 +107,7 @@ final class FeatureRegistryTest extends TestCase
         self::assertInstanceOf(CommandFeature::class, $registry->get(CommandFeature::NAME));
         self::assertInstanceOf(EventListenerFeature::class, $registry->get(EventListenerFeature::NAME));
         self::assertInstanceOf(DoctrineFeature::class, $registry->get(DoctrineFeature::NAME));
+        self::assertInstanceOf(PublicAssetsFeature::class, $registry->get(PublicAssetsFeature::NAME));
         // the order of the questions and of the contributions; a feature reading the answers of other features
         // comes after them (twig defaults to the answer of controllers)
         self::assertSame(
@@ -117,6 +119,7 @@ final class FeatureRegistryTest extends TestCase
                 CommandFeature::NAME,
                 EventListenerFeature::NAME,
                 DoctrineFeature::NAME,
+                PublicAssetsFeature::NAME,
             ],
             array_map(static fn (FeatureInterface $feature): string => $feature->getName(), $registry->getByGroup(FeatureGroup::Features)),
         );

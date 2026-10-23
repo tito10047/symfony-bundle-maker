@@ -270,3 +270,22 @@ doctrine:
                 mappings:
                     MyVendorEverythingYamlBundle: false
 ```
+
+## Web Assets
+
+The bundle provides a stylesheet, `public/css/my-vendor-everything-yaml.css`. The
+`assets:install` command installs it in the `public/bundles/myvendoreverythingyaml/` directory
+of your application (see the [installation instructions](../README.md#installation)).
+When your application uses AssetMapper, AssetMapper serves it too, with a versioned URL.
+It styles the [templates](#templates) of the bundle.
+
+Link it in the `stylesheets` block of your layout, with the `asset()` function of the
+[Asset component](https://symfony.com/doc/current/components/asset.html), which gives
+the right URL in both cases:
+
+```twig
+{# templates/base.html.twig #}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('bundles/myvendoreverythingyaml/css/my-vendor-everything-yaml.css') }}">
+{% endblock %}
+```

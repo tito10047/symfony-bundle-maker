@@ -80,6 +80,7 @@ final class FeatureRegistry implements \IteratorAggregate, \Countable
             new CommandFeature(),
             new EventListenerFeature(),
             new DoctrineFeature(),
+            new PublicAssetsFeature(),
         );
     }
 

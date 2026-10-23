@@ -1,0 +1,27 @@
+/*
+ * Styles of MyVendorEverythingYamlBundle.
+ *
+ * Installed in public/bundles/myvendoreverythingyaml/css/my-vendor-everything-yaml.css by "php bin/console assets:install".
+ */
+
+.my-vendor-everything-yaml-hello {
+    margin: 1rem 0;
+    padding: 1rem 1.5rem;
+    border-radius: .5rem;
+    background: #f5f7fa;
+    color: #1f2933;
+}
+
+.my-vendor-everything-yaml-hello__title {
+    margin: 0 0 .5rem;
+    font-size: 1.5rem;
+}
+
+.my-vendor-everything-yaml-hello__greeting {
+    margin: 0;
+}
+
+.my-vendor-everything-yaml-hello__close {
+    margin-top: 1rem;
+    cursor: pointer;
+}
