@@ -1,5 +1,17 @@
 <?php
 
+declare(strict_types=1);
+
+/*
+ * This file is part of the tito10047/symfony-bundle-maker package.
+ *
+ * (c) Jozef Môstka <jozef@mostka.sk>
+ * (c) Yonel Ceruto <yonelceruto@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Tito10047\BundleMaker\Maker;
 
 use Composer\Json\JsonManipulator;
@@ -15,7 +27,11 @@ class BundleComposerJsonMaker
     {
         $file = $this->bundleDir.'/composer.json';
 
-        $manipulator = new JsonManipulator(file_get_contents($file));
+        if (false === $contents = file_get_contents($file)) {
+            throw new \RuntimeException(\sprintf('Unable to read "%s" file.', $file));
+        }
+
+        $manipulator = new JsonManipulator($contents);
         $manipulator->addProperty('name', $options->name);
         $manipulator->addProperty('description', $options->description);
         $manipulator->addSubNode('autoload', 'psr-4', [Inflector::namespacefy($options->name).'\\' => 'src/']);

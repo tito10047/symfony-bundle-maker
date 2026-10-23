@@ -1,5 +1,17 @@
 <?php
 
+declare(strict_types=1);
+
+/*
+ * This file is part of the tito10047/symfony-bundle-maker package.
+ *
+ * (c) Jozef Môstka <jozef@mostka.sk>
+ * (c) Yonel Ceruto <yonelceruto@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Tito10047\BundleMaker;
 
 use Composer\Composer;
@@ -60,11 +72,11 @@ class Plugin implements PluginInterface, EventSubscriberInterface
     {
         $message = <<<EOT
 
-<bg=green;fg=white>                                                                    </>
-<bg=green;fg=white> ✨ Your bundle is all set to rock the Symfony world! Happy coding! </>
-<bg=green;fg=white>                                                                    </>
+            <bg=green;fg=white>                                                                    </>
+            <bg=green;fg=white> ✨ Your bundle is all set to rock the Symfony world! Happy coding! </>
+            <bg=green;fg=white>                                                                    </>
 
-EOT;
+            EOT;
         $this->io->write($message);
     }
 }

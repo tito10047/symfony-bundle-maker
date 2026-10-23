@@ -1,5 +1,17 @@
 <?php
 
+declare(strict_types=1);
+
+/*
+ * This file is part of the tito10047/symfony-bundle-maker package.
+ *
+ * (c) Jozef Môstka <jozef@mostka.sk>
+ * (c) Yonel Ceruto <yonelceruto@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Tito10047\BundleMaker\Maker;
 
 use PhpParser\BuilderFactory;
@@ -17,7 +29,7 @@ class BundleMaker
         $directory = $this->bundleDir.'/src';
 
         if (!is_dir($directory) && !mkdir($directory) && !is_dir($directory)) {
-            throw new \RuntimeException(sprintf('Directory "%s" was not created.', $directory));
+            throw new \RuntimeException(\sprintf('Directory "%s" was not created.', $directory));
         }
 
         $namespace = Inflector::namespacefy($options->name);
@@ -28,10 +40,10 @@ class BundleMaker
         $classAst = $factory->class($className)->extend('AbstractBundle');
         $classAst->setDocComment(<<<EOF
 
-/**
- * @link https://symfony.com/doc/current/bundles/best_practices.html
- */
-EOF
+            /**
+             * @link https://symfony.com/doc/current/bundles/best_practices.html
+             */
+            EOF
         );
 
         if ($options->hasConfig) {
@@ -65,6 +77,6 @@ EOF
         $fileAst->addStmt($classAst);
 
         $code = (new Standard())->prettyPrintFile([$fileAst->getNode()]);
-        file_put_contents(sprintf('%s/%s.php', $directory, $className), $code);
+        file_put_contents(\sprintf('%s/%s.php', $directory, $className), $code);
     }
 }

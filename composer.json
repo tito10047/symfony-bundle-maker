@@ -1,8 +1,8 @@
 {
     "name": "tito10047/symfony-bundle-maker",
     "description": "Composer plugin for Symfony bundles",
-    "type": "composer-plugin",
     "license": "MIT",
+    "type": "composer-plugin",
     "authors": [
         {
             "name": "Jozef Môstka",
@@ -15,13 +15,17 @@
         }
     ],
     "require": {
-        "php": ">=8.1",
-        "composer-plugin-api": "^2.3",
+        "php": ">=8.2",
+        "composer-plugin-api": "^2.6",
         "nikic/php-parser": "^5.0"
     },
     "require-dev": {
         "composer/composer": "^2.6",
-        "phpunit/phpunit": "^10.5"
+        "friendsofphp/php-cs-fixer": "^3.92",
+        "phpstan/phpstan": "^2.1",
+        "phpstan/phpstan-phpunit": "^2.0",
+        "phpstan/phpstan-strict-rules": "^2.0",
+        "phpunit/phpunit": "^11.5"
     },
     "autoload": {
         "psr-4": {
@@ -33,7 +37,28 @@
             "Tito10047\\BundleMaker\\Tests\\": "tests/"
         }
     },
+    "config": {
+        "sort-packages": true
+    },
     "extra": {
         "class": "Tito10047\\BundleMaker\\Plugin"
+    },
+    "scripts": {
+        "cs": "php-cs-fixer check --diff",
+        "cs:fix": "php-cs-fixer fix",
+        "phpstan": "phpstan analyse",
+        "qa": [
+            "@cs",
+            "@phpstan",
+            "@test"
+        ],
+        "test": "phpunit"
+    },
+    "scripts-descriptions": {
+        "cs": "Checks coding standards (PHP-CS-Fixer, dry run)",
+        "cs:fix": "Fixes coding standards (PHP-CS-Fixer)",
+        "phpstan": "Runs static analysis (PHPStan, level max)",
+        "qa": "Runs every quality check: coding standards, static analysis and tests",
+        "test": "Runs the test suite (PHPUnit)"
     }
 }

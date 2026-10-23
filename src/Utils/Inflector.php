@@ -1,5 +1,17 @@
 <?php
 
+declare(strict_types=1);
+
+/*
+ * This file is part of the tito10047/symfony-bundle-maker package.
+ *
+ * (c) Jozef Môstka <jozef@mostka.sk>
+ * (c) Yonel Ceruto <yonelceruto@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Tito10047\BundleMaker\Utils;
 
 class Inflector
@@ -25,7 +37,7 @@ class Inflector
      */
     public static function className(string $name): string
     {
-        return self::classify(substr($name, strrpos($name, '/') + 1));
+        return self::classify(self::shortName($name));
     }
 
     /**
@@ -37,11 +49,23 @@ class Inflector
             return '';
         }
 
-        return strtolower(str_replace('/', '_', substr($name, 0, strpos($name, '-'))));
+        $dash = strpos($name, '-');
+
+        return strtolower(str_replace('/', '_', false === $dash ? $name : substr($name, 0, $dash)));
     }
 
     public static function fileName(string $name): string
     {
-        return strtolower(substr($name, strrpos($name, '/') + 1));
+        return strtolower(self::shortName($name));
+    }
+
+    /**
+     * Converts 'acme/foo-bundle' to 'foo-bundle'.
+     */
+    private static function shortName(string $name): string
+    {
+        $slash = strrpos($name, '/');
+
+        return false === $slash ? $name : substr($name, $slash + 1);
     }
 }

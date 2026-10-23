@@ -1,5 +1,17 @@
 <?php
 
+declare(strict_types=1);
+
+/*
+ * This file is part of the tito10047/symfony-bundle-maker package.
+ *
+ * (c) Jozef Môstka <jozef@mostka.sk>
+ * (c) Yonel Ceruto <yonelceruto@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Tito10047\BundleMaker\Tests\Maker;
 
 use Tito10047\BundleMaker\Composer\CommandRunner;
@@ -27,17 +39,17 @@ class BundleFileMakerTest extends MakerTestCase
 
         $maker->make($options);
 
-        $this->assertGenFile('assets/foo-bundle.js');
-        $this->assertGenFile('config/routes.php');
-        $this->assertGenFile('config/definition.php');
-        $this->assertGenFile('public/foo-bundle.min.js');
-        $this->assertGenFile('config/services.php');
-        $this->assertGenFile('docs/index.md');
-        $this->assertGenFile('src/Controller/HelloController.php');
-        $this->assertGenFile('templates/hello.html.twig');
-        $this->assertGenFile('translations/FooBundle.fr.xlf');
-        $this->assertGenFile('README.md');
-        $this->assertGenFile('.gitattributes');
+        self::assertGenFile('assets/foo-bundle.js');
+        self::assertGenFile('config/routes.php');
+        self::assertGenFile('config/definition.php');
+        self::assertGenFile('public/foo-bundle.min.js');
+        self::assertGenFile('config/services.php');
+        self::assertGenFile('docs/index.md');
+        self::assertGenFile('src/Controller/HelloController.php');
+        self::assertGenFile('templates/hello.html.twig');
+        self::assertGenFile('translations/FooBundle.fr.xlf');
+        self::assertGenFile('README.md');
+        self::assertGenFile('.gitattributes');
     }
 
     public function testThrowsExceptionWhenUnableToCreateReadmeFile(): void

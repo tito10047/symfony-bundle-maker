@@ -1,5 +1,17 @@
 <?php
 
+declare(strict_types=1);
+
+/*
+ * This file is part of the tito10047/symfony-bundle-maker package.
+ *
+ * (c) Jozef Môstka <jozef@mostka.sk>
+ * (c) Yonel Ceruto <yonelceruto@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Tito10047\BundleMaker\Composer;
 
 use Composer\Command\BaseCommand;
@@ -23,16 +35,25 @@ class CommandRunner
         $this->output = $output ?? Factory::createOutput();
     }
 
+    /**
+     * @param string|list<string> $packages
+     */
     public function require(string|array $packages, bool $dev = false): int
     {
         return $this->run(new RequireCommand(), $packages, $dev);
     }
 
+    /**
+     * @param string|list<string> $packages
+     */
     public function remove(string|array $packages, bool $dev = false): int
     {
         return $this->run(new RemoveCommand(), $packages, $dev);
     }
 
+    /**
+     * @param string|list<string> $packages
+     */
     private function run(BaseCommand $command, string|array $packages, bool $dev): int
     {
         $command->setComposer($this->composer);

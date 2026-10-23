@@ -1,5 +1,17 @@
 <?php
 
+declare(strict_types=1);
+
+/*
+ * This file is part of the tito10047/symfony-bundle-maker package.
+ *
+ * (c) Jozef Môstka <jozef@mostka.sk>
+ * (c) Yonel Ceruto <yonelceruto@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Tito10047\BundleMaker\Maker;
 
 use Tito10047\BundleMaker\Template\TemplateFileCreator;
@@ -22,12 +34,12 @@ class BundleFileMaker
         if ($options->hasWebAssets) {
             $this->fileCreator->create('assets/acme-bundle.js', [
                 'bundle-name' => Inflector::className($options->name),
-            ], $assetsFileName = sprintf('assets/%s.js', Inflector::fileName($options->name)));
+            ], $assetsFileName = \sprintf('assets/%s.js', Inflector::fileName($options->name)));
 
             $this->fileCreator->create('public/acme-bundle.min.js', [
                 'bundle-name' => Inflector::className($options->name),
                 'bundle-file-name' => $assetsFileName,
-            ], sprintf('public/%s.min.js', Inflector::fileName($options->name)));
+            ], \sprintf('public/%s.min.js', Inflector::fileName($options->name)));
         }
 
         if ($options->hasConfig) {
@@ -63,7 +75,7 @@ class BundleFileMaker
         if ($options->hasTranslations) {
             $this->fileCreator->create('translations/AcmeBundle.fr.xlf', [
                 'vendor-prefix' => Inflector::vendory($options->name),
-            ], sprintf('translations/%s.fr.xlf', Inflector::className($options->name)));
+            ], \sprintf('translations/%s.fr.xlf', Inflector::className($options->name)));
         }
 
         $this->fileCreator->create('.gitattributes');

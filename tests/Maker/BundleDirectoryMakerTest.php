@@ -1,8 +1,19 @@
 <?php
 
+declare(strict_types=1);
+
+/*
+ * This file is part of the tito10047/symfony-bundle-maker package.
+ *
+ * (c) Jozef Môstka <jozef@mostka.sk>
+ * (c) Yonel Ceruto <yonelceruto@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Tito10047\BundleMaker\Tests\Maker;
 
-use Composer\Composer;
 use Tito10047\BundleMaker\Composer\CommandRunner;
 use Tito10047\BundleMaker\Maker\BundleDirectoryMaker;
 use Tito10047\BundleMaker\Maker\BundleOptions;
@@ -21,13 +32,13 @@ class BundleDirectoryMakerTest extends MakerTestCase
     {
         $this->maker->make(new BundleOptions());
 
-        $this->assertFileExists($this->bundleDir.'/config');
-        $this->assertFileExists($this->bundleDir.'/src');
-        $this->assertFileExists($this->bundleDir.'/tests');
-        $this->assertFileDoesNotExist($this->bundleDir.'/assets');
-        $this->assertFileDoesNotExist($this->bundleDir.'/public');
-        $this->assertFileDoesNotExist($this->bundleDir.'/templates');
-        $this->assertFileDoesNotExist($this->bundleDir.'/translation');
+        self::assertFileExists($this->bundleDir.'/config');
+        self::assertFileExists($this->bundleDir.'/src');
+        self::assertFileExists($this->bundleDir.'/tests');
+        self::assertFileDoesNotExist($this->bundleDir.'/assets');
+        self::assertFileDoesNotExist($this->bundleDir.'/public');
+        self::assertFileDoesNotExist($this->bundleDir.'/templates');
+        self::assertFileDoesNotExist($this->bundleDir.'/translation');
     }
 
     public function testMakeWebAssets(): void
@@ -37,8 +48,8 @@ class BundleDirectoryMakerTest extends MakerTestCase
 
         $this->maker->make($options);
 
-        $this->assertDirectoryExists($this->bundleDir.'/assets');
-        $this->assertDirectoryExists($this->bundleDir.'/public');
+        self::assertDirectoryExists($this->bundleDir.'/assets');
+        self::assertDirectoryExists($this->bundleDir.'/public');
     }
 
     public function testMakeConfig(): void
@@ -48,7 +59,7 @@ class BundleDirectoryMakerTest extends MakerTestCase
 
         $this->maker->make($options);
 
-        $this->assertDirectoryExists($this->bundleDir.'/config');
+        self::assertDirectoryExists($this->bundleDir.'/config');
     }
 
     public function testMakeTwigTemplates(): void
@@ -58,7 +69,7 @@ class BundleDirectoryMakerTest extends MakerTestCase
 
         $this->maker->make($options);
 
-        $this->assertDirectoryExists($this->bundleDir.'/templates');
+        self::assertDirectoryExists($this->bundleDir.'/templates');
     }
 
     public function testMakeTranslations(): void
@@ -68,6 +79,6 @@ class BundleDirectoryMakerTest extends MakerTestCase
 
         $this->maker->make($options);
 
-        $this->assertDirectoryExists($this->bundleDir.'/translations');
+        self::assertDirectoryExists($this->bundleDir.'/translations');
     }
 }
