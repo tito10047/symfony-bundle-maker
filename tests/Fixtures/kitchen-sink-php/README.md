@@ -108,6 +108,8 @@ composer test
 | `composer lint` |  |
 | `composer kitchen-sink` | Checks the kitchen sink |
 | `composer phpstan` | Runs the static analysis (PHPStan) |
+| `composer cs` | Checks the coding standards (PHP-CS-Fixer) |
+| `composer cs:fix` | Fixes the coding standards (PHP-CS-Fixer) |
 
 The changes of each version are listed in the [changelog](CHANGELOG.md).
 

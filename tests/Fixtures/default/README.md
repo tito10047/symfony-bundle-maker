@@ -91,6 +91,8 @@ composer test
 | `composer qa` | Runs every quality check |
 | `composer test` | Runs the tests (PHPUnit) |
 | `composer phpstan` | Runs the static analysis (PHPStan) |
+| `composer cs` | Checks the coding standards (PHP-CS-Fixer) |
+| `composer cs:fix` | Fixes the coding standards (PHP-CS-Fixer) |
 
 The changes of each version are listed in the [changelog](CHANGELOG.md).
 

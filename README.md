@@ -40,6 +40,7 @@ Each feature is a question of the assistant, and a `BUNDLE_MAKER_<FEATURE>` envi
 | Public assets | `BUNDLE_MAKER_PUBLIC_ASSETS` | no | a stylesheet in `public/`, installed with `assets:install`, for applications to link in their layout |
 | Symfony UX | `BUNDLE_MAKER_UX` | no | a Stimulus controller (`assets/package.json`, `assets/src/`) exposed to AssetMapper, used by the template |
 | PHPStan | `BUNDLE_MAKER_PHPSTAN` | yes | `phpstan.dist.neon` (level 8, with the Symfony, PHPUnit and Doctrine extensions of the bundle) |
+| PHP-CS-Fixer | `BUNDLE_MAKER_CS_FIXER` | yes | `.php-cs-fixer.dist.php` (`@Symfony` and `@Symfony:risky`, as Symfony itself) |
 
 ## Requirements
 

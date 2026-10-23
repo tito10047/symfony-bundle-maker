@@ -31,6 +31,7 @@
     "require-dev": {
         "doctrine/doctrine-bundle": "^2.18 || ^3.0",
         "doctrine/orm": "^3.4",
+        "friendsofphp/php-cs-fixer": "^3.92",
         "phpstan/extension-installer": "^1.4",
         "phpstan/phpstan": "^2.1",
         "phpstan/phpstan-doctrine": "^2.0",
@@ -67,14 +68,19 @@
         "sort-packages": true
     },
     "scripts": {
+        "cs": "php-cs-fixer check --diff",
+        "cs:fix": "php-cs-fixer fix",
         "phpstan": "phpstan analyse",
         "qa": [
             "@test",
-            "@phpstan"
+            "@phpstan",
+            "@cs"
         ],
         "test": "phpunit"
     },
     "scripts-descriptions": {
+        "cs": "Checks the coding standards (PHP-CS-Fixer)",
+        "cs:fix": "Fixes the coding standards (PHP-CS-Fixer)",
         "phpstan": "Runs the static analysis (PHPStan)",
         "qa": "Runs every quality check",
         "test": "Runs the tests (PHPUnit)"

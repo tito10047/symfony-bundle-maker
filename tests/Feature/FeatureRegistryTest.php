@@ -23,6 +23,7 @@ use Tito10047\BundleMaker\Feature\FeatureGroup;
 use Tito10047\BundleMaker\Feature\FeatureInterface;
 use Tito10047\BundleMaker\Feature\FeatureRegistry;
 use Tito10047\BundleMaker\Feature\FeatureSelection;
+use Tito10047\BundleMaker\Feature\PhpCsFixerFeature;
 use Tito10047\BundleMaker\Feature\PhpStanFeature;
 use Tito10047\BundleMaker\Feature\PublicAssetsFeature;
 use Tito10047\BundleMaker\Feature\SemanticConfigFeature;
@@ -129,9 +130,9 @@ final class FeatureRegistryTest extends TestCase
         );
         // quality assurance features come last, in this order: they adapt to everything contributed before them
         self::assertSame(
-            [PhpStanFeature::NAME],
+            [PhpStanFeature::NAME, PhpCsFixerFeature::NAME],
             array_map(static fn (FeatureInterface $feature): string => $feature->getName(), $registry->getByGroup(FeatureGroup::QualityAssurance)),
         );
-        self::assertSame(PhpStanFeature::NAME, array_key_last(iterator_to_array($registry)));
+        self::assertSame(PhpCsFixerFeature::NAME, array_key_last(iterator_to_array($registry)));
     }
 }

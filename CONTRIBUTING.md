@@ -89,7 +89,8 @@ keeps templates out of PHP-CS-Fixer, PHPStan and `php -l`.
 - A template generating PHP outputs the opening tag itself: `<?= "<?php\n" ?>`.
 - Encode every value you did not write for its context: `$helper->php()`,
   `$helper->yaml()`, `$helper->xml()`. Build `use` statements with `$helper->imports()`.
-- Generated code must be clean for the generated quality tools (PHPStan).
+- Generated code must be clean for the generated quality tools (PHP-CS-Fixer,
+  PHPStan): the snapshot tests check the coding standards.
 
 ## The contract: `BundleBlueprint`
 

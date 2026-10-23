@@ -23,6 +23,7 @@
         "symfony/routing": "^7.4.17 || ^8.1.5"
     },
     "require-dev": {
+        "friendsofphp/php-cs-fixer": "^3.92",
         "phpstan/extension-installer": "^1.4",
         "phpstan/phpstan": "^2.1",
         "phpstan/phpstan-phpunit": "^2.0",
@@ -50,6 +51,8 @@
         "sort-packages": true
     },
     "scripts": {
+        "cs": "php-cs-fixer check --diff",
+        "cs:fix": "php-cs-fixer fix",
         "kitchen-sink": "echo kitchen-sink",
         "lint": [
             "@php -l src/",
@@ -59,11 +62,14 @@
         "qa": [
             "@test",
             "@lint",
-            "@phpstan"
+            "@phpstan",
+            "@cs"
         ],
         "test": "phpunit"
     },
     "scripts-descriptions": {
+        "cs": "Checks the coding standards (PHP-CS-Fixer)",
+        "cs:fix": "Fixes the coding standards (PHP-CS-Fixer)",
         "kitchen-sink": "Checks the kitchen sink",
         "phpstan": "Runs the static analysis (PHPStan)",
         "qa": "Runs every quality check",

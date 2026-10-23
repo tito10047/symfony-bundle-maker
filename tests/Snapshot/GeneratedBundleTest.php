@@ -62,6 +62,29 @@ final class GeneratedBundleTest extends TestCase
         }
     }
 
+    /**
+     * The generated code follows the generated coding standards: the bundle configuration when
+     * the "cs-fixer" feature is enabled, the one of the "default" scenario otherwise.
+     */
+    #[DataProvider('provideScenarios')]
+    public function testPhpFilesFollowTheCodingStandards(Scenario $scenario): void
+    {
+        $command = [\PHP_BINARY, \dirname(__DIR__, 2).'/vendor/bin/php-cs-fixer', 'check', '--diff', '--using-cache=no', '--show-progress=none', '--no-interaction'];
+        $config = $scenario->getFixtureDir().'/.php-cs-fixer.dist.php';
+        if (is_file($config)) {
+            $command[] = '--config='.$config;
+        } else {
+            $command[] = '--config='.Scenarios::all()['default']->getFixtureDir().'/.php-cs-fixer.dist.php';
+            $command[] = '--path-mode=override';
+            $command[] = $scenario->getFixtureDir();
+        }
+
+        $process = new ProcessExecutor();
+        $status = $process->execute($command, $output);
+
+        self::assertSame(0, $status, (\is_string($output) ? $output : '').$process->getErrorOutput());
+    }
+
     #[DataProvider('provideScenarios')]
     public function testYamlFilesAreValid(Scenario $scenario): void
     {
