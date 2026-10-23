@@ -1,5 +1,6 @@
 <?php
 
+use Acme\EverythingPhpBundle\Command\HelloCommand;
 use Acme\EverythingPhpBundle\Controller\HelloController;
 use Acme\EverythingPhpBundle\Greeter;
 use Acme\EverythingPhpBundle\GreeterInterface;
@@ -23,6 +24,12 @@ return static function (ContainerConfigurator $container): void {
                 service('twig'),
             ])
             ->tag('controller.service_arguments')
+
+        ->set('acme_everything_php.command.hello', HelloCommand::class)
+            ->args([
+                service('acme_everything_php.greeter'),
+            ])
+            ->tag('console.command')
 
         ->alias(GreeterInterface::class, 'acme_everything_php.greeter')
     ;

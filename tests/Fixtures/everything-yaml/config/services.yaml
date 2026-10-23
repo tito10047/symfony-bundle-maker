@@ -15,5 +15,12 @@ services:
         tags:
             - { name: 'controller.service_arguments' }
 
+    my_vendor_everything_yaml.command.hello:
+        class: MyVendor\EverythingYamlBundle\Command\HelloCommand
+        arguments:
+            - '@my_vendor_everything_yaml.greeter'
+        tags:
+            - { name: 'console.command' }
+
     MyVendor\EverythingYamlBundle\GreeterInterface:
         alias: my_vendor_everything_yaml.greeter

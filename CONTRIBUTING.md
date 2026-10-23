@@ -110,7 +110,7 @@ contributions throw as early as possible.
 
 ## Adding a feature
 
-1. Extend `AbstractFeature` in `src/Feature/`, e.g. like `SemanticConfigFeature`: it describes
+1. Extend `AbstractFeature` in `src/Feature/`, e.g. like `CommandFeature`: it describes
    the feature with constants (`NAME`, `QUESTION`, `GROUP`, `ENABLED_BY_DEFAULT`,
    `REQUIRED_FEATURES`); override `isEnabledByDefault()` when the default depends on
    previous answers. The name defines the environment variable presetting the answer

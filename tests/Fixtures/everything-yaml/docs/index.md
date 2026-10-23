@@ -154,3 +154,20 @@ messages of the bundle:
 Run `php bin/console debug:translation en --domain=MyVendorEverythingYaml` to list the
 messages of the bundle, and `php bin/console lint:xliff translations` to check
 your files. See [How to Override any Part of a Bundle](https://symfony.com/doc/current/bundles/override.html#translations).
+
+## Console Command
+
+The `my-vendor-everything-yaml:hello` command greets someone with the greeter:
+
+```console
+$ php bin/console my-vendor-everything-yaml:hello Jane
+
+ [OK] Hello Jane!
+
+$ php bin/console my-vendor-everything-yaml:hello Jane --yell
+
+ [OK] HELLO JANE!
+```
+
+Run `php bin/console my-vendor-everything-yaml:hello --help` to display its usage, and
+`php bin/console list my-vendor-everything-yaml` to list the commands of the bundle.

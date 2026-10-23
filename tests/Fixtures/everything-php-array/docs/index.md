@@ -154,3 +154,20 @@ messages of the bundle:
 Run `php bin/console debug:translation en --domain=AcmeEverythingPhpArray` to list the
 messages of the bundle, and `php bin/console lint:xliff translations` to check
 your files. See [How to Override any Part of a Bundle](https://symfony.com/doc/current/bundles/override.html#translations).
+
+## Console Command
+
+The `acme-everything-php-array:hello` command greets someone with the greeter:
+
+```console
+$ php bin/console acme-everything-php-array:hello Jane
+
+ [OK] Hello Jane!
+
+$ php bin/console acme-everything-php-array:hello Jane --yell
+
+ [OK] HELLO JANE!
+```
+
+Run `php bin/console acme-everything-php-array:hello --help` to display its usage, and
+`php bin/console list acme-everything-php-array` to list the commands of the bundle.

@@ -16,6 +16,7 @@
     "require": {
         "php": ">=8.2",
         "symfony/config": "^7.4.17 || ^8.1.5",
+        "symfony/console": "^7.4.17 || ^8.1.5",
         "symfony/dependency-injection": "^7.4.17 || ^8.1.5",
         "symfony/framework-bundle": "^7.4.17 || ^8.1.5",
         "symfony/http-foundation": "^7.4.17 || ^8.1.5",

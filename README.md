@@ -18,7 +18,7 @@ for Symfony 7.4 LTS and 8.1+ (`^7.4.17 || ^8.1.5`). It then installs the bundle 
 - [x] Generates a working example (a greeter service, its interface and the exceptions of the bundle) and a
       PHPUnit test suite with a test kernel, fully covered and failing on deprecations caused by the bundle.
 - [x] Optional features, each with its tests and documentation, working alone or together: a controller with its
-      Twig template and translations.
+      Twig template and translations, and an invokable console command loaded lazily.
 - [x] Writes a complete `composer.json` and installs the dependencies in one `composer update`.
 - [x] Runs without interaction, every answer can be preset with an environment variable.
 
@@ -32,6 +32,7 @@ Each feature is a question of the assistant, and a `BUNDLE_MAKER_<FEATURE>` envi
 | Controller | `BUNDLE_MAKER_CONTROLLERS` | no | an invokable controller, its route (`config/routes.*`, imported by applications) and its functional test |
 | Twig template | `BUNDLE_MAKER_TWIG` | yes with a controller | `templates/hello.html.twig` (`@AcmeBlog` namespace, no layout), rendered by the controller |
 | Translations | `BUNDLE_MAKER_TRANSLATIONS` | no | `translations/AcmeBlog.en.xlf`, in the domain of the bundle, used by the template |
+| Console command | `BUNDLE_MAKER_COMMAND` | no | an invokable command (`acme-blog:hello`), loaded lazily, and its tests |
 
 ## Requirements
 

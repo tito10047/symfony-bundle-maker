@@ -1,5 +1,6 @@
 <?php
 
+use Acme\EverythingPhpArrayBundle\Command\HelloCommand;
 use Acme\EverythingPhpArrayBundle\Controller\HelloController;
 use Acme\EverythingPhpArrayBundle\Greeter;
 use Acme\EverythingPhpArrayBundle\GreeterInterface;
@@ -25,6 +26,15 @@ return [
             ],
             'tags' => [
                 ['name' => 'controller.service_arguments'],
+            ],
+        ],
+        'acme_everything_php_array.command.hello' => [
+            'class' => HelloCommand::class,
+            'arguments' => [
+                '@acme_everything_php_array.greeter',
+            ],
+            'tags' => [
+                ['name' => 'console.command'],
             ],
         ],
         GreeterInterface::class => [
