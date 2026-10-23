@@ -21,8 +21,9 @@
 #   E2E_DEPENDENCIES         "highest" (default) or "lowest" (composer update --prefer-lowest, with
 #                            the blocking of versions affected by security advisories disabled, so
 #                            the lower bounds of the constraints are installed; needs Composer 2.10+)
-#   E2E_SCRIPTS              Composer scripts of the bundle to run, in order (default: "qa", which runs
-#                            the tests first); a missing script fails the run
+#   E2E_SCRIPTS              Composer scripts of the bundle to run, in order (default: "qa rector": "qa"
+#                            runs the tests first, "rector" checks that the generated code needs no
+#                            refactoring, as "qa" does not run Rector); a missing script fails the run
 #
 # Without E2E_SYMFONY and with the highest dependencies, the bundle is tested as created:
 # with the dependencies installed by the assistant, nothing is reinstalled.
@@ -52,7 +53,7 @@ skeleton_ref=${E2E_SKELETON_REF:-main}
 plugin_version=${E2E_PLUGIN_VERSION:-1.0.0}
 symfony=${E2E_SYMFONY:-}
 dependencies=${E2E_DEPENDENCIES:-highest}
-read -r -a scripts <<< "${E2E_SCRIPTS-qa}"
+read -r -a scripts <<< "${E2E_SCRIPTS-qa rector}"
 
 fail() {
     if [[ -n ${GITHUB_ACTIONS:-} ]]; then echo "::error::e2e: $*"; else echo "e2e: error: $*" >&2; fi

@@ -134,7 +134,7 @@ jobs:
       fail-fast: false
       matrix:
         # As created: the bundle with the dependencies installed by the assistant (nothing is reinstalled)
-        # and its "qa" script (tests and quality checks), exactly as users get it.
+        # and its "qa" (tests and quality checks) and "rector" (not part of "qa") scripts, exactly as users get it.
         preset: [minimal, all]
         config-format: [php, php-array, yaml]
         php: ['8.5']
@@ -213,8 +213,10 @@ jobs:
           E2E_SKELETON_DIR: bundle-skeleton
           E2E_SYMFONY: ${{ matrix.symfony }}
           E2E_DEPENDENCIES: ${{ matrix.dependencies || 'highest' }}
-          E2E_SCRIPTS: ${{ matrix.scripts || 'qa' }}
-          BUNDLE_MAKER_NAME: acme/blog-bundle
+          E2E_SCRIPTS: ${{ matrix.scripts || 'qa rector' }}
+          # a vendor sorting after the ones of the dependencies (Doctrine, PHPUnit, Symfony, Twig...):
+          # the order of the imports of the generated code depends on it
+          BUNDLE_MAKER_NAME: zeta/blog-bundle
           BUNDLE_MAKER_AUTHOR_NAME: Jane Doe
           BUNDLE_MAKER_AUTHOR_EMAIL: jane@example.com
           BUNDLE_MAKER_ALL: ${{ matrix.all-features }}

@@ -176,7 +176,8 @@ $ docker run --rm -v /tmp/maker82:/app -w /app php:8.2-cli vendor/bin/phpunit
 working copy and a skeleton checkout, checks the generated bundle (its
 `composer.json`, the PHPStan extensions registered by `phpstan/extension-installer`,
 which proves the plugins of the bundle ran, the dist archive of the skeleton), then
-runs the bundle's own scripts (`qa` by default). Its header documents every `E2E_*`
+runs the bundle's own scripts (`qa rector` by default: `qa` does not run Rector, and the
+generated code must need no refactoring). Its header documents every `E2E_*`
 variable; the answers come from the `BUNDLE_MAKER_*` variables.
 
 - **As created** (no `E2E_SYMFONY`, highest dependencies): nothing is reinstalled, the
