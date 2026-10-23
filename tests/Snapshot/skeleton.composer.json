@@ -1,0 +1,23 @@
+{
+    "name": "tito10047/symfony-bundle-skeleton",
+    "description": "Skeleton to create Symfony bundles that follow the best practices, with an interactive assistant",
+    "license": "MIT",
+    "type": "symfony-bundle",
+    "keywords": [
+        "symfony",
+        "symfony-bundle",
+        "bundle",
+        "skeleton"
+    ],
+    "require": {
+        "php": ">=8.2",
+        "symfony/http-kernel": "^7.4.17 || ^8.1.5",
+        "tito10047/symfony-bundle-maker": "^1.0"
+    },
+    "config": {
+        "allow-plugins": {
+            "tito10047/symfony-bundle-maker": true
+        },
+        "sort-packages": true
+    }
+}

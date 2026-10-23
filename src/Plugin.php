@@ -15,21 +15,20 @@ declare(strict_types=1);
 namespace Tito10047\BundleMaker;
 
 use Composer\Composer;
-use Composer\EventDispatcher\Event;
 use Composer\EventDispatcher\EventSubscriberInterface;
-use Composer\Factory;
+use Composer\EventDispatcher\ScriptExecutionException;
 use Composer\IO\IOInterface;
 use Composer\Plugin\PluginInterface;
+use Composer\Script\Event;
 use Composer\Script\ScriptEvents;
-use Tito10047\BundleMaker\Composer\CommandRunner;
-use Tito10047\BundleMaker\Maker\FlexMaker;
+use Composer\Util\Platform;
+use Symfony\Component\Console\Formatter\OutputFormatter;
 
-class Plugin implements PluginInterface, EventSubscriberInterface
+/**
+ * Composer plugin entry point: turns the skeleton into a bundle right after "composer create-project".
+ */
+final class Plugin implements PluginInterface, EventSubscriberInterface
 {
-    private CommandRunner $commandRunner;
-    private FlexMaker $maker;
-    private IOInterface $io;
-
     public static function getSubscribedEvents(): array
     {
         return [
@@ -39,44 +38,38 @@ class Plugin implements PluginInterface, EventSubscriberInterface
 
     public function activate(Composer $composer, IOInterface $io): void
     {
-        $this->commandRunner = new CommandRunner($composer);
-        $this->maker = new FlexMaker($this->commandRunner, $io, \dirname(Factory::getComposerFile()));
-        $this->io = $io;
     }
 
     public function deactivate(Composer $composer, IOInterface $io): void
     {
-        // no-op
     }
 
     public function uninstall(Composer $composer, IOInterface $io): void
     {
-        // no-op
     }
 
+    /**
+     * "composer create-project" runs it from the directory of the new project.
+     *
+     * A failure is reported in one line (the trace with -v), and fails the command: the skeleton
+     * is left untouched, so the assistant can run again once the issue is fixed.
+     *
+     * @throws ScriptExecutionException when the bundle could not be created
+     */
     public function onPostCreateProject(Event $event): void
     {
-        $this->removeSkeletonFiles();
-        $this->maker->make();
-        $this->commandRunner->remove('yceruto/bundle-flex', dev: true);
-        $this->writeSuccessMessage();
-    }
+        $io = $event->getIO();
 
-    private function removeSkeletonFiles(): void
-    {
-        @unlink('LICENSE');
-        @unlink('README.md');
-    }
+        try {
+            BundleCreator::createDefault($io, Platform::getCwd())->run();
+        } catch (\Exception $e) {
+            $io->writeError(['', '<error>'.OutputFormatter::escape($e->getMessage()).'</error>']);
+            if ($io->isVerbose()) {
+                $io->writeError(OutputFormatter::escape((string) $e));
+            }
+            $io->writeError(\sprintf('Fix the issue, then run the assistant again with "<comment>composer run-script %s</comment>".', ScriptEvents::POST_CREATE_PROJECT_CMD));
 
-    private function writeSuccessMessage(): void
-    {
-        $message = <<<EOT
-
-            <bg=green;fg=white>                                                                    </>
-            <bg=green;fg=white> ✨ Your bundle is all set to rock the Symfony world! Happy coding! </>
-            <bg=green;fg=white>                                                                    </>
-
-            EOT;
-        $this->io->write($message);
+            throw new ScriptExecutionException('The bundle could not be created.', 1, $e);
+        }
     }
 }

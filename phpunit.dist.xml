@@ -29,6 +29,8 @@
     <testsuites>
         <testsuite name="Bundle Maker Test Suite">
             <directory>tests</directory>
+            <!-- snapshots of generated bundles, with their own tests -->
+            <exclude>tests/Fixtures</exclude>
         </testsuite>
     </testsuites>
 

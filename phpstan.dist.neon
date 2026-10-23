@@ -8,3 +8,5 @@ parameters:
     paths:
         - src
         - tests
+    excludePaths:
+        - tests/Fixtures/*

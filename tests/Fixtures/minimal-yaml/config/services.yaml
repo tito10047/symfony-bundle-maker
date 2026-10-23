@@ -1,0 +1,16 @@
+# Services are defined explicitly: no autowiring, no autoconfiguration, private by default,
+# with ids prefixed by "acme_minimal_yaml." and aliases for autowiring.
+#
+# See https://symfony.com/doc/current/bundles/best_practices.html#services
+
+parameters:
+    acme_minimal_yaml.greeting: 'Hello'
+
+services:
+    acme_minimal_yaml.greeter:
+        class: Acme\MinimalYamlBundle\Greeter
+        arguments:
+            - '%acme_minimal_yaml.greeting%'
+
+    Acme\MinimalYamlBundle\GreeterInterface:
+        alias: acme_minimal_yaml.greeter

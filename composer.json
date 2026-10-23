@@ -1,8 +1,14 @@
 {
     "name": "tito10047/symfony-bundle-maker",
-    "description": "Composer plugin for Symfony bundles",
+    "description": "Composer plugin that generates a Symfony bundle following the official best practices",
     "license": "MIT",
     "type": "composer-plugin",
+    "keywords": [
+        "symfony",
+        "symfony-bundle",
+        "skeleton",
+        "composer-plugin"
+    ],
     "authors": [
         {
             "name": "Jozef Môstka",
@@ -16,8 +22,7 @@
     ],
     "require": {
         "php": ">=8.2",
-        "composer-plugin-api": "^2.6",
-        "nikic/php-parser": "^5.0"
+        "composer-plugin-api": "^2.6"
     },
     "require-dev": {
         "composer/composer": "^2.6",
@@ -25,7 +30,15 @@
         "phpstan/phpstan": "^2.1",
         "phpstan/phpstan-phpunit": "^2.0",
         "phpstan/phpstan-strict-rules": "^2.0",
-        "phpunit/phpunit": "^11.5"
+        "phpunit/phpunit": "^11.5",
+        "symfony/config": "^7.4 || ^8.1",
+        "symfony/dependency-injection": "^7.4 || ^8.1",
+        "symfony/http-kernel": "^7.4 || ^8.1",
+        "symfony/routing": "^7.4 || ^8.1",
+        "symfony/yaml": "^7.4 || ^8.1"
+    },
+    "conflict": {
+        "marc-mabe/php-enum": "<4.4"
     },
     "autoload": {
         "psr-4": {
@@ -41,6 +54,9 @@
         "sort-packages": true
     },
     "extra": {
+        "branch-alias": {
+            "dev-main": "1.x-dev"
+        },
         "class": "Tito10047\\BundleMaker\\Plugin"
     },
     "scripts": {

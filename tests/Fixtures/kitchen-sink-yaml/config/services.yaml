@@ -1,0 +1,45 @@
+# Services are defined explicitly: no autowiring, no autoconfiguration, private by default,
+# with ids prefixed by "my_vendor_yaml_kitchen_sink." and aliases for autowiring.
+#
+# See https://symfony.com/doc/current/bundles/best_practices.html#services
+
+parameters:
+    my_vendor_yaml_kitchen_sink.kitchen_sink.greeting: 'Hello %%name%%'
+    my_vendor_yaml_kitchen_sink.channels: ['email', '@@sms', 'it''s']
+    my_vendor_yaml_kitchen_sink.enabled: true
+
+services:
+    my_vendor_yaml_kitchen_sink.greeter:
+        class: MyVendor\YamlKitchenSinkBundle\Greeter
+
+    my_vendor_yaml_kitchen_sink.kitchen_sink:
+        class: MyVendor\YamlKitchenSinkBundle\KitchenSink
+        arguments:
+            - '%my_vendor_yaml_kitchen_sink.kitchen_sink.greeting%'
+            - '@my_vendor_yaml_kitchen_sink.formatter'
+
+    my_vendor_yaml_kitchen_sink.formatter:
+        class: MyVendor\YamlKitchenSinkBundle\Formatter\Formatter
+
+    .my_vendor_yaml_kitchen_sink.cache_warmer:
+        class: MyVendor\YamlKitchenSinkBundle\CacheWarmer\Formatter
+        arguments:
+            - '@my_vendor_yaml_kitchen_sink.formatter'
+        tags:
+            - { name: 'kernel.cache_warmer', priority: 10 }
+
+    my_vendor_yaml_kitchen_sink.controller.hello:
+        class: MyVendor\YamlKitchenSinkBundle\Controller\HelloController
+        arguments:
+            - '@my_vendor_yaml_kitchen_sink.greeter'
+        tags:
+            - { name: 'controller.service_arguments' }
+
+    MyVendor\YamlKitchenSinkBundle\GreeterInterface:
+        alias: my_vendor_yaml_kitchen_sink.greeter
+
+    MyVendor\YamlKitchenSinkBundle\Formatter\FormatterInterface:
+        alias: my_vendor_yaml_kitchen_sink.formatter
+
+    my_vendor_yaml_kitchen_sink.default_greeter:
+        alias: my_vendor_yaml_kitchen_sink.greeter

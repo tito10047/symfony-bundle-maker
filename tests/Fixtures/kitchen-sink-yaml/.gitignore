@@ -1,0 +1,4 @@
+/.kitchen-sink.cache
+/.phpunit.cache/
+/composer.lock
+/vendor/

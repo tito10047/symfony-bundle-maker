@@ -1,0 +1,11 @@
+# Services are defined explicitly: no autowiring, no autoconfiguration, private by default,
+# with ids prefixed by "my_vendor_everything_yaml." and aliases for autowiring.
+#
+# See https://symfony.com/doc/current/bundles/best_practices.html#services
+
+services:
+    my_vendor_everything_yaml.greeter:
+        class: MyVendor\EverythingYamlBundle\Greeter
+
+    MyVendor\EverythingYamlBundle\GreeterInterface:
+        alias: my_vendor_everything_yaml.greeter

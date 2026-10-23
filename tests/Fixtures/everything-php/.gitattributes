@@ -1,0 +1,7 @@
+# Files and directories excluded from the archive installed by Composer
+/.editorconfig export-ignore
+/.gitattributes export-ignore
+/.github export-ignore
+/.gitignore export-ignore
+/phpunit.dist.xml export-ignore
+/tests export-ignore
