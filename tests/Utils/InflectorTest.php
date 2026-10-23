@@ -1,9 +1,9 @@
 <?php
 
-namespace Yceruto\BundleFlex\Tests\Utils;
+namespace Tito10047\BundleMaker\Tests\Utils;
 
 use PHPUnit\Framework\TestCase;
-use Yceruto\BundleFlex\Utils\Inflector;
+use Tito10047\BundleMaker\Utils\Inflector;
 
 class InflectorTest extends TestCase
 {

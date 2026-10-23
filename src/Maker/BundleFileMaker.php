@@ -1,9 +1,9 @@
 <?php
 
-namespace Yceruto\BundleFlex\Maker;
+namespace Tito10047\BundleMaker\Maker;
 
-use Yceruto\BundleFlex\Template\TemplateFileCreator;
-use Yceruto\BundleFlex\Utils\Inflector;
+use Tito10047\BundleMaker\Template\TemplateFileCreator;
+use Tito10047\BundleMaker\Utils\Inflector;
 
 class BundleFileMaker
 {

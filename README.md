@@ -1,6 +1,6 @@
-# Bundle Flex
+# Symfony Bundle Maker
 
-Composer plugin for [Symfony Bundle Skeleton](https://github.com/yceruto/bundle-skeleton).
+Composer plugin for [Symfony Bundle Skeleton](https://github.com/tito10047/symfony-bundle-skeleton).
 
 ## Features
 
@@ -9,7 +9,10 @@ Composer plugin for [Symfony Bundle Skeleton](https://github.com/yceruto/bundle-
 - [x] Generate directory structure and boilerplate files.
 - [x] Generate bundle class with basic implementation.
 
-<img src="demo.gif" alt="demo" width="400"/>
+## Credits
+
+Based on [yceruto/bundle-skeleton](https://github.com/yceruto/bundle-skeleton) and
+[yceruto/bundle-flex](https://github.com/yceruto/bundle-flex) by [Yonel Ceruto](https://github.com/yceruto).
 
 ## License
 

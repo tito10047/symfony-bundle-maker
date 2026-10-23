@@ -1,11 +1,11 @@
 <?php
 
-namespace Yceruto\BundleFlex\Tests\Maker;
+namespace Tito10047\BundleMaker\Tests\Maker;
 
 use Composer\IO\IOInterface;
 use Composer\IO\NullIO;
 use PHPUnit\Framework\TestCase;
-use Yceruto\BundleFlex\Maker\BundleOptionsAsker;
+use Tito10047\BundleMaker\Maker\BundleOptionsAsker;
 
 class BundleOptionsAskerTest extends TestCase
 {

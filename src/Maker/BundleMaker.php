@@ -1,10 +1,10 @@
 <?php
 
-namespace Yceruto\BundleFlex\Maker;
+namespace Tito10047\BundleMaker\Maker;
 
 use PhpParser\BuilderFactory;
 use PhpParser\PrettyPrinter\Standard;
-use Yceruto\BundleFlex\Utils\Inflector;
+use Tito10047\BundleMaker\Utils\Inflector;
 
 class BundleMaker
 {

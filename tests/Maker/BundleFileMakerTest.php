@@ -1,12 +1,12 @@
 <?php
 
-namespace Yceruto\BundleFlex\Tests\Maker;
+namespace Tito10047\BundleMaker\Tests\Maker;
 
-use Yceruto\BundleFlex\Composer\CommandRunner;
-use Yceruto\BundleFlex\Maker\BundleDirectoryMaker;
-use Yceruto\BundleFlex\Maker\BundleFileMaker;
-use Yceruto\BundleFlex\Maker\BundleOptions;
-use Yceruto\BundleFlex\Template\TemplateFileCreator;
+use Tito10047\BundleMaker\Composer\CommandRunner;
+use Tito10047\BundleMaker\Maker\BundleDirectoryMaker;
+use Tito10047\BundleMaker\Maker\BundleFileMaker;
+use Tito10047\BundleMaker\Maker\BundleOptions;
+use Tito10047\BundleMaker\Template\TemplateFileCreator;
 
 class BundleFileMakerTest extends MakerTestCase
 {

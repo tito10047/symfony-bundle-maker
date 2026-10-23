@@ -1,10 +1,10 @@
 <?php
 
-namespace Yceruto\BundleFlex\Maker;
+namespace Tito10047\BundleMaker\Maker;
 
 use Composer\IO\IOInterface;
-use Yceruto\BundleFlex\Composer\CommandRunner;
-use Yceruto\BundleFlex\Template\TemplateFileCreator;
+use Tito10047\BundleMaker\Composer\CommandRunner;
+use Tito10047\BundleMaker\Template\TemplateFileCreator;
 
 class FlexMaker
 {

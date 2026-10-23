@@ -1,6 +1,6 @@
 <?php
 
-namespace Yceruto\BundleFlex\Composer;
+namespace Tito10047\BundleMaker\Composer;
 
 use Composer\Command\BaseCommand;
 use Composer\Command\RemoveCommand;

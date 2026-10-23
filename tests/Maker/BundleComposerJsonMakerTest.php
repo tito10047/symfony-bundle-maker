@@ -1,9 +1,9 @@
 <?php
 
-namespace Yceruto\BundleFlex\Tests\Maker;
+namespace Tito10047\BundleMaker\Tests\Maker;
 
-use Yceruto\BundleFlex\Maker\BundleComposerJsonMaker;
-use Yceruto\BundleFlex\Maker\BundleOptions;
+use Tito10047\BundleMaker\Maker\BundleComposerJsonMaker;
+use Tito10047\BundleMaker\Maker\BundleOptions;
 
 class BundleComposerJsonMakerTest extends MakerTestCase
 {

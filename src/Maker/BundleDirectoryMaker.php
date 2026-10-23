@@ -1,8 +1,8 @@
 <?php
 
-namespace Yceruto\BundleFlex\Maker;
+namespace Tito10047\BundleMaker\Maker;
 
-use Yceruto\BundleFlex\Composer\CommandRunner;
+use Tito10047\BundleMaker\Composer\CommandRunner;
 
 class BundleDirectoryMaker
 {

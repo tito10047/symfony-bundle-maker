@@ -1,9 +1,9 @@
 <?php
 
-namespace Yceruto\BundleFlex\Tests\Maker;
+namespace Tito10047\BundleMaker\Tests\Maker;
 
-use Yceruto\BundleFlex\Maker\BundleMaker;
-use Yceruto\BundleFlex\Maker\BundleOptions;
+use Tito10047\BundleMaker\Maker\BundleMaker;
+use Tito10047\BundleMaker\Maker\BundleOptions;
 
 class BundleMakerTest extends MakerTestCase
 {

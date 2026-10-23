@@ -1,12 +1,17 @@
 {
-    "name": "yceruto/bundle-flex",
+    "name": "tito10047/symfony-bundle-maker",
     "description": "Composer plugin for Symfony bundles",
     "type": "composer-plugin",
     "license": "MIT",
     "authors": [
         {
+            "name": "Jozef Môstka",
+            "email": "jozef@mostka.sk"
+        },
+        {
             "name": "Yonel Ceruto",
-            "email": "yonelceruto@gmail.com"
+            "email": "yonelceruto@gmail.com",
+            "role": "Original author"
         }
     ],
     "require": {
@@ -20,15 +25,15 @@
     },
     "autoload": {
         "psr-4": {
-            "Yceruto\\BundleFlex\\": "src/"
+            "Tito10047\\BundleMaker\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Yceruto\\BundleFlex\\Tests\\": "tests/"
+            "Tito10047\\BundleMaker\\Tests\\": "tests/"
         }
     },
     "extra": {
-        "class": "Yceruto\\BundleFlex\\Flex"
+        "class": "Tito10047\\BundleMaker\\Plugin"
     }
 }

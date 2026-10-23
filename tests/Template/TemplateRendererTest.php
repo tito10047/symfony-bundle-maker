@@ -1,9 +1,9 @@
 <?php
 
-namespace Yceruto\BundleFlex\Tests\Template;
+namespace Tito10047\BundleMaker\Tests\Template;
 
 use PHPUnit\Framework\TestCase;
-use Yceruto\BundleFlex\Template\TemplateRenderer;
+use Tito10047\BundleMaker\Template\TemplateRenderer;
 
 class TemplateRendererTest extends TestCase
 {

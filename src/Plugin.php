@@ -1,6 +1,6 @@
 <?php
 
-namespace Yceruto\BundleFlex;
+namespace Tito10047\BundleMaker;
 
 use Composer\Composer;
 use Composer\EventDispatcher\Event;
@@ -9,10 +9,10 @@ use Composer\Factory;
 use Composer\IO\IOInterface;
 use Composer\Plugin\PluginInterface;
 use Composer\Script\ScriptEvents;
-use Yceruto\BundleFlex\Composer\CommandRunner;
-use Yceruto\BundleFlex\Maker\FlexMaker;
+use Tito10047\BundleMaker\Composer\CommandRunner;
+use Tito10047\BundleMaker\Maker\FlexMaker;
 
-class Flex implements PluginInterface, EventSubscriberInterface
+class Plugin implements PluginInterface, EventSubscriberInterface
 {
     private CommandRunner $commandRunner;
     private FlexMaker $maker;

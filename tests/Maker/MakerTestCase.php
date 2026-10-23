@@ -1,9 +1,9 @@
 <?php
 
-namespace Yceruto\BundleFlex\Tests\Maker;
+namespace Tito10047\BundleMaker\Tests\Maker;
 
 use PHPUnit\Framework\TestCase;
-use Yceruto\BundleFlex\Maker\BundleDirectoryMaker;
+use Tito10047\BundleMaker\Maker\BundleDirectoryMaker;
 
 abstract class MakerTestCase extends TestCase
 {
@@ -14,7 +14,7 @@ abstract class MakerTestCase extends TestCase
     protected function setUp(): void
     {
         $this->expectedDir = __DIR__.'/../Expected/acme-bundle';
-        $this->bundleDir = sys_get_temp_dir().'/bundle-flex/bundles/acme-bundle';
+        $this->bundleDir = sys_get_temp_dir().'/bundle-maker/bundles/acme-bundle';
         if (!is_dir($this->bundleDir)) {
             mkdir($this->bundleDir, 0777, true);
         }

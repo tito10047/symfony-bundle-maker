@@ -1,6 +1,6 @@
 <?php
 
-namespace Yceruto\BundleFlex\Template;
+namespace Tito10047\BundleMaker\Template;
 
 class TemplateRenderer
 {

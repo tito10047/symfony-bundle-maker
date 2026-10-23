@@ -1,6 +1,6 @@
 <?php
 
-namespace Yceruto\BundleFlex\Utils;
+namespace Tito10047\BundleMaker\Utils;
 
 class Inflector
 {

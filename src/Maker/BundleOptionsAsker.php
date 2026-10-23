@@ -1,6 +1,6 @@
 <?php
 
-namespace Yceruto\BundleFlex\Maker;
+namespace Tito10047\BundleMaker\Maker;
 
 use Composer\IO\IOInterface;
 use ReflectionProperty;

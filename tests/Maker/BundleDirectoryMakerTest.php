@@ -1,11 +1,11 @@
 <?php
 
-namespace Yceruto\BundleFlex\Tests\Maker;
+namespace Tito10047\BundleMaker\Tests\Maker;
 
 use Composer\Composer;
-use Yceruto\BundleFlex\Composer\CommandRunner;
-use Yceruto\BundleFlex\Maker\BundleDirectoryMaker;
-use Yceruto\BundleFlex\Maker\BundleOptions;
+use Tito10047\BundleMaker\Composer\CommandRunner;
+use Tito10047\BundleMaker\Maker\BundleDirectoryMaker;
+use Tito10047\BundleMaker\Maker\BundleOptions;
 
 class BundleDirectoryMakerTest extends MakerTestCase
 {
