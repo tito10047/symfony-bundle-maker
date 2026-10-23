@@ -76,6 +76,7 @@ final class FeatureRegistry implements \IteratorAggregate, \Countable
             new SemanticConfigFeature(),
             new ControllersFeature(),
             new TwigFeature(),
+            new TranslationsFeature(),
         );
     }
 

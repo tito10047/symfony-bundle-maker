@@ -104,7 +104,7 @@ final class BundleGeneratorTest extends TestCase
         file_put_contents($dir.'/composer.json', '{"name": "tito10047/symfony-bundle-skeleton", "minimum-stability": "stable"}');
 
         try {
-            $features = ['config' => true, 'controllers' => false, 'twig' => false];
+            $features = ['config' => true, 'controllers' => false, 'twig' => false, 'translations' => false];
             $blueprint = (new BundleGenerator(CoreContributors::createDefault(), FeatureRegistry::createDefault()))->generate(OptionsFactory::create(features: $features), $dir);
 
             self::assertSame('acme/blog-bundle', $blueprint->naming->packageName);

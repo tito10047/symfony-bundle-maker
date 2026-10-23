@@ -1,9 +1,11 @@
 <?php
+use Tito10047\BundleMaker\Feature\TranslationsFeature;
 use Tito10047\BundleMaker\Feature\TwigFeature;
 
 /**
- * @var Tito10047\BundleMaker\Naming\BundleNaming     $naming
- * @var Tito10047\BundleMaker\Template\TemplateHelper $helper
+ * @var Tito10047\BundleMaker\Blueprint\BundleBlueprint $blueprint
+ * @var Tito10047\BundleMaker\Naming\BundleNaming       $naming
+ * @var Tito10047\BundleMaker\Template\TemplateHelper   $helper
  */
 $template = $helper->php(TwigFeature::templateName($naming));
 ?>
@@ -21,6 +23,9 @@ final class TemplateTest extends KernelTestCase
         $html = $this->render(['greeting' => 'Hello Jane!']);
 
         $this->assertStringContainsString('Hello Jane!', $html);
+<?php if ($blueprint->hasFeature(TranslationsFeature::NAME)): ?>
+        $this->assertStringContainsString(<?= $helper->php(TranslationsFeature::TITLE_MESSAGE) ?>, $html);
+<?php endif ?>
     }
 
     public function testEscapesTheGreeting(): void

@@ -18,6 +18,7 @@ use Symfony\Component\Console\Formatter\OutputFormatter;
 use Tito10047\BundleMaker\Feature\FeatureGroup;
 use Tito10047\BundleMaker\Feature\FeatureInterface;
 use Tito10047\BundleMaker\Feature\FeatureRegistry;
+use Tito10047\BundleMaker\Feature\TranslationsFeature;
 use Tito10047\BundleMaker\Feature\TwigFeature;
 
 /**
@@ -43,6 +44,9 @@ final class OptionsSummary
             'Bundle class' => $naming->fqcn,
             'Extension alias' => $naming->alias,
         ];
+        if ($options->hasFeature(TranslationsFeature::NAME)) {
+            $rows['Translation domain'] = $naming->translationDomain;
+        }
         if ($options->hasFeature(TwigFeature::NAME)) {
             $rows['Twig namespace'] = '@'.$naming->twigNamespace;
         }

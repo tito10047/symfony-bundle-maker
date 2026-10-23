@@ -93,6 +93,13 @@ final class TestKernel extends Kernel
             'strict_variables' => true,
         ]);
 
+        $container->extension('framework', [
+            'default_locale' => 'en',
+            'translator' => [
+                'fallbacks' => ['en'],
+            ],
+        ]);
+
         foreach ($this->extensionConfigs as $alias => $config) {
             $container->extension($alias, $config);
         }

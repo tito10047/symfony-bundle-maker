@@ -314,6 +314,7 @@ final class BundleOptionsAskerTest extends TestCase
         self::assertStringContainsString("    BSD-3-Clause       BSD 3-Clause License\n", $output);
         self::assertStringContainsString("    php-array  PHP arrays, Symfony 7.4+\n", $output);
         self::assertMatchesRegularExpression('/^  Twig namespace +@AcmeBlog$/m', $output);
+        self::assertStringNotContainsString('Translation domain', $output);
     }
 
     public function testKeepsAPackageNameWithoutSuffixWhenConfirmed(): void

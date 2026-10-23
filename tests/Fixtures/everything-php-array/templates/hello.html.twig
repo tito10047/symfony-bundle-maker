@@ -9,6 +9,6 @@
  # or only its "title" block by extending '@!AcmeEverythingPhpArray/hello.html.twig'.
  #}
 <section class="acme-everything-php-array-hello">
-    <h1 class="acme-everything-php-array-hello__title">{% block title %}Welcome!{% endblock %}</h1>
+    <h1 class="acme-everything-php-array-hello__title">{% block title %}{{ 'Welcome!'|trans({}, 'AcmeEverythingPhpArray') }}{% endblock %}</h1>
     <p class="acme-everything-php-array-hello__greeting">{{ greeting }}</p>
 </section>

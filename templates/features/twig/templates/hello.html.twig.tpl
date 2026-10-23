@@ -1,11 +1,15 @@
 <?php
 use Tito10047\BundleMaker\Feature\ControllersFeature;
+use Tito10047\BundleMaker\Feature\TranslationsFeature;
 use Tito10047\BundleMaker\Feature\TwigFeature;
 
 /**
  * @var Tito10047\BundleMaker\Blueprint\BundleBlueprint $blueprint
  * @var Tito10047\BundleMaker\Naming\BundleNaming       $naming
  */
+$translations = $blueprint->hasFeature(TranslationsFeature::NAME);
+$domain = $naming->translationDomain;
+$message = static fn (string $message): string => $translations ? "{{ '".$message."'|trans({}, '".$domain."') }}" : $message;
 $css = $naming->slug.'-hello';
 ?>
 {#
@@ -23,6 +27,6 @@ $css = $naming->slug.'-hello';
  # or only its "title" block by extending '@!<?= $naming->twigNamespace ?>/hello.html.twig'.
  #}
 <section class="<?= $css ?>">
-    <h1 class="<?= $css ?>__title">{% block title %}Welcome!{% endblock %}</h1>
+    <h1 class="<?= $css ?>__title">{% block title %}<?= $message(TranslationsFeature::TITLE_MESSAGE) ?>{% endblock %}</h1>
     <p class="<?= $css ?>__greeting">{{ greeting }}</p>
 </section>

@@ -12,6 +12,7 @@ final class TemplateTest extends KernelTestCase
         $html = $this->render(['greeting' => 'Hello Jane!']);
 
         $this->assertStringContainsString('Hello Jane!', $html);
+        $this->assertStringContainsString('Welcome!', $html);
     }
 
     public function testEscapesTheGreeting(): void

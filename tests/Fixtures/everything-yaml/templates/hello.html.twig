@@ -9,6 +9,6 @@
  # or only its "title" block by extending '@!MyVendorEverythingYaml/hello.html.twig'.
  #}
 <section class="my-vendor-everything-yaml-hello">
-    <h1 class="my-vendor-everything-yaml-hello__title">{% block title %}Welcome!{% endblock %}</h1>
+    <h1 class="my-vendor-everything-yaml-hello__title">{% block title %}{{ 'Welcome!'|trans({}, 'MyVendorEverythingYaml') }}{% endblock %}</h1>
     <p class="my-vendor-everything-yaml-hello__greeting">{{ greeting }}</p>
 </section>
