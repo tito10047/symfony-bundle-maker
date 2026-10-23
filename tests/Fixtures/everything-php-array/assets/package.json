@@ -1,0 +1,21 @@
+{
+    "name": "@acme/everything-php-array-bundle",
+    "description": "AcmeEverythingPhpArrayBundle for Symfony",
+    "license": "MIT",
+    "type": "module",
+    "symfony": {
+        "controllers": {
+            "hello": {
+                "main": "src/hello_controller.js",
+                "fetch": "lazy",
+                "enabled": true
+            }
+        },
+        "importmap": {
+            "@hotwired/stimulus": "^3.0.0"
+        }
+    },
+    "peerDependencies": {
+        "@hotwired/stimulus": "^3.0.0"
+    }
+}

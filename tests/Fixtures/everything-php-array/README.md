@@ -78,6 +78,38 @@ directory of your application (Symfony Flex runs this command after each
 php bin/console assets:install
 ```
 
+### Enable the Stimulus Controller
+
+The bundle provides a [Stimulus](https://stimulus.hotwired.dev/) controller, so
+your application needs [StimulusBundle](https://symfony.com/bundles/StimulusBundle/current/index.html).
+Symfony Flex enables the controller for you. Without Flex, enable it in the
+`assets/controllers.json` file of your application:
+
+```json
+{
+    "controllers": {
+        "@acme/everything-php-array-bundle": {
+            "hello": {
+                "enabled": true,
+                "fetch": "lazy"
+            }
+        }
+    },
+    "entrypoints": []
+}
+```
+
+With AssetMapper, also add Stimulus to the importmap of your application, if it
+is not there yet:
+
+```console
+php bin/console importmap:require @hotwired/stimulus
+```
+
+With Webpack Encore, add the bundle to the dependencies of your `package.json`
+(`"@acme/everything-php-array-bundle": "file:vendor/acme/everything-php-array-bundle/assets"`), then
+run `npm install --force` and rebuild your assets.
+
 ## Configuration
 
 The bundle works without configuration. To change its defaults, configure the

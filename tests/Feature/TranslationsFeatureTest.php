@@ -21,16 +21,18 @@ final class TranslationsFeatureTest extends TestCase
 {
     public function testTranslatesTheMessagesOfTheTemplate(): void
     {
-        $files = (new Scenario('translations', features: ['twig', 'translations']))->render();
+        $files = (new Scenario('translations', features: ['twig', 'translations', 'ux']))->render();
 
         self::assertArrayHasKey('translations/AcmeBlog.en.xlf', $files);
         self::assertStringContainsString("{{ 'Welcome!'|trans({}, 'AcmeBlog') }}", $files['templates/hello.html.twig']);
+        self::assertStringContainsString("{{ 'Close'|trans({}, 'AcmeBlog') }}", $files['templates/hello.html.twig']);
     }
 
     public function testDocumentsTheTranslatorWithoutTwig(): void
     {
         $files = (new Scenario('translations', features: ['translations']))->render();
 
+        self::assertStringNotContainsString('<source>Close</source>', $files['translations/AcmeBlog.en.xlf']);
         self::assertStringContainsString("\$translator->trans('Welcome!', [], 'AcmeBlog');", $files['docs/index.md']);
     }
 }

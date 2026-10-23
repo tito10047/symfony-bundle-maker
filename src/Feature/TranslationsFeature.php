@@ -40,6 +40,9 @@ final class TranslationsFeature extends AbstractFeature
     /** Title of the template of the "twig" feature. */
     public const TITLE_MESSAGE = 'Welcome!';
 
+    /** Label of the button closing the greeting, when the "ux" feature is enabled too. */
+    public const CLOSE_MESSAGE = 'Close';
+
     public function contribute(BundleBlueprint $blueprint): void
     {
         // the tests check the messages with the real translator
@@ -63,7 +66,12 @@ final class TranslationsFeature extends AbstractFeature
      */
     public static function getMessages(BundleBlueprint $blueprint): array
     {
-        return [self::TITLE_MESSAGE];
+        $messages = [self::TITLE_MESSAGE];
+        if ($blueprint->hasFeature(TwigFeature::NAME) && $blueprint->hasFeature(UxFeature::NAME)) {
+            $messages[] = self::CLOSE_MESSAGE;
+        }
+
+        return $messages;
     }
 
     /**

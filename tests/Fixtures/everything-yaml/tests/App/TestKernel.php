@@ -14,6 +14,7 @@ use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigura
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator;
+use Symfony\UX\StimulusBundle\StimulusBundle;
 
 /**
  * Minimal application registering MyVendorEverythingYamlBundle, booted by the integration and functional tests.
@@ -49,6 +50,7 @@ final class TestKernel extends Kernel
         yield new FrameworkBundle();
         yield new TwigBundle();
         yield new DoctrineBundle();
+        yield new StimulusBundle();
         yield new MyVendorEverythingYamlBundle();
     }
 

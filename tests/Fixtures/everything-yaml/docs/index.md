@@ -289,3 +289,46 @@ the right URL in both cases:
     <link rel="stylesheet" href="{{ asset('bundles/myvendoreverythingyaml/css/my-vendor-everything-yaml.css') }}">
 {% endblock %}
 ```
+
+## Stimulus Controller
+
+The bundle is a [Symfony UX](https://ux.symfony.com/) package: it provides the
+`my-vendor/everything-yaml-bundle/hello` [Stimulus](https://stimulus.hotwired.dev/) controller
+(`assets/src/hello_controller.js`), which closes the element it is attached
+to. It is loaded lazily: only when a page uses it.
+The [templates](#templates) use it to close the greeting.
+
+Use it with the `stimulus_*()` Twig functions of StimulusBundle:
+
+```twig
+<section {{ stimulus_controller('my-vendor/everything-yaml-bundle/hello') }}>
+    <p>Hello Jane!</p>
+    <button type="button" {{ stimulus_action('my-vendor/everything-yaml-bundle/hello', 'close') }}>Close</button>
+</section>
+```
+
+Or with the HTML attributes they render:
+
+```html
+<section data-controller="my-vendor--everything-yaml-bundle--hello">
+    <p>Hello Jane!</p>
+    <button type="button" data-action="my-vendor--everything-yaml-bundle--hello#close">Close</button>
+</section>
+```
+
+Before closing the element, the controller dispatches the `my-vendor--everything-yaml-bundle--hello:close`
+event. Cancel it to keep the element open:
+
+```js
+document.addEventListener('my-vendor--everything-yaml-bundle--hello:close', (event) => {
+    if (!confirm('Close the greeting?')) {
+        event.preventDefault();
+    }
+});
+```
+
+When your application uses AssetMapper, the bundle adds its `assets/src/` directory to
+the AssetMapper paths, under the `@my-vendor/everything-yaml-bundle` namespace: run
+`php bin/console debug:asset-map` to list its files. Disable the controller in the
+`assets/controllers.json` file of your application to stop loading it.
+See [Create a UX bundle](https://symfony.com/doc/current/frontend/create_ux_bundle.html).

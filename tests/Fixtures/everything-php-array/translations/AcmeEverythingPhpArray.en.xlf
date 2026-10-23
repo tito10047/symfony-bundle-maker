@@ -6,6 +6,10 @@
                 <source>Welcome!</source>
                 <target>Welcome!</target>
             </trans-unit>
+            <trans-unit id="2">
+                <source>Close</source>
+                <target>Close</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

@@ -2,15 +2,18 @@
 use Tito10047\BundleMaker\Feature\ControllersFeature;
 use Tito10047\BundleMaker\Feature\TranslationsFeature;
 use Tito10047\BundleMaker\Feature\TwigFeature;
+use Tito10047\BundleMaker\Feature\UxFeature;
 
 /**
  * @var Tito10047\BundleMaker\Blueprint\BundleBlueprint $blueprint
  * @var Tito10047\BundleMaker\Naming\BundleNaming       $naming
  */
 $translations = $blueprint->hasFeature(TranslationsFeature::NAME);
+$ux = $blueprint->hasFeature(UxFeature::NAME);
 $domain = $naming->translationDomain;
 $message = static fn (string $message): string => $translations ? "{{ '".$message."'|trans({}, '".$domain."') }}" : $message;
 $css = $naming->slug.'-hello';
+$controller = UxFeature::controllerName($naming);
 ?>
 {#
 <?php if ($blueprint->hasFeature(ControllersFeature::NAME)): ?>
@@ -26,7 +29,10 @@ $css = $naming->slug.'-hello';
  # <?= TwigFeature::overrideDirectory($naming) ?>hello.html.twig file of your application,
  # or only its "title" block by extending '@!<?= $naming->twigNamespace ?>/hello.html.twig'.
  #}
-<section class="<?= $css ?>">
+<section class="<?= $css ?>"<?= $ux ? " {{ stimulus_controller('".$controller."') }}" : '' ?>>
     <h1 class="<?= $css ?>__title">{% block title %}<?= $message(TranslationsFeature::TITLE_MESSAGE) ?>{% endblock %}</h1>
     <p class="<?= $css ?>__greeting">{{ greeting }}</p>
+<?php if ($ux): ?>
+    <button type="button" class="<?= $css ?>__close" {{ stimulus_action('<?= $controller ?>', 'close') }}><?= $message(TranslationsFeature::CLOSE_MESSAGE) ?></button>
+<?php endif ?>
 </section>

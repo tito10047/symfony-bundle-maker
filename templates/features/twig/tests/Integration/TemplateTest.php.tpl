@@ -1,6 +1,7 @@
 <?php
 use Tito10047\BundleMaker\Feature\TranslationsFeature;
 use Tito10047\BundleMaker\Feature\TwigFeature;
+use Tito10047\BundleMaker\Feature\UxFeature;
 
 /**
  * @var Tito10047\BundleMaker\Blueprint\BundleBlueprint $blueprint
@@ -25,6 +26,10 @@ final class TemplateTest extends KernelTestCase
         $this->assertStringContainsString('Hello Jane!', $html);
 <?php if ($blueprint->hasFeature(TranslationsFeature::NAME)): ?>
         $this->assertStringContainsString(<?= $helper->php(TranslationsFeature::TITLE_MESSAGE) ?>, $html);
+<?php endif ?>
+<?php if ($blueprint->hasFeature(UxFeature::NAME)): ?>
+        $this->assertStringContainsString(<?= $helper->php('data-controller="'.UxFeature::controllerIdentifier($naming).'"') ?>, $html);
+        $this->assertStringContainsString(<?= $helper->php('data-action="'.UxFeature::controllerIdentifier($naming).'#close"') ?>, $html);
 <?php endif ?>
     }
 

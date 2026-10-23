@@ -18,7 +18,7 @@ for Symfony 7.4 LTS and 8.1+ (`^7.4.17 || ^8.1.5`). It then installs the bundle 
 - [x] Generates a working example (a greeter service, its interface and the exceptions of the bundle) and a
       PHPUnit test suite with a test kernel, fully covered and failing on deprecations caused by the bundle.
 - [x] Optional features, each with its tests and documentation, working alone or together: a controller with its
-      Twig template, translations and public assets, an invokable console command loaded lazily,
+      Twig template, translations, public assets and a Stimulus controller, an invokable console command loaded lazily,
       a `kernel.response` event listener enabled through the configuration, and a Doctrine ORM entity mapped in XML,
       registered when the application uses the ORM.
 - [x] Writes a complete `composer.json` and installs the dependencies in one `composer update`.
@@ -38,6 +38,7 @@ Each feature is a question of the assistant, and a `BUNDLE_MAKER_<FEATURE>` envi
 | Event listener | `BUNDLE_MAKER_EVENT_LISTENER` | no | a `kernel.response` listener adding a greeting header, enabled by the `greeting_header` option (requires the semantic configuration), and its tests |
 | Doctrine entity | `BUNDLE_MAKER_DOCTRINE` | no | an entity mapped in XML (`config/doctrine/`), registered when the application uses the ORM (with a `model_manager_name` option), and its tests on SQLite |
 | Public assets | `BUNDLE_MAKER_PUBLIC_ASSETS` | no | a stylesheet in `public/`, installed with `assets:install`, for applications to link in their layout |
+| Symfony UX | `BUNDLE_MAKER_UX` | no | a Stimulus controller (`assets/package.json`, `assets/src/`) exposed to AssetMapper, used by the template |
 
 ## Requirements
 

@@ -8,7 +8,8 @@
  # templates/bundles/AcmeEverythingPhpBundle/hello.html.twig file of your application,
  # or only its "title" block by extending '@!AcmeEverythingPhp/hello.html.twig'.
  #}
-<section class="acme-everything-php-hello">
+<section class="acme-everything-php-hello" {{ stimulus_controller('acme/everything-php-bundle/hello') }}>
     <h1 class="acme-everything-php-hello__title">{% block title %}{{ 'Welcome!'|trans({}, 'AcmeEverythingPhp') }}{% endblock %}</h1>
     <p class="acme-everything-php-hello__greeting">{{ greeting }}</p>
+    <button type="button" class="acme-everything-php-hello__close" {{ stimulus_action('acme/everything-php-bundle/hello', 'close') }}>{{ 'Close'|trans({}, 'AcmeEverythingPhp') }}</button>
 </section>

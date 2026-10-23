@@ -29,19 +29,21 @@ final class TwigFeatureTest extends TestCase
 
     public function testTheApplicationRendersTheTemplatesWithoutControllers(): void
     {
-        $scenario = new Scenario('twig', features: ['twig']);
+        $scenario = new Scenario('twig', features: ['twig', 'ux']);
         $composer = $scenario->createBlueprint()->composer;
 
         self::assertArrayHasKey('symfony/twig-bundle', $composer->getRequireDev());
+        self::assertArrayHasKey('symfony/stimulus-bundle', $composer->getRequireDev());
         self::assertArrayNotHasKey('twig/twig', $composer->getRequire() + $composer->getRequireDev());
         self::assertStringContainsString("render it in your templates with {{ include('@AcmeBlog/hello.html.twig'", $scenario->render()['templates/hello.html.twig']);
     }
 
     public function testTheBundleRendersTheTemplatesWithControllers(): void
     {
-        $composer = (new Scenario('twig', features: ['controllers', 'twig']))->createBlueprint()->composer;
+        $composer = (new Scenario('twig', features: ['controllers', 'twig', 'ux']))->createBlueprint()->composer;
 
         self::assertArrayHasKey('symfony/twig-bundle', $composer->getRequire());
+        self::assertArrayHasKey('symfony/stimulus-bundle', $composer->getRequire());
         self::assertSame(TwigFeature::TWIG_CONSTRAINT, $composer->getRequire()['twig/twig'] ?? null);
     }
 }

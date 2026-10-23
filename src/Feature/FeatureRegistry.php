@@ -81,6 +81,7 @@ final class FeatureRegistry implements \IteratorAggregate, \Countable
             new EventListenerFeature(),
             new DoctrineFeature(),
             new PublicAssetsFeature(),
+            new UxFeature(),
         );
     }
 

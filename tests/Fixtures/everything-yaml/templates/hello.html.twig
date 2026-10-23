@@ -8,7 +8,8 @@
  # templates/bundles/MyVendorEverythingYamlBundle/hello.html.twig file of your application,
  # or only its "title" block by extending '@!MyVendorEverythingYaml/hello.html.twig'.
  #}
-<section class="my-vendor-everything-yaml-hello">
+<section class="my-vendor-everything-yaml-hello" {{ stimulus_controller('my-vendor/everything-yaml-bundle/hello') }}>
     <h1 class="my-vendor-everything-yaml-hello__title">{% block title %}{{ 'Welcome!'|trans({}, 'MyVendorEverythingYaml') }}{% endblock %}</h1>
     <p class="my-vendor-everything-yaml-hello__greeting">{{ greeting }}</p>
+    <button type="button" class="my-vendor-everything-yaml-hello__close" {{ stimulus_action('my-vendor/everything-yaml-bundle/hello', 'close') }}>{{ 'Close'|trans({}, 'MyVendorEverythingYaml') }}</button>
 </section>

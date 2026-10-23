@@ -15,7 +15,7 @@ final class TranslationsTest extends KernelTestCase
         $translator = self::getContainer()->get('translator');
         $this->assertInstanceOf(TranslatorBagInterface::class, $translator);
 
-        $this->assertSame(['Welcome!' => 'Welcome!'], $translator->getCatalogue('en')->all(self::DOMAIN));
+        $this->assertSame(['Welcome!' => 'Welcome!', 'Close' => 'Close'], $translator->getCatalogue('en')->all(self::DOMAIN));
     }
 
     public function testTranslationFilesAreValidXliff(): void

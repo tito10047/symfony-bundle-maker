@@ -4,6 +4,7 @@ namespace Acme\EverythingPhpArrayBundle;
 
 use Doctrine\Bundle\DoctrineBundle\DependencyInjection\Compiler\DoctrineOrmMappingsPass;
 use Doctrine\ORM\Mapping\Driver\XmlDriver;
+use Symfony\Component\AssetMapper\AssetMapperInterface;
 use Symfony\Component\Config\Definition\Configurator\DefinitionConfigurator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
@@ -19,6 +20,21 @@ final class AcmeEverythingPhpArrayBundle extends AbstractBundle
     public function configure(DefinitionConfigurator $definition): void
     {
         $definition->import('../config/definition.php');
+    }
+
+    public function prependExtension(ContainerConfigurator $container, ContainerBuilder $builder): void
+    {
+        // exposes the Stimulus controllers to AssetMapper, when the application uses it,
+        // see https://symfony.com/doc/current/frontend/create_ux_bundle.html#specifics-for-asset-mapper
+        if (interface_exists(AssetMapperInterface::class) && $builder->hasExtension('framework')) {
+            $builder->prependExtensionConfig('framework', [
+                'asset_mapper' => [
+                    'paths' => [
+                        $this->getPath().'/assets/src' => '@acme/everything-php-array-bundle',
+                    ],
+                ],
+            ]);
+        }
     }
 
     /**

@@ -13,6 +13,8 @@ final class TemplateTest extends KernelTestCase
 
         $this->assertStringContainsString('Hello Jane!', $html);
         $this->assertStringContainsString('Welcome!', $html);
+        $this->assertStringContainsString('data-controller="my-vendor--everything-yaml-bundle--hello"', $html);
+        $this->assertStringContainsString('data-action="my-vendor--everything-yaml-bundle--hello#close"', $html);
     }
 
     public function testEscapesTheGreeting(): void

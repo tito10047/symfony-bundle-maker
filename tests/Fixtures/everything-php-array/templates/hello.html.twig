@@ -8,7 +8,8 @@
  # templates/bundles/AcmeEverythingPhpArrayBundle/hello.html.twig file of your application,
  # or only its "title" block by extending '@!AcmeEverythingPhpArray/hello.html.twig'.
  #}
-<section class="acme-everything-php-array-hello">
+<section class="acme-everything-php-array-hello" {{ stimulus_controller('acme/everything-php-array-bundle/hello') }}>
     <h1 class="acme-everything-php-array-hello__title">{% block title %}{{ 'Welcome!'|trans({}, 'AcmeEverythingPhpArray') }}{% endblock %}</h1>
     <p class="acme-everything-php-array-hello__greeting">{{ greeting }}</p>
+    <button type="button" class="acme-everything-php-array-hello__close" {{ stimulus_action('acme/everything-php-array-bundle/hello', 'close') }}>{{ 'Close'|trans({}, 'AcmeEverythingPhpArray') }}</button>
 </section>
