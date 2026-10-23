@@ -1,0 +1,160 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  # weekly, to catch new releases of the dependencies that break the bundle
+  schedule:
+    - cron: '0 6 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  tests:
+    name: PHP ${{ matrix.php }}, Symfony ${{ matrix.next-minor && 'next minor' || matrix.symfony }}${{ matrix.dependencies == 'lowest' && ' (lowest dependencies)' || '' }}${{ matrix.coverage && ' (code coverage)' || '' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    continue-on-error: ${{ matrix.next-minor == true }}
+    strategy:
+      fail-fast: false
+      # every supported PHP version and Symfony version (Symfony 7.4: PHP 8.2+, Symfony 8: PHP 8.4+),
+      # with the lowest dependencies on the lowest PHP version of each Symfony version
+      # See https://symfony.com/doc/current/bundles/best_practices.html#continuous-integration
+      matrix:
+        include:
+          - php: '8.2'
+            symfony: '7.4.*'
+            dependencies: lowest
+          - php: '8.3'
+            symfony: '7.4.*'
+          - php: '8.4'
+            symfony: '8.1.*'
+            dependencies: lowest
+          - php: '8.5'
+            symfony: '7.4.*'
+          - php: '8.5'
+            symfony: '8.1.*'
+            coverage: true
+          # the next minor version of Symfony 8, in development, allowed to fail
+          - php: '8.5'
+            symfony: '8.*'
+            next-minor: true
+    env:
+      # the best practices recommend covering at least 95% of the code, set 0 to only report it
+      MIN_COVERAGE: 95
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          coverage: ${{ matrix.coverage && 'pcov' || 'none' }}
+          tools: composer:v2
+          ini-values: zend.assertions=1
+          extensions: 'pdo_sqlite'
+
+      - name: Install Symfony Flex
+        run: |
+          composer global config --no-plugins allow-plugins.symfony/flex true
+          composer global require --no-progress --no-scripts --no-plugins symfony/flex
+
+      - name: Find the next minor version of Symfony
+        id: next-minor
+        if: matrix.next-minor
+        env:
+          SYMFONY: ${{ matrix.symfony }}
+        run: |
+          composer config minimum-stability dev
+          composer config prefer-stable true
+          # the newest development branch of the major version, e.g. "8.2.x-dev" while Symfony 8.2 is developed
+          branch=$(composer show symfony/http-kernel --all --format=json | jq -r --arg major "${SYMFONY%%.*}" '[.versions[] | select(test("^" + $major + "\\.[0-9]+\\.x-dev$"))] | first')
+          [[ $branch == *.x-dev ]] || { echo "::error::No development branch of Symfony $SYMFONY found"; exit 1; }
+          echo "Symfony $branch"
+          echo "symfony=${branch%.x-dev}.*" >> "$GITHUB_OUTPUT"
+
+      # Composer refuses the versions affected by security advisories: --prefer-lowest would install
+      # the lowest versions without advisory instead of the lower bounds of the constraints
+      - name: Allow the versions affected by security advisories
+        if: matrix.dependencies == 'lowest'
+        run: composer config --global policy.advisories.block false
+
+      # caches the downloaded packages (Composer cache directory), never vendor/
+      - name: Install dependencies
+        uses: ramsey/composer-install@v4
+        env:
+          # restricts the versions of every Symfony package, with Symfony Flex
+          SYMFONY_REQUIRE: ${{ steps.next-minor.outputs.symfony || matrix.symfony }}
+        with:
+          dependency-versions: ${{ matrix.dependencies || 'highest' }}
+
+      - name: Run the tests
+        if: ${{ !matrix.coverage }}
+        run: composer test
+
+      - name: Run the tests with code coverage
+        if: matrix.coverage
+        run: vendor/bin/phpunit --coverage-clover="$RUNNER_TEMP/clover.xml" --coverage-text --only-summary-for-coverage-text
+
+      - name: Check the code coverage
+        if: matrix.coverage
+        shell: php {0}
+        run: |
+          <?php
+          $metrics = simplexml_load_file(getenv('RUNNER_TEMP').'/clover.xml')->project->metrics;
+          $statements = (int) $metrics['statements'];
+          $coverage = 0 === $statements ? 100.0 : 100 * (int) $metrics['coveredstatements'] / $statements;
+          $minimum = (float) getenv('MIN_COVERAGE');
+          $summary = sprintf('Line coverage: %.2f%% (minimum: %s%%)', $coverage, $minimum);
+          file_put_contents(getenv('GITHUB_STEP_SUMMARY'), "### Code coverage\n\n{$summary}\n", FILE_APPEND);
+          echo $summary, PHP_EOL;
+          exit($coverage < $minimum ? 1 : 0);
+
+      - name: Upload the coverage report
+        if: matrix.coverage
+        uses: actions/upload-artifact@v7
+        with:
+          name: coverage
+          path: ${{ runner.temp }}/clover.xml
+
+  qa:
+    name: Quality assurance
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.5'
+          coverage: none
+          tools: composer:v2
+          extensions: 'pdo_sqlite'
+
+      - name: Validate composer.json
+        run: composer validate --strict
+
+      - name: Install dependencies
+        uses: ramsey/composer-install@v4
+        with:
+          dependency-versions: highest
+
+      - name: composer phpstan
+        run: composer phpstan
+
+      - name: composer cs
+        run: composer cs

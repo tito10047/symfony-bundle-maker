@@ -2,6 +2,8 @@
 
 AcmeEverythingPhpBundle for Symfony
 
+[![CI](https://github.com/acme/everything-php-bundle/actions/workflows/ci.yml/badge.svg)](https://github.com/acme/everything-php-bundle/actions/workflows/ci.yml)
+
 ## Requirements
 
 - PHP 8.2 or higher (8.4 or higher with Symfony 8)

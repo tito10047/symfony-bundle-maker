@@ -4,6 +4,7 @@ AcmePhpKitchenSinkBundle for Symfony
 
 [![Kitchen sink](https://img.shields.io/badge/kitchen-sink-blue)](https://example.com)
 [![PHP](https://img.shields.io/badge/php-8.2-blue)](https://php.net)
+[![CI](https://github.com/acme/php-kitchen-sink-bundle/actions/workflows/ci.yml/badge.svg)](https://github.com/acme/php-kitchen-sink-bundle/actions/workflows/ci.yml)
 
 ## Requirements
 

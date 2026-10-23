@@ -39,4 +39,10 @@ enum ListSlot: string
 
     /** Markdown badges shown under the title of README.md, e.g. the CI status. */
     case ReadmeBadges = 'readme.badges';
+
+    /**
+     * PHP extensions installed by every job of .github/workflows/ci.yml (shivammathur/setup-php "extensions" input),
+     * e.g. "pdo_sqlite". Rendered only when the "ci" feature is enabled.
+     */
+    case CiPhpExtensions = 'ci.php_extensions';
 }

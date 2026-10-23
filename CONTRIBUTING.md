@@ -107,7 +107,8 @@ contributions throw as early as possible.
 - `$slots`: partials and values for the master templates (`Slot`, `ListSlot`). A slot
   that nothing renders is a bug: `SlotsTest` checks that every slot is rendered. E.g.
   `Slot::ReadmeInstallationSteps` adds a `### <title>` section after the standard
-  Flex / non-Flex installation instructions.
+  Flex / non-Flex installation instructions, `ListSlot::CiPhpExtensions` the PHP
+  extensions the tests need in CI.
 - `hasFeature($name)`: whether another feature is enabled.
 
 ## Adding a feature

@@ -78,6 +78,7 @@ final class DoctrineFeature extends AbstractFeature
         $blueprint->slots->addValue(ListSlot::TestKernelBundles, 'Doctrine\Bundle\DoctrineBundle\DoctrineBundle');
         $blueprint->slots->addValue(ListSlot::TestKernelUses, 'Composer\InstalledVersions');
         $blueprint->slots->addPartial(Slot::TestKernelConfigureContainer, 'features/doctrine/partials/test_kernel.php.tpl');
+        $blueprint->slots->addValue(ListSlot::CiPhpExtensions, 'pdo_sqlite');
 
         if ($blueprint->hasFeature(PhpStanFeature::NAME)) {
             // reads the mapping of the entities from the entity manager of the test application

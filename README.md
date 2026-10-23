@@ -42,6 +42,7 @@ Each feature is a question of the assistant, and a `BUNDLE_MAKER_<FEATURE>` envi
 | PHPStan | `BUNDLE_MAKER_PHPSTAN` | yes | `phpstan.dist.neon` (level 8, with the Symfony, PHPUnit and Doctrine extensions of the bundle) |
 | PHP-CS-Fixer | `BUNDLE_MAKER_CS_FIXER` | yes | `.php-cs-fixer.dist.php` (`@Symfony` and `@Symfony:risky`, as Symfony itself) |
 | Rector | `BUNDLE_MAKER_RECTOR` | yes | `rector.php`, a local tool (`composer rector`), neither part of `composer qa` nor of the CI |
+| GitHub Actions | `BUNDLE_MAKER_CI` | yes | a CI workflow testing every supported PHP and Symfony version, and Dependabot |
 
 ## Requirements
 
