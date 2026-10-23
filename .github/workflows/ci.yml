@@ -2,51 +2,221 @@ name: CI
 
 on:
   push:
-    branches: ["main"]
+    branches: [main]
   pull_request:
-    branches: ["main"]
+  # weekly, to catch new releases of Composer, of the skeleton and of the dependencies of the generated bundles
+  schedule:
+    - cron: '0 5 * * 1'
+  workflow_dispatch:
+    inputs:
+      skeleton-repository:
+        description: GitHub repository of the bundle skeleton used by the end-to-end tests (owner/name)
+        required: false
+        type: string
+      skeleton-ref:
+        description: Branch, tag or commit of the bundle skeleton
+        required: false
+        type: string
 
 permissions:
   contents: read
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  # The skeleton the end-to-end tests create bundles from. Override it with the
+  # workflow_dispatch inputs or the SKELETON_REPOSITORY / SKELETON_REF repository variables.
+  SKELETON_REPOSITORY: ${{ inputs.skeleton-repository || vars.SKELETON_REPOSITORY || format('{0}/symfony-bundle-skeleton', github.repository_owner) }}
+  SKELETON_REF: ${{ inputs.skeleton-ref || vars.SKELETON_REF || 'main' }}
+
 jobs:
   tests:
-    name: Build
+    name: PHP ${{ matrix.php }}${{ matrix.dependencies == 'lowest' && ' (lowest dependencies)' || '' }}
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     strategy:
+      fail-fast: false
       matrix:
-        php:
-          - 8.2
-          - 8.3
-          - 8.4
-          - 8.5
-
+        php: ['8.2', '8.3', '8.4', '8.5']
+        dependencies: [highest]
+        include:
+          - php: '8.2'
+            dependencies: lowest
     steps:
-    - name: Set up PHP
-      uses: shivammathur/setup-php@v2
-      with:
-        php-version: ${{ matrix.php }}
-        extensions: bcmath, gmp, intl, dom, mbstring
-        ini-values: zend.assertions=1
+      - name: Checkout
+        uses: actions/checkout@v7
+        with:
+          persist-credentials: false
 
-    - name: Checkout code
-      uses: actions/checkout@v4
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          coverage: none
+          tools: composer:v2
+          ini-values: zend.assertions=1
 
-    - name: Validate composer.json and composer.lock
-      run: composer validate --strict
+      # Composer refuses the versions affected by security advisories: --prefer-lowest would install
+      # the lowest versions without advisory instead of the lower bounds of the constraints
+      - name: Allow the versions affected by security advisories
+        if: matrix.dependencies == 'lowest'
+        run: composer config --global policy.advisories.block false
 
-    - name: Cache Composer packages
-      id: composer-cache
-      uses: actions/cache@v3
-      with:
-        path: vendor
-        key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
-        restore-keys: |
-          ${{ runner.os }}-php-
+      # caches the downloaded packages (Composer cache directory), never vendor/
+      - name: Install dependencies
+        uses: ramsey/composer-install@v4
+        with:
+          dependency-versions: ${{ matrix.dependencies }}
 
-    - name: Install dependencies
-      run: composer install --classmap-authoritative
+      - name: Run the tests
+        run: composer test
 
-    - name: Run the quality checks
-      run: composer qa
+  qa:
+    name: Quality assurance, PHP ${{ matrix.php }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        # Symfony 7.4 (PHP 8.3 cannot install Symfony 8) and Symfony 8
+        php: ['8.3', '8.5']
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+        with:
+          persist-credentials: false
 
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          coverage: none
+          tools: composer:v2
+
+      - name: Validate composer.json
+        run: composer validate --strict
+
+      - name: Install dependencies
+        uses: ramsey/composer-install@v4
+        with:
+          dependency-versions: highest
+
+      - name: Check the coding standards
+        run: composer cs
+
+      - name: Run the static analysis
+        run: composer phpstan
+
+  lint:
+    name: Lint the workflows and the scripts
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+
+      # the workflows of this repository and the ones generated in the snapshots
+      - name: Lint the GitHub Actions workflows
+        run: docker run --rm -v "$PWD:/repo" -w /repo rhysd/actionlint:1.7.12 -color .github/workflows/*.yml tests/Fixtures/*/.github/workflows/*.yml
+
+      - name: Lint the shell scripts
+        run: shellcheck tests/e2e/run.sh
+
+  e2e:
+    name: E2E, ${{ matrix.preset }} features, ${{ matrix.config-format }} config, PHP ${{ matrix.php }}, ${{ matrix.symfony && format('Symfony {0}, lowest dependencies', matrix.symfony) || 'as created' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        # As created: the bundle with the dependencies installed by the assistant (nothing is reinstalled)
+        # and its "qa" script (tests and quality checks), exactly as users get it.
+        preset: [minimal, all]
+        config-format: [php, php-array, yaml]
+        php: ['8.5']
+        include:
+          - preset: minimal
+            all-features: '0'
+          - preset: all
+            all-features: '1'
+          # as created with the lowest supported PHP version, so with Symfony 7.4
+          - preset: all
+            all-features: '1'
+            config-format: yaml
+            php: '8.2'
+          # the lower bounds of the constraints with each supported Symfony version, tests only
+          # (the quality tools target the latest versions)
+          - preset: minimal
+            all-features: '0'
+            config-format: php
+            php: '8.2'
+            symfony: '7.4.*'
+            dependencies: lowest
+            scripts: test
+          - preset: all
+            all-features: '1'
+            config-format: php-array
+            php: '8.2'
+            symfony: '7.4.*'
+            dependencies: lowest
+            scripts: test
+          - preset: all
+            all-features: '1'
+            config-format: yaml
+            php: '8.4'
+            symfony: '8.1.*'
+            dependencies: lowest
+            scripts: test
+    steps:
+      - name: Checkout the plugin
+        uses: actions/checkout@v7
+        with:
+          path: bundle-maker
+          persist-credentials: false
+
+      - name: Checkout the skeleton
+        uses: actions/checkout@v7
+        with:
+          repository: ${{ env.SKELETON_REPOSITORY }}
+          ref: ${{ env.SKELETON_REF }}
+          path: bundle-skeleton
+          persist-credentials: false
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          coverage: none
+          tools: composer:v2
+          ini-values: zend.assertions=1
+
+      - name: Locate the Composer cache
+        id: composer-cache
+        run: |
+          echo "dir=$(composer config --global cache-files-dir)" >> "$GITHUB_OUTPUT"
+          echo "week=$(date -u +%G-%V)" >> "$GITHUB_OUTPUT"
+
+      # the downloaded packages only, never vendor/; a new cache every week
+      - name: Cache the downloaded packages
+        uses: actions/cache@v6
+        with:
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key: e2e-composer-${{ runner.os }}-php${{ matrix.php }}-${{ matrix.dependencies || 'highest' }}-${{ steps.composer-cache.outputs.week }}
+          restore-keys: e2e-composer-${{ runner.os }}-php${{ matrix.php }}-${{ matrix.dependencies || 'highest' }}-
+
+      - name: Create and check a bundle
+        env:
+          E2E_SKELETON_DIR: bundle-skeleton
+          E2E_SYMFONY: ${{ matrix.symfony }}
+          E2E_DEPENDENCIES: ${{ matrix.dependencies || 'highest' }}
+          E2E_SCRIPTS: ${{ matrix.scripts || 'qa' }}
+          BUNDLE_MAKER_NAME: acme/blog-bundle
+          BUNDLE_MAKER_AUTHOR_NAME: Jane Doe
+          BUNDLE_MAKER_AUTHOR_EMAIL: jane@example.com
+          BUNDLE_MAKER_ALL: ${{ matrix.all-features }}
+          BUNDLE_MAKER_CONFIG_FORMAT: ${{ matrix.config-format }}
+        run: bundle-maker/tests/e2e/run.sh "$RUNNER_TEMP/blog-bundle"

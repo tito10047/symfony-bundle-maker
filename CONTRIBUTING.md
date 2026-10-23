@@ -61,7 +61,8 @@ templates/
 tests/
 ├── Fixtures/<scenario>/         snapshots: the expected bundle of each scenario
 ├── Snapshot/                    scenarios, snapshot test, "the generated bundle works" test
-└── Support/                     test doubles, and KitchenSinkFeature, which uses the whole blueprint API
+├── Support/                     test doubles, and KitchenSinkFeature, which uses the whole blueprint API
+└── e2e/run.sh                   end-to-end test
 ```
 
 ## Names
@@ -90,7 +91,7 @@ keeps templates out of PHP-CS-Fixer, PHPStan and `php -l`.
 - Encode every value you did not write for its context: `$helper->php()`,
   `$helper->yaml()`, `$helper->xml()`. Build `use` statements with `$helper->imports()`.
 - Generated code must be clean for the generated quality tools (PHP-CS-Fixer,
-  PHPStan): the snapshot tests check the coding standards.
+  PHPStan): the snapshot and end-to-end tests check it.
 
 ## The contract: `BundleBlueprint`
 
@@ -145,6 +146,7 @@ A file every bundle has belongs to a core contributor
 | Unit tests | one test class per class, in the mirrored namespace |
 | Snapshots | `tests/Fixtures/<scenario>/`: the full expected output of each scenario of `tests/Snapshot/Scenarios.php` (minimal, everything and kitchen sink, in every format) |
 | Working output | `GeneratedBundleTest` lints the snapshots, validates `composer.json`, checks the coding standards and loads the services and routes in a real container in every format |
+| End to end | `tests/e2e/run.sh`, below |
 
 Snapshots are regenerated, then reviewed, with:
 
@@ -157,7 +159,7 @@ The plugin supports PHP 8.2 and Composer 2.6 (the lowest dependencies). To run
 its tests on PHP 8.2, copy the working copy (`git archive` would omit the
 export-ignored tests) and use a container. For the lowest dependencies, add
 `--prefer-lowest`, and disable the blocking of the versions affected by security
-advisories, or Composer installs newer versions than the lower bounds:
+advisories, as the CI does, or Composer installs newer versions than the lower bounds:
 
 ```console
 $ git clone . /tmp/maker82
@@ -166,3 +168,32 @@ $ docker run --rm -v /tmp/maker82:/app -w /app composer:2 sh -c \
 $ docker run --rm -v /tmp/maker82:/app -w /app php:8.2-cli vendor/bin/phpunit
 ```
 
+### End-to-end tests
+
+`tests/e2e/run.sh <target-dir>` runs a real `composer create-project` with this
+working copy and a skeleton checkout, checks the generated bundle (its
+`composer.json`, the PHPStan extensions registered by `phpstan/extension-installer`,
+which proves the plugins of the bundle ran, the dist archive of the skeleton), then
+runs the bundle's own scripts (`qa` by default). Its header documents every `E2E_*`
+variable; the answers come from the `BUNDLE_MAKER_*` variables.
+
+- **As created** (no `E2E_SYMFONY`, highest dependencies): nothing is reinstalled, the
+  bundle is tested exactly as users get it.
+- **Lowest** (`E2E_SYMFONY=8.1.*`, `E2E_DEPENDENCIES=lowest`): the dependencies are
+  reinstalled with `--prefer-lowest` and `policy.advisories.block false` (in a
+  temporary `COMPOSER_HOME`, needs Composer 2.10+), so the lower bounds are tested.
+
+The CI (`.github/workflows/ci.yml`) runs every format as created on PHP 8.5, all
+features as created on PHP 8.2, and the lowest dependencies on PHP 8.2 / Symfony 7.4
+and PHP 8.4 / Symfony 8.1. The CI of the skeleton runs the same script with
+`E2E_SKELETON_DIR` set to its own checkout.
+
+```console
+$ git clone https://github.com/tito10047/symfony-bundle-skeleton /tmp/skeleton
+$ E2E_SKELETON_DIR=/tmp/skeleton BUNDLE_MAKER_NAME=acme/blog-bundle BUNDLE_MAKER_ALL=1 \
+  BUNDLE_MAKER_AUTHOR_NAME="Jane Doe" tests/e2e/run.sh /tmp/e2e/blog-bundle
+```
+
+Nothing test-specific may leak into the generated `composer.json`: the plugin is
+declared as a path repository in a temporary `COMPOSER_HOME`, and the skeleton is
+exported with `git archive`, so its `export-ignore` rules apply as for the dist archive.

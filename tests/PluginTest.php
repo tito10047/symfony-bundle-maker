@@ -26,6 +26,9 @@ use Tito10047\BundleMaker\Options\InvalidPresetException;
 use Tito10047\BundleMaker\Plugin;
 use Tito10047\BundleMaker\Tests\Support\Filesystem;
 
+/**
+ * The successful creation is covered end-to-end by "composer create-project" (see CONTRIBUTING.md).
+ */
 final class PluginTest extends TestCase
 {
     public function testSubscribesToTheProjectCreation(): void
