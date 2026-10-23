@@ -70,8 +70,8 @@ final class SlotsTest extends TestCase
     /**
      * A slot that no master template renders is a bug: contributions to it would be silently lost.
      *
-     * Core templates render the slots every bundle has. A slot owned by a feature is
-     * rendered by the templates of that feature only: its documentation
+     * Core templates render the slots every bundle has. A slot owned by a feature (e.g. the
+     * PHPStan slot) is rendered by the templates of that feature only: its documentation
      * must say so ("when the "<feature>" feature is enabled"), so contributors know it is
      * conditional, and templates/features/<feature>/ must render it.
      */

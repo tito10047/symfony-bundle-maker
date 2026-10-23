@@ -1,0 +1,16 @@
+# PHPStan configuration, run it with "composer phpstan".
+# Extensions (Symfony, PHPUnit) are registered by phpstan/extension-installer.
+# To change it locally, create a phpstan.neon file (ignored by Git) that includes this one.
+#
+# See https://phpstan.org/config-reference
+
+parameters:
+    level: 8
+    paths:
+        - config
+        - src
+        - tests
+
+    # configures a PHPStan extension
+    symfony:
+        consoleApplicationLoader: null

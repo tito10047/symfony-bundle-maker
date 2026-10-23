@@ -79,6 +79,13 @@ final class DoctrineFeature extends AbstractFeature
         $blueprint->slots->addValue(ListSlot::TestKernelUses, 'Composer\InstalledVersions');
         $blueprint->slots->addPartial(Slot::TestKernelConfigureContainer, 'features/doctrine/partials/test_kernel.php.tpl');
 
+        if ($blueprint->hasFeature(PhpStanFeature::NAME)) {
+            // reads the mapping of the entities from the entity manager of the test application
+            $composer->requireDev('phpstan/phpstan-doctrine', '^2.0');
+            $blueprint->addFile('features/doctrine/tests/object-manager.php.tpl', 'tests/object-manager.php');
+            $blueprint->slots->addPartial(Slot::PhpStanParameters, 'features/doctrine/partials/phpstan.neon.tpl');
+        }
+
         $blueprint->slots->addPartial(Slot::ReadmeInstallationSteps, 'features/doctrine/partials/readme_step.md.tpl');
         $blueprint->slots->addPartial(Slot::DocsSections, 'features/doctrine/partials/docs.md.tpl');
     }

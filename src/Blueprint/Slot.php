@@ -77,4 +77,10 @@ enum Slot: string
      * The method is only generated when the slot is not empty.
      */
     case TestKernelConfigureRoutes = 'test_kernel.configure_routes';
+
+    /**
+     * Entries of the "parameters" section of phpstan.dist.neon, e.g. the configuration of a PHPStan extension.
+     * Rendered only when the "phpstan" feature is enabled.
+     */
+    case PhpStanParameters = 'phpstan.parameters';
 }

@@ -39,6 +39,7 @@ Each feature is a question of the assistant, and a `BUNDLE_MAKER_<FEATURE>` envi
 | Doctrine entity | `BUNDLE_MAKER_DOCTRINE` | no | an entity mapped in XML (`config/doctrine/`), registered when the application uses the ORM (with a `model_manager_name` option), and its tests on SQLite |
 | Public assets | `BUNDLE_MAKER_PUBLIC_ASSETS` | no | a stylesheet in `public/`, installed with `assets:install`, for applications to link in their layout |
 | Symfony UX | `BUNDLE_MAKER_UX` | no | a Stimulus controller (`assets/package.json`, `assets/src/`) exposed to AssetMapper, used by the template |
+| PHPStan | `BUNDLE_MAKER_PHPSTAN` | yes | `phpstan.dist.neon` (level 8, with the Symfony, PHPUnit and Doctrine extensions of the bundle) |
 
 ## Requirements
 

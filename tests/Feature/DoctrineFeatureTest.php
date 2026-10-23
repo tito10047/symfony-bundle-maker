@@ -47,14 +47,16 @@ final class DoctrineFeatureTest extends TestCase
 
         self::assertArrayNotHasKey('config/definition.php', $files);
         self::assertStringContainsString("parameters:\n    acme_blog.model_manager_name: customer", $files['docs/index.md']);
+        self::assertArrayNotHasKey('tests/object-manager.php', $files);
     }
 
     public function testTheEntityManagerIsAnOptionOfTheSemanticConfiguration(): void
     {
-        $files = (new Scenario('doctrine', features: ['config', 'doctrine']))->render();
+        $files = (new Scenario('doctrine', features: ['config', 'doctrine', 'phpstan']))->render();
 
         self::assertStringContainsString("->scalarNode('model_manager_name')", $files['config/definition.php']);
         self::assertStringContainsString("->set('acme_blog.model_manager_name', \$config['model_manager_name'])", $files['src/AcmeBlogBundle.php']);
         self::assertStringContainsString("acme_blog:\n    model_manager_name: customer", $files['docs/index.md']);
+        self::assertArrayHasKey('tests/object-manager.php', $files);
     }
 }

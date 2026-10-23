@@ -1,0 +1,17 @@
+# PHPStan configuration, run it with "composer phpstan".
+# Extensions (Symfony, PHPUnit) are registered by phpstan/extension-installer.
+# To change it locally, create a phpstan.neon file (ignored by Git) that includes this one.
+#
+# See https://phpstan.org/config-reference
+
+parameters:
+    level: 8
+    paths:
+        - config
+        - src
+        - tests
+
+    # the mapping of the entities, read by phpstan/phpstan-doctrine; the result cache of PHPStan ignores the
+    # mapping files: run "vendor/bin/phpstan clear-result-cache" after changing them
+    doctrine:
+        objectManagerLoader: tests/object-manager.php

@@ -95,6 +95,8 @@ final class KitchenSinkFeature extends AbstractFeature
         $blueprint->slots->addValue(ListSlot::GitAttributesExportIgnore, '/kitchen-sink.dist.php');
         $blueprint->slots->addValue(ListSlot::GitIgnore, '/.kitchen-sink.cache', '/vendor/');
 
+        $blueprint->slots->addPartial(Slot::PhpStanParameters, 'kitchen-sink/partials/phpstan_parameters.neon.tpl');
+
         $blueprint->addFile('kitchen-sink/NOTES.md.tpl', 'docs/notes.md', ['note' => 'Generated for <'.$naming->className.'>']);
     }
 }

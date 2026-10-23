@@ -90,6 +90,7 @@ composer test
 |---|---|
 | `composer qa` | Runs every quality check |
 | `composer test` | Runs the tests (PHPUnit) |
+| `composer phpstan` | Runs the static analysis (PHPStan) |
 
 The changes of each version are listed in the [changelog](CHANGELOG.md).
 
