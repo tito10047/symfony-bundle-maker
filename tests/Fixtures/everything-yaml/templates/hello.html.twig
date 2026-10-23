@@ -1,0 +1,14 @@
+{#
+ # Greets people, rendered by MyVendor\EverythingYamlBundle\Controller\HelloController.
+ #
+ # Variables:
+ #   greeting  string  the greeting, e.g. "Hello Jane!"
+ #
+ # It is a fragment, without layout, so applications can display it anywhere. Override it in the
+ # templates/bundles/MyVendorEverythingYamlBundle/hello.html.twig file of your application,
+ # or only its "title" block by extending '@!MyVendorEverythingYaml/hello.html.twig'.
+ #}
+<section class="my-vendor-everything-yaml-hello">
+    <h1 class="my-vendor-everything-yaml-hello__title">{% block title %}Welcome!{% endblock %}</h1>
+    <p class="my-vendor-everything-yaml-hello__greeting">{{ greeting }}</p>
+</section>

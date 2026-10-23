@@ -11,6 +11,7 @@ services:
         class: MyVendor\EverythingYamlBundle\Controller\HelloController
         arguments:
             - '@my_vendor_everything_yaml.greeter'
+            - '@twig'
         tags:
             - { name: 'controller.service_arguments' }
 

@@ -18,6 +18,7 @@ use Symfony\Component\Console\Formatter\OutputFormatter;
 use Tito10047\BundleMaker\Feature\FeatureGroup;
 use Tito10047\BundleMaker\Feature\FeatureInterface;
 use Tito10047\BundleMaker\Feature\FeatureRegistry;
+use Tito10047\BundleMaker\Feature\TwigFeature;
 
 /**
  * Summary of the answers and of the derived names, shown before the final confirmation.
@@ -42,6 +43,9 @@ final class OptionsSummary
             'Bundle class' => $naming->fqcn,
             'Extension alias' => $naming->alias,
         ];
+        if ($options->hasFeature(TwigFeature::NAME)) {
+            $rows['Twig namespace'] = '@'.$naming->twigNamespace;
+        }
 
         foreach (FeatureGroup::cases() as $group) {
             $groupFeatures = $features->getByGroup($group);

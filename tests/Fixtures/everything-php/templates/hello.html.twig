@@ -1,0 +1,14 @@
+{#
+ # Greets people, rendered by Acme\EverythingPhpBundle\Controller\HelloController.
+ #
+ # Variables:
+ #   greeting  string  the greeting, e.g. "Hello Jane!"
+ #
+ # It is a fragment, without layout, so applications can display it anywhere. Override it in the
+ # templates/bundles/AcmeEverythingPhpBundle/hello.html.twig file of your application,
+ # or only its "title" block by extending '@!AcmeEverythingPhp/hello.html.twig'.
+ #}
+<section class="acme-everything-php-hello">
+    <h1 class="acme-everything-php-hello__title">{% block title %}Welcome!{% endblock %}</h1>
+    <p class="acme-everything-php-hello__greeting">{{ greeting }}</p>
+</section>

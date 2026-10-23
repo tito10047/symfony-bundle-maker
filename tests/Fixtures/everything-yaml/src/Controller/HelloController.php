@@ -6,9 +6,10 @@ use MyVendor\EverythingYamlBundle\Exception\InvalidArgumentException;
 use MyVendor\EverythingYamlBundle\GreeterInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
+use Twig\Environment;
 
 /**
- * Greets people, in plain text.
+ * Greets people on a page rendered from the "@MyVendorEverythingYaml/hello.html.twig" template.
  *
  * Routed by the "my_vendor_everything_yaml_hello" route.
  */
@@ -16,6 +17,7 @@ final readonly class HelloController
 {
     public function __construct(
         private GreeterInterface $greeter,
+        private Environment $twig,
     ) {
     }
 
@@ -27,8 +29,8 @@ final readonly class HelloController
             throw new BadRequestHttpException($exception->getMessage(), $exception);
         }
 
-        return new Response($greeting, Response::HTTP_OK, [
-            'Content-Type' => 'text/plain; charset=UTF-8',
-        ]);
+        return new Response($this->twig->render('@MyVendorEverythingYaml/hello.html.twig', [
+            'greeting' => $greeting,
+        ]));
     }
 }

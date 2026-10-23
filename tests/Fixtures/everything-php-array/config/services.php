@@ -21,6 +21,7 @@ return [
             'class' => HelloController::class,
             'arguments' => [
                 '@acme_everything_php_array.greeter',
+                '@twig',
             ],
             'tags' => [
                 ['name' => 'controller.service_arguments'],

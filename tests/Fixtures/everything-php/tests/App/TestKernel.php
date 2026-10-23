@@ -7,6 +7,7 @@ use Acme\EverythingPhpBundle\GreeterInterface;
 use Psr\Log\NullLogger;
 use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
+use Symfony\Bundle\TwigBundle\TwigBundle;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 use Symfony\Component\HttpKernel\Kernel;
@@ -44,6 +45,7 @@ final class TestKernel extends Kernel
     public function registerBundles(): iterable
     {
         yield new FrameworkBundle();
+        yield new TwigBundle();
         yield new AcmeEverythingPhpBundle();
     }
 
@@ -85,6 +87,11 @@ final class TestKernel extends Kernel
         $container->services()
             ->set('logger', NullLogger::class)
         ;
+
+        // undefined variables of the templates are errors
+        $container->extension('twig', [
+            'strict_variables' => true,
+        ]);
 
         foreach ($this->extensionConfigs as $alias => $config) {
             $container->extension($alias, $config);

@@ -30,7 +30,8 @@ use Tito10047\BundleMaker\Naming\BundleNaming;
  * which applications import.
  *
  * The controller is a final invokable class, without AbstractController: its dependencies are
- * injected explicitly. It returns plain text. Its functional test only checks the responses.
+ * injected explicitly. It renders the template of the "twig" feature when it is enabled, and
+ * returns plain text otherwise. Its functional test only checks the responses.
  *
  * The bundle requires FrameworkBundle: it registers the controllers of the bundles
  * ("controller.service_arguments" tag) and imports their routes.
@@ -52,6 +53,9 @@ final class ControllersFeature extends AbstractFeature
         $serviceId = $naming->alias.'.controller.hello';
 
         $arguments = [ServiceArgument::service(GreeterContributor::serviceId($naming))];
+        if ($blueprint->hasFeature(TwigFeature::NAME)) {
+            $arguments[] = ServiceArgument::service('twig');
+        }
 
         // "symfony/routing" is required as soon as a route exists
         $blueprint->composer->require('symfony/framework-bundle', Constraint::SYMFONY);

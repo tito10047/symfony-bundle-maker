@@ -18,8 +18,8 @@ final class HelloControllerTest extends WebTestCase
         $client->request('GET', $url);
 
         $this->assertResponseIsSuccessful();
-        $this->assertResponseHeaderSame('Content-Type', 'text/plain; charset=UTF-8');
-        $this->assertSame($greeting, $client->getResponse()->getContent());
+        $this->assertResponseHeaderSame('Content-Type', 'text/html; charset=UTF-8');
+        $this->assertStringContainsString($greeting, (string) $client->getResponse()->getContent());
     }
 
     /**

@@ -64,6 +64,7 @@ final class BundleOptionsAskerTest extends TestCase
         $output = $io->getOutput();
         self::assertStringContainsString('Symfony bundle assistant', $output);
         self::assertMatchesRegularExpression('/^  Extension alias +acme_my_blog$/m', $output);
+        self::assertStringNotContainsString('Twig namespace', $output, 'Twig is disabled.');
         self::assertMatchesRegularExpression('/^  Features +none$/m', $output);
         self::assertMatchesRegularExpression('/^  Quality assurance +phpstan$/m', $output);
         self::assertStringNotContainsString(' Identity', $output, 'Headings of unasked questions are not printed.');
@@ -312,6 +313,7 @@ final class BundleOptionsAskerTest extends TestCase
         self::assertStringContainsString('License ("?" to list them) [MIT]', $output);
         self::assertStringContainsString("    BSD-3-Clause       BSD 3-Clause License\n", $output);
         self::assertStringContainsString("    php-array  PHP arrays, Symfony 7.4+\n", $output);
+        self::assertMatchesRegularExpression('/^  Twig namespace +@AcmeBlog$/m', $output);
     }
 
     public function testKeepsAPackageNameWithoutSuffixWhenConfirmed(): void

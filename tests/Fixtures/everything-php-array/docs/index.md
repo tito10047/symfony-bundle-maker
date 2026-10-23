@@ -72,7 +72,7 @@ The bundle provides a page greeting people, once its routes are imported
 
 With the `/acme-everything-php-array` prefix, `/acme-everything-php-array/hello/Jane` greets "Hello Jane!", and
 `/acme-everything-php-array/hello` greets "Hello World!".
-The page is plain text.
+The page is rendered from the `@AcmeEverythingPhpArray/hello.html.twig` template, see [Templates](#templates).
 
 Link to the page by the name of its route, never by its path, which depends
 on the prefix chosen by the application:
@@ -82,3 +82,41 @@ on the prefix chosen by the application:
 ```
 
 Run `php bin/console debug:router acme_everything_php_array_hello` to display the route.
+
+## Templates
+
+The templates of the bundle are in the `@AcmeEverythingPhpArray` Twig namespace.
+`@AcmeEverythingPhpArray/hello.html.twig` renders the greeting page. Its only variable is
+`greeting`, the greeting to display, e.g. "Hello Jane!". You can also include it
+in your own templates:
+
+```twig
+{{ include('@AcmeEverythingPhpArray/hello.html.twig', {greeting: 'Hello Jane!'}) }}
+```
+
+The templates extend no layout: they display well anywhere in your pages.
+
+### Overriding the templates
+
+To change a template, create a template with the same name in the
+`templates/bundles/AcmeEverythingPhpArrayBundle/` directory of your application. For example,
+`templates/bundles/AcmeEverythingPhpArrayBundle/hello.html.twig` replaces `@AcmeEverythingPhpArray/hello.html.twig`:
+
+```twig
+{# templates/bundles/AcmeEverythingPhpArrayBundle/hello.html.twig #}
+<p class="greeting">{{ greeting }}</p>
+```
+
+To only change its `title` block, extend the original template: the `!` prefix
+always refers to the template of the bundle.
+
+```twig
+{# templates/bundles/AcmeEverythingPhpArrayBundle/hello.html.twig #}
+{% extends '@!AcmeEverythingPhpArray/hello.html.twig' %}
+
+{% block title %}Nice to meet you!{% endblock %}
+```
+
+Clear the cache after creating an overriding template for the first time:
+`php bin/console cache:clear`.
+See [How to Override any Part of a Bundle](https://symfony.com/doc/current/bundles/override.html#templates).

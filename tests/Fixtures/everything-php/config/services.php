@@ -20,6 +20,7 @@ return static function (ContainerConfigurator $container): void {
         ->set('acme_everything_php.controller.hello', HelloController::class)
             ->args([
                 service('acme_everything_php.greeter'),
+                service('twig'),
             ])
             ->tag('controller.service_arguments')
 

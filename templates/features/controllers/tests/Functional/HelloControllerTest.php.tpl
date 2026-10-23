@@ -1,11 +1,14 @@
 <?php
 use Tito10047\BundleMaker\Contributor\Core\GreeterContributor;
 use Tito10047\BundleMaker\Feature\ControllersFeature;
+use Tito10047\BundleMaker\Feature\TwigFeature;
 
 /**
- * @var Tito10047\BundleMaker\Naming\BundleNaming     $naming
- * @var Tito10047\BundleMaker\Template\TemplateHelper $helper
+ * @var Tito10047\BundleMaker\Blueprint\BundleBlueprint $blueprint
+ * @var Tito10047\BundleMaker\Naming\BundleNaming       $naming
+ * @var Tito10047\BundleMaker\Template\TemplateHelper   $helper
  */
+$twig = $blueprint->hasFeature(TwigFeature::NAME);
 $greeting = GreeterContributor::DEFAULT_GREETING;
 ?>
 <?= "<?php\n" ?>
@@ -28,8 +31,13 @@ final class HelloControllerTest extends WebTestCase
         $client->request('GET', $url);
 
         $this->assertResponseIsSuccessful();
+<?php if ($twig): ?>
+        $this->assertResponseHeaderSame('Content-Type', 'text/html; charset=UTF-8');
+        $this->assertStringContainsString($greeting, (string) $client->getResponse()->getContent());
+<?php else: ?>
         $this->assertResponseHeaderSame('Content-Type', 'text/plain; charset=UTF-8');
         $this->assertSame($greeting, $client->getResponse()->getContent());
+<?php endif ?>
     }
 
     /**

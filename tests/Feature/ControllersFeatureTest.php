@@ -44,4 +44,11 @@ final class ControllersFeatureTest extends TestCase
         self::assertStringContainsString("assertResponseHeaderSame('Content-Type', 'text/plain; charset=UTF-8')", $files['tests/Functional/HelloControllerTest.php']);
         self::assertStringContainsString('The page is plain text.', $files['docs/index.md']);
     }
+
+    public function testRendersTheTemplateWithTwig(): void
+    {
+        $files = (new Scenario('controllers', features: ['controllers', 'twig']))->render();
+
+        self::assertStringContainsString("\$this->twig->render('@AcmeBlog/hello.html.twig'", $files['src/Controller/HelloController.php']);
+    }
 }

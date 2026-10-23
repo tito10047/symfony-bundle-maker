@@ -21,6 +21,7 @@ use Tito10047\BundleMaker\Feature\FeatureInterface;
 use Tito10047\BundleMaker\Feature\FeatureRegistry;
 use Tito10047\BundleMaker\Feature\FeatureSelection;
 use Tito10047\BundleMaker\Feature\SemanticConfigFeature;
+use Tito10047\BundleMaker\Feature\TwigFeature;
 use Tito10047\BundleMaker\Tests\Support\TestFeature;
 
 final class FeatureRegistryTest extends TestCase
@@ -96,11 +97,14 @@ final class FeatureRegistryTest extends TestCase
 
         self::assertInstanceOf(SemanticConfigFeature::class, $registry->get(SemanticConfigFeature::NAME));
         self::assertInstanceOf(ControllersFeature::class, $registry->get(ControllersFeature::NAME));
-        // the order of the questions and of the contributions
+        self::assertInstanceOf(TwigFeature::class, $registry->get(TwigFeature::NAME));
+        // the order of the questions and of the contributions; a feature reading the answers of other features
+        // comes after them (twig defaults to the answer of controllers)
         self::assertSame(
             [
                 SemanticConfigFeature::NAME,
                 ControllersFeature::NAME,
+                TwigFeature::NAME,
             ],
             array_map(static fn (FeatureInterface $feature): string => $feature->getName(), $registry->getByGroup(FeatureGroup::Features)),
         );
