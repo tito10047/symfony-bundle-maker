@@ -1,33 +1,33 @@
 # Services are defined explicitly: no autowiring, no autoconfiguration, private by default,
-# with ids prefixed by "my_vendor_everything_yaml." and aliases for autowiring.
+# with ids prefixed by "tito10047_everything_yaml." and aliases for autowiring.
 #
 # See https://symfony.com/doc/current/bundles/best_practices.html#services
 
 services:
-    my_vendor_everything_yaml.greeter:
-        class: MyVendor\EverythingYamlBundle\Greeter
+    tito10047_everything_yaml.greeter:
+        class: Tito10047\EverythingYamlBundle\Greeter
 
-    my_vendor_everything_yaml.controller.hello:
-        class: MyVendor\EverythingYamlBundle\Controller\HelloController
+    tito10047_everything_yaml.controller.hello:
+        class: Tito10047\EverythingYamlBundle\Controller\HelloController
         arguments:
-            - '@my_vendor_everything_yaml.greeter'
+            - '@tito10047_everything_yaml.greeter'
             - '@twig'
         tags:
             - { name: 'controller.service_arguments' }
 
-    my_vendor_everything_yaml.command.hello:
-        class: MyVendor\EverythingYamlBundle\Command\HelloCommand
+    tito10047_everything_yaml.command.hello:
+        class: Tito10047\EverythingYamlBundle\Command\HelloCommand
         arguments:
-            - '@my_vendor_everything_yaml.greeter'
+            - '@tito10047_everything_yaml.greeter'
         tags:
             - { name: 'console.command' }
 
-    my_vendor_everything_yaml.event_listener.greeting_header:
-        class: MyVendor\EverythingYamlBundle\EventListener\GreetingHeaderListener
+    tito10047_everything_yaml.event_listener.greeting_header:
+        class: Tito10047\EverythingYamlBundle\EventListener\GreetingHeaderListener
         arguments:
-            - '@my_vendor_everything_yaml.greeter'
+            - '@tito10047_everything_yaml.greeter'
         tags:
             - { name: 'kernel.event_listener', event: 'kernel.response' }
 
-    MyVendor\EverythingYamlBundle\GreeterInterface:
-        alias: my_vendor_everything_yaml.greeter
+    Tito10047\EverythingYamlBundle\GreeterInterface:
+        alias: tito10047_everything_yaml.greeter

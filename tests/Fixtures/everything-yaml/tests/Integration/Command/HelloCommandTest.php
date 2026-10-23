@@ -1,6 +1,6 @@
 <?php
 
-namespace MyVendor\EverythingYamlBundle\Tests\Integration\Command;
+namespace Tito10047\EverythingYamlBundle\Tests\Integration\Command;
 
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
@@ -43,6 +43,6 @@ final class HelloCommandTest extends KernelTestCase
     {
         $application = new Application(self::bootKernel());
 
-        return new CommandTester($application->find('my-vendor-everything-yaml:hello'));
+        return new CommandTester($application->find('tito10047-everything-yaml:hello'));
     }
 }

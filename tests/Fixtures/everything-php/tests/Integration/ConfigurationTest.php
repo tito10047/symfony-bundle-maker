@@ -1,10 +1,7 @@
 <?php
 
-namespace Acme\EverythingPhpBundle\Tests\Integration;
+namespace Zeta\EverythingPhpBundle\Tests\Integration;
 
-use Acme\EverythingPhpBundle\EventListener\GreetingHeaderListener;
-use Acme\EverythingPhpBundle\GreeterInterface;
-use Acme\EverythingPhpBundle\Tests\App\TestKernel;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
@@ -15,6 +12,9 @@ use Symfony\Component\HttpKernel\Event\ResponseEvent;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\HttpKernel\KernelInterface;
+use Zeta\EverythingPhpBundle\EventListener\GreetingHeaderListener;
+use Zeta\EverythingPhpBundle\GreeterInterface;
+use Zeta\EverythingPhpBundle\Tests\App\TestKernel;
 
 /**
  * Boots the test application with the given configuration of the bundle.
@@ -23,7 +23,7 @@ final class ConfigurationTest extends KernelTestCase
 {
     public function testGreetingIsPassedToTheGreeter(): void
     {
-        self::bootKernel(['extension_configs' => ['acme_everything_php' => ['greeting' => 'Hi']]]);
+        self::bootKernel(['extension_configs' => ['zeta_everything_php' => ['greeting' => 'Hi']]]);
 
         $greeter = self::getContainer()->get('test.'.GreeterInterface::class);
 
@@ -40,7 +40,7 @@ final class ConfigurationTest extends KernelTestCase
         $this->expectException(InvalidConfigurationException::class);
         $this->expectExceptionMessage($expectedMessage);
 
-        self::bootKernel(['extension_configs' => ['acme_everything_php' => $config]]);
+        self::bootKernel(['extension_configs' => ['zeta_everything_php' => $config]]);
     }
 
     /**
@@ -48,8 +48,8 @@ final class ConfigurationTest extends KernelTestCase
      */
     public static function provideInvalidConfigurations(): iterable
     {
-        yield 'empty greeting' => [['greeting' => ''], 'The path "acme_everything_php.greeting" cannot contain an empty value'];
-        yield 'unknown option' => [['unknown' => true], 'Unrecognized option "unknown" under "acme_everything_php"'];
+        yield 'empty greeting' => [['greeting' => ''], 'The path "zeta_everything_php.greeting" cannot contain an empty value'];
+        yield 'unknown option' => [['unknown' => true], 'Unrecognized option "unknown" under "zeta_everything_php"'];
     }
 
     public function testGreetingHeaderIsDisabledByDefault(): void
@@ -61,7 +61,7 @@ final class ConfigurationTest extends KernelTestCase
 
     public function testGreetingHeaderCanBeEnabled(): void
     {
-        $response = $this->dispatchResponse(self::bootKernel(['extension_configs' => ['acme_everything_php' => ['greeting_header' => true]]]));
+        $response = $this->dispatchResponse(self::bootKernel(['extension_configs' => ['zeta_everything_php' => ['greeting_header' => true]]]));
 
         $this->assertSame('Hello World!', $response->headers->get(GreetingHeaderListener::HEADER));
     }

@@ -1,8 +1,8 @@
-# MyVendorEverythingYamlBundle
+# Tito10047EverythingYamlBundle
 
-MyVendorEverythingYamlBundle for Symfony
+Tito10047EverythingYamlBundle for Symfony
 
-[![CI](https://github.com/my-vendor/everything-yaml-bundle/actions/workflows/ci.yml/badge.svg)](https://github.com/my-vendor/everything-yaml-bundle/actions/workflows/ci.yml)
+[![CI](https://github.com/tito10047/everything-yaml-bundle/actions/workflows/ci.yml/badge.svg)](https://github.com/tito10047/everything-yaml-bundle/actions/workflows/ci.yml)
 
 ## Requirements
 
@@ -20,7 +20,7 @@ of the Composer documentation.
 Open a command console, enter your project directory and execute:
 
 ```console
-composer require my-vendor/everything-yaml-bundle
+composer require tito10047/everything-yaml-bundle
 ```
 
 ### Applications that don't use Symfony Flex
@@ -31,7 +31,7 @@ Open a command console, enter your project directory and execute the
 following command to download the latest stable version of this bundle:
 
 ```console
-composer require my-vendor/everything-yaml-bundle
+composer require tito10047/everything-yaml-bundle
 ```
 
 #### Step 2: Enable the Bundle
@@ -44,7 +44,7 @@ in the `config/bundles.php` file of your project:
 
 return [
     // ...
-    MyVendor\EverythingYamlBundle\MyVendorEverythingYamlBundle::class => ['all' => true],
+    Tito10047\EverythingYamlBundle\Tito10047EverythingYamlBundle::class => ['all' => true],
 ];
 ```
 
@@ -54,15 +54,15 @@ Import the routes of the bundle in your application, under the prefix of
 your choice:
 
 ```yaml
-# config/routes/my_vendor_everything_yaml.yaml
-my_vendor_everything_yaml:
-    resource: '@MyVendorEverythingYamlBundle/config/routes.yaml'
-    prefix: /my-vendor-everything-yaml
+# config/routes/tito10047_everything_yaml.yaml
+tito10047_everything_yaml:
+    resource: '@Tito10047EverythingYamlBundle/config/routes.yaml'
+    prefix: /tito10047-everything-yaml
 ```
 
 ### Create the Database Table
 
-The bundle stores its entities in the `my_vendor_everything_yaml_greeting` table. Create it with a
+The bundle stores its entities in the `tito10047_everything_yaml_greeting` table. Create it with a
 [migration](https://symfony.com/bundles/DoctrineMigrationsBundle/current/index.html):
 
 ```console
@@ -72,7 +72,7 @@ php bin/console doctrine:migrations:migrate
 
 ### Install the Assets
 
-Install the web assets of the bundle in the `public/bundles/myvendoreverythingyaml/`
+Install the web assets of the bundle in the `public/bundles/tito10047everythingyaml/`
 directory of your application (Symfony Flex runs this command after each
 `composer require` and `composer update`):
 
@@ -90,7 +90,7 @@ Symfony Flex enables the controller for you. Without Flex, enable it in the
 ```json
 {
     "controllers": {
-        "@my-vendor/everything-yaml-bundle": {
+        "@tito10047/everything-yaml-bundle": {
             "hello": {
                 "enabled": true,
                 "fetch": "lazy"
@@ -109,34 +109,34 @@ php bin/console importmap:require @hotwired/stimulus
 ```
 
 With Webpack Encore, add the bundle to the dependencies of your `package.json`
-(`"@my-vendor/everything-yaml-bundle": "file:vendor/my-vendor/everything-yaml-bundle/assets"`), then
+(`"@tito10047/everything-yaml-bundle": "file:vendor/tito10047/everything-yaml-bundle/assets"`), then
 run `npm install --force` and rebuild your assets.
 
 ## Configuration
 
 The bundle works without configuration. To change its defaults, configure the
-`my_vendor_everything_yaml` extension in your application:
+`tito10047_everything_yaml` extension in your application:
 
 ```yaml
-# config/packages/my_vendor_everything_yaml.yaml
-my_vendor_everything_yaml:
+# config/packages/tito10047_everything_yaml.yaml
+tito10047_everything_yaml:
     greeting: 'Hi'
 ```
 
 Or in PHP:
 
 ```php
-// config/packages/my_vendor_everything_yaml.php
+// config/packages/tito10047_everything_yaml.php
 namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 
 return App::config([
-    'my_vendor_everything_yaml' => [
+    'tito10047_everything_yaml' => [
         'greeting' => 'Hi',
     ],
 ]);
 ```
 
-Run `php bin/console config:dump-reference my_vendor_everything_yaml` to list every option
+Run `php bin/console config:dump-reference tito10047_everything_yaml` to list every option
 and its default value, or read the [configuration reference](docs/index.md#configuration).
 
 ## Documentation
@@ -166,4 +166,4 @@ The changes of each version are listed in the [changelog](CHANGELOG.md).
 
 ## License
 
-MyVendorEverythingYamlBundle is released under the MIT License, see the [LICENSE](LICENSE) file.
+Tito10047EverythingYamlBundle is released under the MIT License, see the [LICENSE](LICENSE) file.

@@ -5,8 +5,8 @@
  * the mapping of the entities from it (doctrine.objectManagerLoader in phpstan.dist.neon).
  */
 
-use Acme\EverythingPhpBundle\Tests\App\TestKernel;
 use Doctrine\Persistence\ManagerRegistry;
+use Zeta\EverythingPhpBundle\Tests\App\TestKernel;
 
 // in debug mode, the container and the mapping are refreshed when the mapping files change
 $kernel = new TestKernel('test', true);

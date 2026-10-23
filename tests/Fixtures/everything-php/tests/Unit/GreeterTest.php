@@ -1,11 +1,11 @@
 <?php
 
-namespace Acme\EverythingPhpBundle\Tests\Unit;
+namespace Zeta\EverythingPhpBundle\Tests\Unit;
 
-use Acme\EverythingPhpBundle\Exception\InvalidArgumentException;
-use Acme\EverythingPhpBundle\Greeter;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
+use Zeta\EverythingPhpBundle\Exception\InvalidArgumentException;
+use Zeta\EverythingPhpBundle\Greeter;
 
 final class GreeterTest extends TestCase
 {

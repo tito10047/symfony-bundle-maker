@@ -1,13 +1,13 @@
 <?php
 
-namespace MyVendor\EverythingYamlBundle;
+namespace Tito10047\EverythingYamlBundle;
 
-use MyVendor\EverythingYamlBundle\Exception\InvalidArgumentException;
+use Tito10047\EverythingYamlBundle\Exception\InvalidArgumentException;
 
 /**
  * Greets people with the configured greeting.
  *
- * Registered as the "my_vendor_everything_yaml.greeter" service.
+ * Registered as the "tito10047_everything_yaml.greeter" service.
  */
 final readonly class Greeter implements GreeterInterface
 {

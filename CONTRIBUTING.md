@@ -89,7 +89,9 @@ keeps templates out of PHP-CS-Fixer, PHPStan and `php -l`.
   `$slots->render()` or a string literal ending with `\n`.
 - A template generating PHP outputs the opening tag itself: `<?= "<?php\n" ?>`.
 - Encode every value you did not write for its context: `$helper->php()`,
-  `$helper->yaml()`, `$helper->xml()`. Build `use` statements with `$helper->imports()`.
+  `$helper->yaml()`, `$helper->xml()`. Build `use` statements with `$helper->imports()`:
+  it sorts them, and their order depends on the vendor of the bundle. `TemplateConventionsTest`
+  rejects a `use` statement written with a computed name.
 - Generated code must be clean for the generated quality tools (PHP-CS-Fixer,
   PHPStan): the snapshot and end-to-end tests check it.
 

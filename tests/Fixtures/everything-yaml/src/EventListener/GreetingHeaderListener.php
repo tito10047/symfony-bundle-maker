@@ -1,18 +1,18 @@
 <?php
 
-namespace MyVendor\EverythingYamlBundle\EventListener;
+namespace Tito10047\EverythingYamlBundle\EventListener;
 
-use MyVendor\EverythingYamlBundle\GreeterInterface;
 use Symfony\Component\HttpKernel\Event\ResponseEvent;
+use Tito10047\EverythingYamlBundle\GreeterInterface;
 
 /**
- * Adds a greeting header to the responses of the application, e.g. "X-My-Vendor-Everything-Yaml-Greeting: Hello World!".
+ * Adds a greeting header to the responses of the application, e.g. "X-Tito10047-Everything-Yaml-Greeting: Hello World!".
  *
  * Listens to the "kernel.response" event when the "greeting_header" option is enabled.
  */
 final readonly class GreetingHeaderListener
 {
-    public const HEADER = 'X-My-Vendor-Everything-Yaml-Greeting';
+    public const HEADER = 'X-Tito10047-Everything-Yaml-Greeting';
 
     public function __construct(
         private GreeterInterface $greeter,

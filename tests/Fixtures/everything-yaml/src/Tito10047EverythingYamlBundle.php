@@ -1,6 +1,6 @@
 <?php
 
-namespace Acme\EverythingPhpBundle;
+namespace Tito10047\EverythingYamlBundle;
 
 use Doctrine\Bundle\DoctrineBundle\DependencyInjection\Compiler\DoctrineOrmMappingsPass;
 use Doctrine\ORM\Mapping\Driver\XmlDriver;
@@ -15,7 +15,7 @@ use Symfony\Component\HttpKernel\Bundle\AbstractBundle;
  *
  * @see https://symfony.com/doc/current/bundles/best_practices.html
  */
-final class AcmeEverythingPhpBundle extends AbstractBundle
+final class Tito10047EverythingYamlBundle extends AbstractBundle
 {
     public function configure(DefinitionConfigurator $definition): void
     {
@@ -30,7 +30,7 @@ final class AcmeEverythingPhpBundle extends AbstractBundle
             $builder->prependExtensionConfig('framework', [
                 'asset_mapper' => [
                     'paths' => [
-                        $this->getPath().'/assets/src' => '@acme/everything-php-bundle',
+                        $this->getPath().'/assets/src' => '@tito10047/everything-yaml-bundle',
                     ],
                 ],
             ]);
@@ -42,19 +42,19 @@ final class AcmeEverythingPhpBundle extends AbstractBundle
      */
     public function loadExtension(array $config, ContainerConfigurator $container, ContainerBuilder $builder): void
     {
-        $container->import('../config/services.php');
+        $container->import('../config/services.yaml');
 
         $container->services()
-            ->get('acme_everything_php.greeter')
+            ->get('tito10047_everything_yaml.greeter')
                 ->arg(0, $config['greeting'])
         ;
 
         if (!$config['greeting_header']['enabled']) {
-            $builder->removeDefinition('acme_everything_php.event_listener.greeting_header');
+            $builder->removeDefinition('tito10047_everything_yaml.event_listener.greeting_header');
         }
 
         $container->parameters()
-            ->set('acme_everything_php.model_manager_name', $config['model_manager_name'])
+            ->set('tito10047_everything_yaml.model_manager_name', $config['model_manager_name'])
         ;
     }
 
@@ -63,11 +63,11 @@ final class AcmeEverythingPhpBundle extends AbstractBundle
         parent::build($container);
 
         // maps the entities with the XML files of config/doctrine/ when the application uses Doctrine ORM,
-        // in the entity manager named by the "acme_everything_php.model_manager_name" parameter, or the default one
+        // in the entity manager named by the "tito10047_everything_yaml.model_manager_name" parameter, or the default one
         if (class_exists(DoctrineOrmMappingsPass::class) && class_exists(XmlDriver::class)) {
             $container->addCompilerPass(DoctrineOrmMappingsPass::createXmlMappingDriver(
-                [$this->getPath().'/config/doctrine' => 'Acme\\EverythingPhpBundle\\Entity'],
-                ['acme_everything_php.model_manager_name'],
+                [$this->getPath().'/config/doctrine' => 'Tito10047\\EverythingYamlBundle\\Entity'],
+                ['tito10047_everything_yaml.model_manager_name'],
                 'doctrine.default_entity_manager',
                 enableXsdValidation: true,
             ));

@@ -1,14 +1,14 @@
 <?php
 
-namespace MyVendor\EverythingYamlBundle\Tests\Unit\EventListener;
+namespace Tito10047\EverythingYamlBundle\Tests\Unit\EventListener;
 
-use MyVendor\EverythingYamlBundle\EventListener\GreetingHeaderListener;
-use MyVendor\EverythingYamlBundle\Greeter;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\ResponseEvent;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
+use Tito10047\EverythingYamlBundle\EventListener\GreetingHeaderListener;
+use Tito10047\EverythingYamlBundle\Greeter;
 
 final class GreetingHeaderListenerTest extends TestCase
 {

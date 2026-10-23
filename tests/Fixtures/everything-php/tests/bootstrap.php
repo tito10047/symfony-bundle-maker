@@ -1,7 +1,7 @@
 <?php
 
-use Acme\EverythingPhpBundle\Tests\App\TestKernel;
 use Symfony\Component\Filesystem\Filesystem;
+use Zeta\EverythingPhpBundle\Tests\App\TestKernel;
 
 require dirname(__DIR__).'/vendor/autoload.php';
 

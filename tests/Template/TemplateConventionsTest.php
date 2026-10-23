@@ -67,4 +67,21 @@ final class TemplateConventionsTest extends TestCase
 
         self::assertSame([], $violations);
     }
+
+    /**
+     * The order of the imports depends on the names: an import written in a template with a
+     * computed name, e.g. a class of the bundle, is out of order for some vendors.
+     */
+    #[DataProvider('provideTemplates')]
+    public function testBuildsTheImportsOfComputedNamesWithTheHelper(string $path): void
+    {
+        $violations = [];
+        foreach (explode("\n", (string) file_get_contents($path)) as $i => $line) {
+            if (1 === preg_match('{^use\b.*<\?=}', $line)) {
+                $violations[] = \sprintf('line %d: build the imports with $helper->imports(), which sorts them: "%s"', $i + 1, $line);
+            }
+        }
+
+        self::assertSame([], $violations);
+    }
 }

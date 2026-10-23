@@ -1,15 +1,15 @@
 {#
- # Greets people, rendered by Acme\EverythingPhpBundle\Controller\HelloController.
+ # Greets people, rendered by Zeta\EverythingPhpBundle\Controller\HelloController.
  #
  # Variables:
  #   greeting  string  the greeting, e.g. "Hello Jane!"
  #
  # It is a fragment, without layout, so applications can display it anywhere. Override it in the
- # templates/bundles/AcmeEverythingPhpBundle/hello.html.twig file of your application,
- # or only its "title" block by extending '@!AcmeEverythingPhp/hello.html.twig'.
+ # templates/bundles/ZetaEverythingPhpBundle/hello.html.twig file of your application,
+ # or only its "title" block by extending '@!ZetaEverythingPhp/hello.html.twig'.
  #}
-<section class="acme-everything-php-hello" {{ stimulus_controller('acme/everything-php-bundle/hello') }}>
-    <h1 class="acme-everything-php-hello__title">{% block title %}{{ 'Welcome!'|trans({}, 'AcmeEverythingPhp') }}{% endblock %}</h1>
-    <p class="acme-everything-php-hello__greeting">{{ greeting }}</p>
-    <button type="button" class="acme-everything-php-hello__close" {{ stimulus_action('acme/everything-php-bundle/hello', 'close') }}>{{ 'Close'|trans({}, 'AcmeEverythingPhp') }}</button>
+<section class="zeta-everything-php-hello" {{ stimulus_controller('zeta/everything-php-bundle/hello') }}>
+    <h1 class="zeta-everything-php-hello__title">{% block title %}{{ 'Welcome!'|trans({}, 'ZetaEverythingPhp') }}{% endblock %}</h1>
+    <p class="zeta-everything-php-hello__greeting">{{ greeting }}</p>
+    <button type="button" class="zeta-everything-php-hello__close" {{ stimulus_action('zeta/everything-php-bundle/hello', 'close') }}>{{ 'Close'|trans({}, 'ZetaEverythingPhp') }}</button>
 </section>

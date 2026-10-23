@@ -1,9 +1,9 @@
 <?php
 
-namespace MyVendor\EverythingYamlBundle\Entity;
+namespace Tito10047\EverythingYamlBundle\Entity;
 
 /**
- * A greeting sent to someone, stored in the "my_vendor_everything_yaml_greeting" table.
+ * A greeting sent to someone, stored in the "tito10047_everything_yaml_greeting" table.
  *
  * The entity is a plain PHP class, mapped in config/doctrine/Greeting.orm.xml. It is not final:
  * Doctrine may extend it to create its lazy-loading proxies.

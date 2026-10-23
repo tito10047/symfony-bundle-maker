@@ -1,9 +1,9 @@
 <?php
 
-namespace Acme\EverythingPhpBundle\Entity;
+namespace Zeta\EverythingPhpBundle\Entity;
 
 /**
- * A greeting sent to someone, stored in the "acme_everything_php_greeting" table.
+ * A greeting sent to someone, stored in the "zeta_everything_php_greeting" table.
  *
  * The entity is a plain PHP class, mapped in config/doctrine/Greeting.orm.xml. It is not final:
  * Doctrine may extend it to create its lazy-loading proxies.

@@ -1,14 +1,14 @@
 <?php
 
-namespace MyVendor\EverythingYamlBundle\Tests\Integration;
+namespace Zeta\EverythingPhpBundle\Tests\Integration;
 
-use MyVendor\EverythingYamlBundle\GreeterInterface;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
+use Zeta\EverythingPhpBundle\GreeterInterface;
 
 /**
  * Boots the test application, which registers the bundle.
  */
-final class MyVendorEverythingYamlBundleTest extends KernelTestCase
+final class ZetaEverythingPhpBundleTest extends KernelTestCase
 {
     public function testGreeterCanBeAutowired(): void
     {

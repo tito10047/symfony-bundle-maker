@@ -1,6 +1,6 @@
 {
-    "name": "@acme/everything-php-bundle",
-    "description": "AcmeEverythingPhpBundle for Symfony",
+    "name": "@zeta/everything-php-bundle",
+    "description": "ZetaEverythingPhpBundle for Symfony",
     "license": "MIT",
     "type": "module",
     "symfony": {

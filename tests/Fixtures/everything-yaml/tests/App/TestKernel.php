@@ -1,11 +1,9 @@
 <?php
 
-namespace MyVendor\EverythingYamlBundle\Tests\App;
+namespace Tito10047\EverythingYamlBundle\Tests\App;
 
 use Composer\InstalledVersions;
 use Doctrine\Bundle\DoctrineBundle\DoctrineBundle;
-use MyVendor\EverythingYamlBundle\GreeterInterface;
-use MyVendor\EverythingYamlBundle\MyVendorEverythingYamlBundle;
 use Psr\Log\NullLogger;
 use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
@@ -15,9 +13,11 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
 use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator;
 use Symfony\UX\StimulusBundle\StimulusBundle;
+use Tito10047\EverythingYamlBundle\GreeterInterface;
+use Tito10047\EverythingYamlBundle\Tito10047EverythingYamlBundle;
 
 /**
- * Minimal application registering MyVendorEverythingYamlBundle, booted by the integration and functional tests.
+ * Minimal application registering Tito10047EverythingYamlBundle, booted by the integration and functional tests.
  *
  * The bundle directory is read-only: the cache and the logs are written to the system temporary
  * directory, in a directory specific to the configuration of the kernel. tests/bootstrap.php
@@ -29,7 +29,7 @@ final class TestKernel extends Kernel
 
     /**
      * @param array<string, array<string, mixed>> $extensionConfigs configuration of the extensions, indexed by alias,
-     *                                                              applied last, e.g. ['my_vendor_everything_yaml' => ['greeting' => 'Hi']]
+     *                                                              applied last, e.g. ['tito10047_everything_yaml' => ['greeting' => 'Hi']]
      */
     public function __construct(
         string $environment = 'test',
@@ -51,7 +51,7 @@ final class TestKernel extends Kernel
         yield new TwigBundle();
         yield new DoctrineBundle();
         yield new StimulusBundle();
-        yield new MyVendorEverythingYamlBundle();
+        yield new Tito10047EverythingYamlBundle();
     }
 
     /**
@@ -133,7 +133,7 @@ final class TestKernel extends Kernel
     protected function configureRoutes(RoutingConfigurator $routes): void
     {
         // imported like an application does, see README.md
-        $routes->import('@MyVendorEverythingYamlBundle/config/routes.yaml');
+        $routes->import('@Tito10047EverythingYamlBundle/config/routes.yaml');
     }
 
     /**
@@ -141,7 +141,7 @@ final class TestKernel extends Kernel
      */
     public static function getTemporaryDir(): string
     {
-        return sys_get_temp_dir().'/my-vendor-everything-yaml-bundle/'.hash('xxh128', __DIR__);
+        return sys_get_temp_dir().'/tito10047-everything-yaml-bundle/'.hash('xxh128', __DIR__);
     }
 
     private function getVarDir(): string

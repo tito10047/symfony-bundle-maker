@@ -1,6 +1,6 @@
-# MyVendorEverythingYamlBundle
+# Tito10047EverythingYamlBundle
 
-MyVendorEverythingYamlBundle for Symfony
+Tito10047EverythingYamlBundle for Symfony
 
 ## Installation
 
@@ -9,15 +9,15 @@ Follow the [installation instructions](../README.md#installation) of the README.
 ## Configuration
 
 The bundle works without configuration. These are the options of the
-`my_vendor_everything_yaml` extension, with their default values:
+`tito10047_everything_yaml` extension, with their default values:
 
 ```yaml
-# config/packages/my_vendor_everything_yaml.yaml
-my_vendor_everything_yaml:
+# config/packages/tito10047_everything_yaml.yaml
+tito10047_everything_yaml:
     # The word people are greeted with, e.g. "Hello" in "Hello Jane!".
     greeting: 'Hello' # Example: 'Hi'
 
-    # Adds the greeting to the responses of the application, in the "X-My-Vendor-Everything-Yaml-Greeting" header.
+    # Adds the greeting to the responses of the application, in the "X-Tito10047-Everything-Yaml-Greeting" header.
     greeting_header:
         enabled: false
 
@@ -28,11 +28,11 @@ my_vendor_everything_yaml:
 The same configuration in PHP:
 
 ```php
-// config/packages/my_vendor_everything_yaml.php
+// config/packages/tito10047_everything_yaml.php
 namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 
 return App::config([
-    'my_vendor_everything_yaml' => [
+    'tito10047_everything_yaml' => [
         'greeting' => 'Hello',
         'greeting_header' => [
             'enabled' => false,
@@ -42,19 +42,19 @@ return App::config([
 ]);
 ```
 
-Run `php bin/console config:dump-reference my_vendor_everything_yaml` to display this
-reference, and `php bin/console debug:config my_vendor_everything_yaml` to display the
+Run `php bin/console config:dump-reference tito10047_everything_yaml` to display this
+reference, and `php bin/console debug:config tito10047_everything_yaml` to display the
 configuration of your application.
 
 ## Usage
 
-The bundle provides a greeter service. Type-hint `MyVendor\EverythingYamlBundle\GreeterInterface`
+The bundle provides a greeter service. Type-hint `Tito10047\EverythingYamlBundle\GreeterInterface`
 in the constructor of your services to get it injected by autowiring:
 
 ```php
 namespace App\Service;
 
-use MyVendor\EverythingYamlBundle\GreeterInterface;
+use Tito10047\EverythingYamlBundle\GreeterInterface;
 
 final class Welcome
 {
@@ -70,7 +70,7 @@ final class Welcome
 }
 ```
 
-Every exception thrown by the bundle implements `MyVendor\EverythingYamlBundle\Exception\ExceptionInterface`.
+Every exception thrown by the bundle implements `Tito10047\EverythingYamlBundle\Exception\ExceptionInterface`.
 
 ## Routes
 
@@ -79,30 +79,30 @@ The bundle provides a page greeting people, once its routes are imported
 
 | Route | Path | Controller |
 |---|---|---|
-| `my_vendor_everything_yaml_hello` | `/hello/{name}` | `MyVendor\EverythingYamlBundle\Controller\HelloController` |
+| `tito10047_everything_yaml_hello` | `/hello/{name}` | `Tito10047\EverythingYamlBundle\Controller\HelloController` |
 
-With the `/my-vendor-everything-yaml` prefix, `/my-vendor-everything-yaml/hello/Jane` greets "Hello Jane!", and
-`/my-vendor-everything-yaml/hello` greets "Hello World!".
-The page is rendered from the `@MyVendorEverythingYaml/hello.html.twig` template, see [Templates](#templates).
+With the `/tito10047-everything-yaml` prefix, `/tito10047-everything-yaml/hello/Jane` greets "Hello Jane!", and
+`/tito10047-everything-yaml/hello` greets "Hello World!".
+The page is rendered from the `@Tito10047EverythingYaml/hello.html.twig` template, see [Templates](#templates).
 
 Link to the page by the name of its route, never by its path, which depends
 on the prefix chosen by the application:
 
 ```twig
-<a href="{{ path('my_vendor_everything_yaml_hello', {name: 'Jane'}) }}">Greet Jane</a>
+<a href="{{ path('tito10047_everything_yaml_hello', {name: 'Jane'}) }}">Greet Jane</a>
 ```
 
-Run `php bin/console debug:router my_vendor_everything_yaml_hello` to display the route.
+Run `php bin/console debug:router tito10047_everything_yaml_hello` to display the route.
 
 ## Templates
 
-The templates of the bundle are in the `@MyVendorEverythingYaml` Twig namespace.
-`@MyVendorEverythingYaml/hello.html.twig` renders the greeting page. Its only variable is
+The templates of the bundle are in the `@Tito10047EverythingYaml` Twig namespace.
+`@Tito10047EverythingYaml/hello.html.twig` renders the greeting page. Its only variable is
 `greeting`, the greeting to display, e.g. "Hello Jane!". You can also include it
 in your own templates:
 
 ```twig
-{{ include('@MyVendorEverythingYaml/hello.html.twig', {greeting: 'Hello Jane!'}) }}
+{{ include('@Tito10047EverythingYaml/hello.html.twig', {greeting: 'Hello Jane!'}) }}
 ```
 
 The templates extend no layout: they display well anywhere in your pages.
@@ -110,11 +110,11 @@ The templates extend no layout: they display well anywhere in your pages.
 ### Overriding the templates
 
 To change a template, create a template with the same name in the
-`templates/bundles/MyVendorEverythingYamlBundle/` directory of your application. For example,
-`templates/bundles/MyVendorEverythingYamlBundle/hello.html.twig` replaces `@MyVendorEverythingYaml/hello.html.twig`:
+`templates/bundles/Tito10047EverythingYamlBundle/` directory of your application. For example,
+`templates/bundles/Tito10047EverythingYamlBundle/hello.html.twig` replaces `@Tito10047EverythingYaml/hello.html.twig`:
 
 ```twig
-{# templates/bundles/MyVendorEverythingYamlBundle/hello.html.twig #}
+{# templates/bundles/Tito10047EverythingYamlBundle/hello.html.twig #}
 <p class="greeting">{{ greeting }}</p>
 ```
 
@@ -122,8 +122,8 @@ To only change its `title` block, extend the original template: the `!` prefix
 always refers to the template of the bundle.
 
 ```twig
-{# templates/bundles/MyVendorEverythingYamlBundle/hello.html.twig #}
-{% extends '@!MyVendorEverythingYaml/hello.html.twig' %}
+{# templates/bundles/Tito10047EverythingYamlBundle/hello.html.twig #}
+{% extends '@!Tito10047EverythingYaml/hello.html.twig' %}
 
 {% block title %}Nice to meet you!{% endblock %}
 ```
@@ -134,18 +134,18 @@ See [How to Override any Part of a Bundle](https://symfony.com/doc/current/bundl
 
 ## Translations
 
-The messages of the bundle are in the `MyVendorEverythingYaml` translation domain. They
+The messages of the bundle are in the `Tito10047EverythingYaml` translation domain. They
 are written in English, and their ids are the English messages: they display
 well even when your application has no translator.
 The [templates](#templates) translate them with the `trans` filter:
 
 ```twig
-{{ 'Welcome!'|trans({}, 'MyVendorEverythingYaml') }}
+{{ 'Welcome!'|trans({}, 'Tito10047EverythingYaml') }}
 ```
 
 To translate them into another language, or to change them, create a file
-for the `MyVendorEverythingYaml` domain in the `translations/` directory of your
-application, e.g. `translations/MyVendorEverythingYaml.fr.xlf`. Its messages take precedence over the
+for the `Tito10047EverythingYaml` domain in the `translations/` directory of your
+application, e.g. `translations/Tito10047EverythingYaml.fr.xlf`. Its messages take precedence over the
 messages of the bundle:
 
 ```xml
@@ -162,26 +162,26 @@ messages of the bundle:
 </xliff>
 ```
 
-Run `php bin/console debug:translation en --domain=MyVendorEverythingYaml` to list the
+Run `php bin/console debug:translation en --domain=Tito10047EverythingYaml` to list the
 messages of the bundle, and `php bin/console lint:xliff translations` to check
 your files. See [How to Override any Part of a Bundle](https://symfony.com/doc/current/bundles/override.html#translations).
 
 ## Console Command
 
-The `my-vendor-everything-yaml:hello` command greets someone with the greeter:
+The `tito10047-everything-yaml:hello` command greets someone with the greeter:
 
 ```console
-$ php bin/console my-vendor-everything-yaml:hello Jane
+$ php bin/console tito10047-everything-yaml:hello Jane
 
  [OK] Hello Jane!
 
-$ php bin/console my-vendor-everything-yaml:hello Jane --yell
+$ php bin/console tito10047-everything-yaml:hello Jane --yell
 
  [OK] HELLO JANE!
 ```
 
-Run `php bin/console my-vendor-everything-yaml:hello --help` to display its usage, and
-`php bin/console list my-vendor-everything-yaml` to list the commands of the bundle.
+Run `php bin/console tito10047-everything-yaml:hello --help` to display its usage, and
+`php bin/console list tito10047-everything-yaml` to list the commands of the bundle.
 
 ## Greeting Header
 
@@ -189,14 +189,14 @@ The bundle can add a greeting header to the responses of your application:
 
 ```http
 HTTP/1.1 200 OK
-X-My-Vendor-Everything-Yaml-Greeting: Hello World!
+X-Tito10047-Everything-Yaml-Greeting: Hello World!
 ```
 
 It is disabled by default. Enable it in the configuration of the bundle:
 
 ```yaml
-# config/packages/my_vendor_everything_yaml.yaml
-my_vendor_everything_yaml:
+# config/packages/tito10047_everything_yaml.yaml
+tito10047_everything_yaml:
     greeting_header: true
 ```
 
@@ -207,8 +207,8 @@ among the other listeners of this event.
 
 ## Doctrine Entity
 
-The bundle provides the `MyVendor\EverythingYamlBundle\Entity\Greeting` entity, stored in the
-`my_vendor_everything_yaml_greeting` table. It is mapped when your application uses
+The bundle provides the `Tito10047\EverythingYamlBundle\Entity\Greeting` entity, stored in the
+`tito10047_everything_yaml_greeting` table. It is mapped when your application uses
 [Doctrine ORM with DoctrineBundle](https://symfony.com/doc/current/doctrine.html):
 
 ```console
@@ -224,9 +224,9 @@ Use the entity like the ones of your application:
 ```php
 namespace App\Service;
 
-use MyVendor\EverythingYamlBundle\Entity\Greeting;
-use MyVendor\EverythingYamlBundle\GreeterInterface;
 use Doctrine\ORM\EntityManagerInterface;
+use Tito10047\EverythingYamlBundle\Entity\Greeting;
+use Tito10047\EverythingYamlBundle\GreeterInterface;
 
 final class GreetingRecorder
 {
@@ -252,8 +252,8 @@ final class GreetingRecorder
 When your application has several entity managers, choose the one mapping the entities of the bundle:
 
 ```yaml
-# config/packages/my_vendor_everything_yaml.yaml
-my_vendor_everything_yaml:
+# config/packages/tito10047_everything_yaml.yaml
+tito10047_everything_yaml:
     model_manager_name: customer
 ```
 
@@ -268,13 +268,13 @@ doctrine:
             default:
                 auto_mapping: true
                 mappings:
-                    MyVendorEverythingYamlBundle: false
+                    Tito10047EverythingYamlBundle: false
 ```
 
 ## Web Assets
 
-The bundle provides a stylesheet, `public/css/my-vendor-everything-yaml.css`. The
-`assets:install` command installs it in the `public/bundles/myvendoreverythingyaml/` directory
+The bundle provides a stylesheet, `public/css/tito10047-everything-yaml.css`. The
+`assets:install` command installs it in the `public/bundles/tito10047everythingyaml/` directory
 of your application (see the [installation instructions](../README.md#installation)).
 When your application uses AssetMapper, AssetMapper serves it too, with a versioned URL.
 It styles the [templates](#templates) of the bundle.
@@ -286,14 +286,14 @@ the right URL in both cases:
 ```twig
 {# templates/base.html.twig #}
 {% block stylesheets %}
-    <link rel="stylesheet" href="{{ asset('bundles/myvendoreverythingyaml/css/my-vendor-everything-yaml.css') }}">
+    <link rel="stylesheet" href="{{ asset('bundles/tito10047everythingyaml/css/tito10047-everything-yaml.css') }}">
 {% endblock %}
 ```
 
 ## Stimulus Controller
 
 The bundle is a [Symfony UX](https://ux.symfony.com/) package: it provides the
-`my-vendor/everything-yaml-bundle/hello` [Stimulus](https://stimulus.hotwired.dev/) controller
+`tito10047/everything-yaml-bundle/hello` [Stimulus](https://stimulus.hotwired.dev/) controller
 (`assets/src/hello_controller.js`), which closes the element it is attached
 to. It is loaded lazily: only when a page uses it.
 The [templates](#templates) use it to close the greeting.
@@ -301,26 +301,26 @@ The [templates](#templates) use it to close the greeting.
 Use it with the `stimulus_*()` Twig functions of StimulusBundle:
 
 ```twig
-<section {{ stimulus_controller('my-vendor/everything-yaml-bundle/hello') }}>
+<section {{ stimulus_controller('tito10047/everything-yaml-bundle/hello') }}>
     <p>Hello Jane!</p>
-    <button type="button" {{ stimulus_action('my-vendor/everything-yaml-bundle/hello', 'close') }}>Close</button>
+    <button type="button" {{ stimulus_action('tito10047/everything-yaml-bundle/hello', 'close') }}>Close</button>
 </section>
 ```
 
 Or with the HTML attributes they render:
 
 ```html
-<section data-controller="my-vendor--everything-yaml-bundle--hello">
+<section data-controller="tito10047--everything-yaml-bundle--hello">
     <p>Hello Jane!</p>
-    <button type="button" data-action="my-vendor--everything-yaml-bundle--hello#close">Close</button>
+    <button type="button" data-action="tito10047--everything-yaml-bundle--hello#close">Close</button>
 </section>
 ```
 
-Before closing the element, the controller dispatches the `my-vendor--everything-yaml-bundle--hello:close`
+Before closing the element, the controller dispatches the `tito10047--everything-yaml-bundle--hello:close`
 event. Cancel it to keep the element open:
 
 ```js
-document.addEventListener('my-vendor--everything-yaml-bundle--hello:close', (event) => {
+document.addEventListener('tito10047--everything-yaml-bundle--hello:close', (event) => {
     if (!confirm('Close the greeting?')) {
         event.preventDefault();
     }
@@ -328,7 +328,7 @@ document.addEventListener('my-vendor--everything-yaml-bundle--hello:close', (eve
 ```
 
 When your application uses AssetMapper, the bundle adds its `assets/src/` directory to
-the AssetMapper paths, under the `@my-vendor/everything-yaml-bundle` namespace: run
+the AssetMapper paths, under the `@tito10047/everything-yaml-bundle` namespace: run
 `php bin/console debug:asset-map` to list its files. Disable the controller in the
 `assets/controllers.json` file of your application to stop loading it.
 See [Create a UX bundle](https://symfony.com/doc/current/frontend/create_ux_bundle.html).

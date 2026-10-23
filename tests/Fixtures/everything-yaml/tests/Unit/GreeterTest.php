@@ -1,11 +1,11 @@
 <?php
 
-namespace MyVendor\EverythingYamlBundle\Tests\Unit;
+namespace Tito10047\EverythingYamlBundle\Tests\Unit;
 
-use MyVendor\EverythingYamlBundle\Exception\InvalidArgumentException;
-use MyVendor\EverythingYamlBundle\Greeter;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
+use Tito10047\EverythingYamlBundle\Exception\InvalidArgumentException;
+use Tito10047\EverythingYamlBundle\Greeter;
 
 final class GreeterTest extends TestCase
 {

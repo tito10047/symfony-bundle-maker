@@ -1,18 +1,18 @@
 <?php
 
-namespace Acme\EverythingPhpBundle\EventListener;
+namespace Zeta\EverythingPhpBundle\EventListener;
 
-use Acme\EverythingPhpBundle\GreeterInterface;
 use Symfony\Component\HttpKernel\Event\ResponseEvent;
+use Zeta\EverythingPhpBundle\GreeterInterface;
 
 /**
- * Adds a greeting header to the responses of the application, e.g. "X-Acme-Everything-Php-Greeting: Hello World!".
+ * Adds a greeting header to the responses of the application, e.g. "X-Zeta-Everything-Php-Greeting: Hello World!".
  *
  * Listens to the "kernel.response" event when the "greeting_header" option is enabled.
  */
 final readonly class GreetingHeaderListener
 {
-    public const HEADER = 'X-Acme-Everything-Php-Greeting';
+    public const HEADER = 'X-Zeta-Everything-Php-Greeting';
 
     public function __construct(
         private GreeterInterface $greeter,

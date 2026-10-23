@@ -1,19 +1,19 @@
 <?php
 
-namespace MyVendor\EverythingYamlBundle\Command;
+namespace Tito10047\EverythingYamlBundle\Command;
 
-use MyVendor\EverythingYamlBundle\Exception\InvalidArgumentException;
-use MyVendor\EverythingYamlBundle\GreeterInterface;
 use Symfony\Component\Console\Attribute\Argument;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Attribute\Option;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Style\SymfonyStyle;
+use Tito10047\EverythingYamlBundle\Exception\InvalidArgumentException;
+use Tito10047\EverythingYamlBundle\GreeterInterface;
 
 /**
- * Greets someone from the command line, e.g. "php bin/console my-vendor-everything-yaml:hello Jane".
+ * Greets someone from the command line, e.g. "php bin/console tito10047-everything-yaml:hello Jane".
  */
-#[AsCommand('my-vendor-everything-yaml:hello', 'Greets someone')]
+#[AsCommand('tito10047-everything-yaml:hello', 'Greets someone')]
 final readonly class HelloCommand
 {
     public function __construct(

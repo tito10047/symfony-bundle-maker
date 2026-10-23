@@ -1,13 +1,13 @@
 <?php
 
-namespace Acme\EverythingPhpBundle;
+namespace Zeta\EverythingPhpBundle;
 
-use Acme\EverythingPhpBundle\Exception\InvalidArgumentException;
+use Zeta\EverythingPhpBundle\Exception\InvalidArgumentException;
 
 /**
  * Greets people with the configured greeting.
  *
- * Registered as the "acme_everything_php.greeter" service.
+ * Registered as the "zeta_everything_php.greeter" service.
  */
 final readonly class Greeter implements GreeterInterface
 {

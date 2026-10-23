@@ -1,9 +1,9 @@
 <?php
 
-namespace Acme\EverythingPhpBundle\Exception;
+namespace Zeta\EverythingPhpBundle\Exception;
 
 /**
- * Implemented by every exception thrown by AcmeEverythingPhpBundle, so they can be caught at once.
+ * Implemented by every exception thrown by ZetaEverythingPhpBundle, so they can be caught at once.
  */
 interface ExceptionInterface extends \Throwable
 {

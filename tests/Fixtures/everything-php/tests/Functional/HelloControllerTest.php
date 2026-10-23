@@ -1,6 +1,6 @@
 <?php
 
-namespace Acme\EverythingPhpBundle\Tests\Functional;
+namespace Zeta\EverythingPhpBundle\Tests\Functional;
 
 use PHPUnit\Framework\Attributes\DataProvider;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;

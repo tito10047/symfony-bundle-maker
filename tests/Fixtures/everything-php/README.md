@@ -1,8 +1,8 @@
-# AcmeEverythingPhpBundle
+# ZetaEverythingPhpBundle
 
-AcmeEverythingPhpBundle for Symfony
+ZetaEverythingPhpBundle for Symfony
 
-[![CI](https://github.com/acme/everything-php-bundle/actions/workflows/ci.yml/badge.svg)](https://github.com/acme/everything-php-bundle/actions/workflows/ci.yml)
+[![CI](https://github.com/zeta/everything-php-bundle/actions/workflows/ci.yml/badge.svg)](https://github.com/zeta/everything-php-bundle/actions/workflows/ci.yml)
 
 ## Requirements
 
@@ -20,7 +20,7 @@ of the Composer documentation.
 Open a command console, enter your project directory and execute:
 
 ```console
-composer require acme/everything-php-bundle
+composer require zeta/everything-php-bundle
 ```
 
 ### Applications that don't use Symfony Flex
@@ -31,7 +31,7 @@ Open a command console, enter your project directory and execute the
 following command to download the latest stable version of this bundle:
 
 ```console
-composer require acme/everything-php-bundle
+composer require zeta/everything-php-bundle
 ```
 
 #### Step 2: Enable the Bundle
@@ -44,7 +44,7 @@ in the `config/bundles.php` file of your project:
 
 return [
     // ...
-    Acme\EverythingPhpBundle\AcmeEverythingPhpBundle::class => ['all' => true],
+    Zeta\EverythingPhpBundle\ZetaEverythingPhpBundle::class => ['all' => true],
 ];
 ```
 
@@ -54,15 +54,15 @@ Import the routes of the bundle in your application, under the prefix of
 your choice:
 
 ```yaml
-# config/routes/acme_everything_php.yaml
-acme_everything_php:
-    resource: '@AcmeEverythingPhpBundle/config/routes.php'
-    prefix: /acme-everything-php
+# config/routes/zeta_everything_php.yaml
+zeta_everything_php:
+    resource: '@ZetaEverythingPhpBundle/config/routes.php'
+    prefix: /zeta-everything-php
 ```
 
 ### Create the Database Table
 
-The bundle stores its entities in the `acme_everything_php_greeting` table. Create it with a
+The bundle stores its entities in the `zeta_everything_php_greeting` table. Create it with a
 [migration](https://symfony.com/bundles/DoctrineMigrationsBundle/current/index.html):
 
 ```console
@@ -72,7 +72,7 @@ php bin/console doctrine:migrations:migrate
 
 ### Install the Assets
 
-Install the web assets of the bundle in the `public/bundles/acmeeverythingphp/`
+Install the web assets of the bundle in the `public/bundles/zetaeverythingphp/`
 directory of your application (Symfony Flex runs this command after each
 `composer require` and `composer update`):
 
@@ -90,7 +90,7 @@ Symfony Flex enables the controller for you. Without Flex, enable it in the
 ```json
 {
     "controllers": {
-        "@acme/everything-php-bundle": {
+        "@zeta/everything-php-bundle": {
             "hello": {
                 "enabled": true,
                 "fetch": "lazy"
@@ -109,34 +109,34 @@ php bin/console importmap:require @hotwired/stimulus
 ```
 
 With Webpack Encore, add the bundle to the dependencies of your `package.json`
-(`"@acme/everything-php-bundle": "file:vendor/acme/everything-php-bundle/assets"`), then
+(`"@zeta/everything-php-bundle": "file:vendor/zeta/everything-php-bundle/assets"`), then
 run `npm install --force` and rebuild your assets.
 
 ## Configuration
 
 The bundle works without configuration. To change its defaults, configure the
-`acme_everything_php` extension in your application:
+`zeta_everything_php` extension in your application:
 
 ```yaml
-# config/packages/acme_everything_php.yaml
-acme_everything_php:
+# config/packages/zeta_everything_php.yaml
+zeta_everything_php:
     greeting: 'Hi'
 ```
 
 Or in PHP:
 
 ```php
-// config/packages/acme_everything_php.php
+// config/packages/zeta_everything_php.php
 namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 
 return App::config([
-    'acme_everything_php' => [
+    'zeta_everything_php' => [
         'greeting' => 'Hi',
     ],
 ]);
 ```
 
-Run `php bin/console config:dump-reference acme_everything_php` to list every option
+Run `php bin/console config:dump-reference zeta_everything_php` to list every option
 and its default value, or read the [configuration reference](docs/index.md#configuration).
 
 ## Documentation
@@ -166,4 +166,4 @@ The changes of each version are listed in the [changelog](CHANGELOG.md).
 
 ## License
 
-AcmeEverythingPhpBundle is released under the MIT License, see the [LICENSE](LICENSE) file.
+ZetaEverythingPhpBundle is released under the MIT License, see the [LICENSE](LICENSE) file.

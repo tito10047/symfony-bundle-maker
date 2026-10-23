@@ -3,7 +3,7 @@
 use Symfony\Component\Config\Definition\Configurator\DefinitionConfigurator;
 
 /*
- * Configuration tree of the "my_vendor_everything_yaml" extension.
+ * Configuration tree of the "tito10047_everything_yaml" extension.
  *
  * Keep it static (no environment variables, no container parameters): Symfony
  * dumps it as the configuration reference of the bundle.
@@ -20,7 +20,7 @@ return static function (DefinitionConfigurator $definition): void {
                 ->cannotBeEmpty()
             ->end()
             ->arrayNode('greeting_header')
-                ->info('Adds the greeting to the responses of the application, in the "X-My-Vendor-Everything-Yaml-Greeting" header.')
+                ->info('Adds the greeting to the responses of the application, in the "X-Tito10047-Everything-Yaml-Greeting" header.')
                 ->canBeEnabled()
             ->end()
             ->scalarNode('model_manager_name')

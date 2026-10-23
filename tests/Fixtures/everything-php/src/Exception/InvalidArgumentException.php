@@ -1,6 +1,6 @@
 <?php
 
-namespace Acme\EverythingPhpBundle\Exception;
+namespace Zeta\EverythingPhpBundle\Exception;
 
 /**
  * Thrown when an argument has an invalid value.

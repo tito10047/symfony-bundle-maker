@@ -1,6 +1,6 @@
 <?php
 
-namespace Acme\EverythingPhpBundle\Tests\Integration;
+namespace Zeta\EverythingPhpBundle\Tests\Integration;
 
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Twig\Environment;
@@ -13,8 +13,8 @@ final class TemplateTest extends KernelTestCase
 
         $this->assertStringContainsString('Hello Jane!', $html);
         $this->assertStringContainsString('Welcome!', $html);
-        $this->assertStringContainsString('data-controller="acme--everything-php-bundle--hello"', $html);
-        $this->assertStringContainsString('data-action="acme--everything-php-bundle--hello#close"', $html);
+        $this->assertStringContainsString('data-controller="zeta--everything-php-bundle--hello"', $html);
+        $this->assertStringContainsString('data-action="zeta--everything-php-bundle--hello#close"', $html);
     }
 
     public function testEscapesTheGreeting(): void
@@ -32,6 +32,6 @@ final class TemplateTest extends KernelTestCase
         $twig = self::getContainer()->get('twig');
         $this->assertInstanceOf(Environment::class, $twig);
 
-        return $twig->render('@AcmeEverythingPhp/hello.html.twig', $context);
+        return $twig->render('@ZetaEverythingPhp/hello.html.twig', $context);
     }
 }

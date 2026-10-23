@@ -1,19 +1,19 @@
 <?php
 
-namespace Acme\EverythingPhpBundle\Command;
+namespace Zeta\EverythingPhpBundle\Command;
 
-use Acme\EverythingPhpBundle\Exception\InvalidArgumentException;
-use Acme\EverythingPhpBundle\GreeterInterface;
 use Symfony\Component\Console\Attribute\Argument;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Attribute\Option;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Style\SymfonyStyle;
+use Zeta\EverythingPhpBundle\Exception\InvalidArgumentException;
+use Zeta\EverythingPhpBundle\GreeterInterface;
 
 /**
- * Greets someone from the command line, e.g. "php bin/console acme-everything-php:hello Jane".
+ * Greets someone from the command line, e.g. "php bin/console zeta-everything-php:hello Jane".
  */
-#[AsCommand('acme-everything-php:hello', 'Greets someone')]
+#[AsCommand('zeta-everything-php:hello', 'Greets someone')]
 final readonly class HelloCommand
 {
     public function __construct(

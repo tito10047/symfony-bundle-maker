@@ -1,9 +1,7 @@
 <?php
 
-namespace Acme\EverythingPhpBundle\Tests\App;
+namespace Zeta\EverythingPhpBundle\Tests\App;
 
-use Acme\EverythingPhpBundle\AcmeEverythingPhpBundle;
-use Acme\EverythingPhpBundle\GreeterInterface;
 use Composer\InstalledVersions;
 use Doctrine\Bundle\DoctrineBundle\DoctrineBundle;
 use Psr\Log\NullLogger;
@@ -15,9 +13,11 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
 use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator;
 use Symfony\UX\StimulusBundle\StimulusBundle;
+use Zeta\EverythingPhpBundle\GreeterInterface;
+use Zeta\EverythingPhpBundle\ZetaEverythingPhpBundle;
 
 /**
- * Minimal application registering AcmeEverythingPhpBundle, booted by the integration and functional tests.
+ * Minimal application registering ZetaEverythingPhpBundle, booted by the integration and functional tests.
  *
  * The bundle directory is read-only: the cache and the logs are written to the system temporary
  * directory, in a directory specific to the configuration of the kernel. tests/bootstrap.php
@@ -29,7 +29,7 @@ final class TestKernel extends Kernel
 
     /**
      * @param array<string, array<string, mixed>> $extensionConfigs configuration of the extensions, indexed by alias,
-     *                                                              applied last, e.g. ['acme_everything_php' => ['greeting' => 'Hi']]
+     *                                                              applied last, e.g. ['zeta_everything_php' => ['greeting' => 'Hi']]
      */
     public function __construct(
         string $environment = 'test',
@@ -51,7 +51,7 @@ final class TestKernel extends Kernel
         yield new TwigBundle();
         yield new DoctrineBundle();
         yield new StimulusBundle();
-        yield new AcmeEverythingPhpBundle();
+        yield new ZetaEverythingPhpBundle();
     }
 
     /**
@@ -133,7 +133,7 @@ final class TestKernel extends Kernel
     protected function configureRoutes(RoutingConfigurator $routes): void
     {
         // imported like an application does, see README.md
-        $routes->import('@AcmeEverythingPhpBundle/config/routes.php');
+        $routes->import('@ZetaEverythingPhpBundle/config/routes.php');
     }
 
     /**
@@ -141,7 +141,7 @@ final class TestKernel extends Kernel
      */
     public static function getTemporaryDir(): string
     {
-        return sys_get_temp_dir().'/acme-everything-php-bundle/'.hash('xxh128', __DIR__);
+        return sys_get_temp_dir().'/zeta-everything-php-bundle/'.hash('xxh128', __DIR__);
     }
 
     private function getVarDir(): string

@@ -51,10 +51,12 @@ final class Scenarios
             new Scenario('minimal-php', 'acme/minimal-php-bundle'),
             new Scenario('minimal-php-array', 'acme/minimal-php-array-bundle', ConfigFormat::PhpArray),
             new Scenario('minimal-yaml', 'acme/minimal-yaml-bundle', ConfigFormat::Yaml, license: License::Proprietary),
-            // every built-in feature together (BUNDLE_MAKER_ALL=1), in each configuration format
-            new Scenario('everything-php', 'acme/everything-php-bundle', ConfigFormat::Php, $everything),
+            // every built-in feature together (BUNDLE_MAKER_ALL=1), in each configuration format; the order of the
+            // imports depends on the vendor, which sorts before (Acme), among (Tito10047, between Symfony and Twig)
+            // and after (Zeta) the vendors of the dependencies (Doctrine, PHPUnit, Psr, Symfony, Twig)
+            new Scenario('everything-php', 'zeta/everything-php-bundle', ConfigFormat::Php, $everything),
             new Scenario('everything-php-array', 'acme/everything-php-array-bundle', ConfigFormat::PhpArray, $everything),
-            new Scenario('everything-yaml', 'my-vendor/everything-yaml-bundle', ConfigFormat::Yaml, $everything),
+            new Scenario('everything-yaml', 'tito10047/everything-yaml-bundle', ConfigFormat::Yaml, $everything),
             // every contribution point of the blueprint, in each configuration format
             new Scenario('kitchen-sink-php', 'acme/php-kitchen-sink-bundle', ConfigFormat::Php, ['config', 'kitchen-sink', ...$qualityAssurance]),
             new Scenario('kitchen-sink-php-array', 'acme/php-array-kitchen-sink-bundle', ConfigFormat::PhpArray, ['config', 'kitchen-sink', ...$qualityAssurance]),

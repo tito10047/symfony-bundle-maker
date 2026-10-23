@@ -1,14 +1,14 @@
 <?php
 
-namespace Acme\EverythingPhpBundle\Tests\Integration;
+namespace Tito10047\EverythingYamlBundle\Tests\Integration;
 
-use Acme\EverythingPhpBundle\GreeterInterface;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
+use Tito10047\EverythingYamlBundle\GreeterInterface;
 
 /**
  * Boots the test application, which registers the bundle.
  */
-final class AcmeEverythingPhpBundleTest extends KernelTestCase
+final class Tito10047EverythingYamlBundleTest extends KernelTestCase
 {
     public function testGreeterCanBeAutowired(): void
     {

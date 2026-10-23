@@ -1,6 +1,6 @@
 {
-    "name": "@my-vendor/everything-yaml-bundle",
-    "description": "MyVendorEverythingYamlBundle for Symfony",
+    "name": "@tito10047/everything-yaml-bundle",
+    "description": "Tito10047EverythingYamlBundle for Symfony",
     "license": "MIT",
     "type": "module",
     "symfony": {

@@ -6,7 +6,7 @@
  */
 
 use Doctrine\Persistence\ManagerRegistry;
-use MyVendor\EverythingYamlBundle\Tests\App\TestKernel;
+use Tito10047\EverythingYamlBundle\Tests\App\TestKernel;
 
 // in debug mode, the container and the mapping are refreshed when the mapping files change
 $kernel = new TestKernel('test', true);

@@ -1,7 +1,7 @@
 <?php
 
-use MyVendor\EverythingYamlBundle\Tests\App\TestKernel;
 use Symfony\Component\Filesystem\Filesystem;
+use Tito10047\EverythingYamlBundle\Tests\App\TestKernel;
 
 require dirname(__DIR__).'/vendor/autoload.php';
 

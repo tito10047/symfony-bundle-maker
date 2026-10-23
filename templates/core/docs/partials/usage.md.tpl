@@ -4,8 +4,10 @@ use Tito10047\BundleMaker\Contributor\Core\GreeterContributor;
 /**
  * @var Tito10047\BundleMaker\Blueprint\BundleBlueprint $blueprint
  * @var Tito10047\BundleMaker\Naming\BundleNaming       $naming
+ * @var Tito10047\BundleMaker\Template\TemplateHelper   $helper
  */
 $interface = GreeterContributor::interfaceName($naming);
+$imports = $helper->imports([$interface], 'App\Service');
 ?>
 ## Usage
 
@@ -15,7 +17,7 @@ in the constructor of your services to get it injected by autowiring:
 ```php
 namespace App\Service;
 
-use <?= $interface ?>;
+<?= $imports->render() ?>
 
 final class Welcome
 {

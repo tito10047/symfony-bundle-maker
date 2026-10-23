@@ -3,11 +3,11 @@ import { Controller } from '@hotwired/stimulus';
 /*
  * Closes the element it is attached to, e.g. a greeting:
  *
- *     <section {{ stimulus_controller('acme/everything-php-bundle/hello') }}>
- *         <button type="button" {{ stimulus_action('acme/everything-php-bundle/hello', 'close') }}>Close</button>
+ *     <section {{ stimulus_controller('zeta/everything-php-bundle/hello') }}>
+ *         <button type="button" {{ stimulus_action('zeta/everything-php-bundle/hello', 'close') }}>Close</button>
  *     </section>
  *
- * Before closing, it dispatches the "acme--everything-php-bundle--hello:close" event,
+ * Before closing, it dispatches the "zeta--everything-php-bundle--hello:close" event,
  * which listeners can cancel with event.preventDefault().
  *
  * Plain JavaScript, served as is by AssetMapper: no build step.

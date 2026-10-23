@@ -1,6 +1,6 @@
-# AcmeEverythingPhpBundle
+# ZetaEverythingPhpBundle
 
-AcmeEverythingPhpBundle for Symfony
+ZetaEverythingPhpBundle for Symfony
 
 ## Installation
 
@@ -9,15 +9,15 @@ Follow the [installation instructions](../README.md#installation) of the README.
 ## Configuration
 
 The bundle works without configuration. These are the options of the
-`acme_everything_php` extension, with their default values:
+`zeta_everything_php` extension, with their default values:
 
 ```yaml
-# config/packages/acme_everything_php.yaml
-acme_everything_php:
+# config/packages/zeta_everything_php.yaml
+zeta_everything_php:
     # The word people are greeted with, e.g. "Hello" in "Hello Jane!".
     greeting: 'Hello' # Example: 'Hi'
 
-    # Adds the greeting to the responses of the application, in the "X-Acme-Everything-Php-Greeting" header.
+    # Adds the greeting to the responses of the application, in the "X-Zeta-Everything-Php-Greeting" header.
     greeting_header:
         enabled: false
 
@@ -28,11 +28,11 @@ acme_everything_php:
 The same configuration in PHP:
 
 ```php
-// config/packages/acme_everything_php.php
+// config/packages/zeta_everything_php.php
 namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 
 return App::config([
-    'acme_everything_php' => [
+    'zeta_everything_php' => [
         'greeting' => 'Hello',
         'greeting_header' => [
             'enabled' => false,
@@ -42,19 +42,19 @@ return App::config([
 ]);
 ```
 
-Run `php bin/console config:dump-reference acme_everything_php` to display this
-reference, and `php bin/console debug:config acme_everything_php` to display the
+Run `php bin/console config:dump-reference zeta_everything_php` to display this
+reference, and `php bin/console debug:config zeta_everything_php` to display the
 configuration of your application.
 
 ## Usage
 
-The bundle provides a greeter service. Type-hint `Acme\EverythingPhpBundle\GreeterInterface`
+The bundle provides a greeter service. Type-hint `Zeta\EverythingPhpBundle\GreeterInterface`
 in the constructor of your services to get it injected by autowiring:
 
 ```php
 namespace App\Service;
 
-use Acme\EverythingPhpBundle\GreeterInterface;
+use Zeta\EverythingPhpBundle\GreeterInterface;
 
 final class Welcome
 {
@@ -70,7 +70,7 @@ final class Welcome
 }
 ```
 
-Every exception thrown by the bundle implements `Acme\EverythingPhpBundle\Exception\ExceptionInterface`.
+Every exception thrown by the bundle implements `Zeta\EverythingPhpBundle\Exception\ExceptionInterface`.
 
 ## Routes
 
@@ -79,30 +79,30 @@ The bundle provides a page greeting people, once its routes are imported
 
 | Route | Path | Controller |
 |---|---|---|
-| `acme_everything_php_hello` | `/hello/{name}` | `Acme\EverythingPhpBundle\Controller\HelloController` |
+| `zeta_everything_php_hello` | `/hello/{name}` | `Zeta\EverythingPhpBundle\Controller\HelloController` |
 
-With the `/acme-everything-php` prefix, `/acme-everything-php/hello/Jane` greets "Hello Jane!", and
-`/acme-everything-php/hello` greets "Hello World!".
-The page is rendered from the `@AcmeEverythingPhp/hello.html.twig` template, see [Templates](#templates).
+With the `/zeta-everything-php` prefix, `/zeta-everything-php/hello/Jane` greets "Hello Jane!", and
+`/zeta-everything-php/hello` greets "Hello World!".
+The page is rendered from the `@ZetaEverythingPhp/hello.html.twig` template, see [Templates](#templates).
 
 Link to the page by the name of its route, never by its path, which depends
 on the prefix chosen by the application:
 
 ```twig
-<a href="{{ path('acme_everything_php_hello', {name: 'Jane'}) }}">Greet Jane</a>
+<a href="{{ path('zeta_everything_php_hello', {name: 'Jane'}) }}">Greet Jane</a>
 ```
 
-Run `php bin/console debug:router acme_everything_php_hello` to display the route.
+Run `php bin/console debug:router zeta_everything_php_hello` to display the route.
 
 ## Templates
 
-The templates of the bundle are in the `@AcmeEverythingPhp` Twig namespace.
-`@AcmeEverythingPhp/hello.html.twig` renders the greeting page. Its only variable is
+The templates of the bundle are in the `@ZetaEverythingPhp` Twig namespace.
+`@ZetaEverythingPhp/hello.html.twig` renders the greeting page. Its only variable is
 `greeting`, the greeting to display, e.g. "Hello Jane!". You can also include it
 in your own templates:
 
 ```twig
-{{ include('@AcmeEverythingPhp/hello.html.twig', {greeting: 'Hello Jane!'}) }}
+{{ include('@ZetaEverythingPhp/hello.html.twig', {greeting: 'Hello Jane!'}) }}
 ```
 
 The templates extend no layout: they display well anywhere in your pages.
@@ -110,11 +110,11 @@ The templates extend no layout: they display well anywhere in your pages.
 ### Overriding the templates
 
 To change a template, create a template with the same name in the
-`templates/bundles/AcmeEverythingPhpBundle/` directory of your application. For example,
-`templates/bundles/AcmeEverythingPhpBundle/hello.html.twig` replaces `@AcmeEverythingPhp/hello.html.twig`:
+`templates/bundles/ZetaEverythingPhpBundle/` directory of your application. For example,
+`templates/bundles/ZetaEverythingPhpBundle/hello.html.twig` replaces `@ZetaEverythingPhp/hello.html.twig`:
 
 ```twig
-{# templates/bundles/AcmeEverythingPhpBundle/hello.html.twig #}
+{# templates/bundles/ZetaEverythingPhpBundle/hello.html.twig #}
 <p class="greeting">{{ greeting }}</p>
 ```
 
@@ -122,8 +122,8 @@ To only change its `title` block, extend the original template: the `!` prefix
 always refers to the template of the bundle.
 
 ```twig
-{# templates/bundles/AcmeEverythingPhpBundle/hello.html.twig #}
-{% extends '@!AcmeEverythingPhp/hello.html.twig' %}
+{# templates/bundles/ZetaEverythingPhpBundle/hello.html.twig #}
+{% extends '@!ZetaEverythingPhp/hello.html.twig' %}
 
 {% block title %}Nice to meet you!{% endblock %}
 ```
@@ -134,18 +134,18 @@ See [How to Override any Part of a Bundle](https://symfony.com/doc/current/bundl
 
 ## Translations
 
-The messages of the bundle are in the `AcmeEverythingPhp` translation domain. They
+The messages of the bundle are in the `ZetaEverythingPhp` translation domain. They
 are written in English, and their ids are the English messages: they display
 well even when your application has no translator.
 The [templates](#templates) translate them with the `trans` filter:
 
 ```twig
-{{ 'Welcome!'|trans({}, 'AcmeEverythingPhp') }}
+{{ 'Welcome!'|trans({}, 'ZetaEverythingPhp') }}
 ```
 
 To translate them into another language, or to change them, create a file
-for the `AcmeEverythingPhp` domain in the `translations/` directory of your
-application, e.g. `translations/AcmeEverythingPhp.fr.xlf`. Its messages take precedence over the
+for the `ZetaEverythingPhp` domain in the `translations/` directory of your
+application, e.g. `translations/ZetaEverythingPhp.fr.xlf`. Its messages take precedence over the
 messages of the bundle:
 
 ```xml
@@ -162,26 +162,26 @@ messages of the bundle:
 </xliff>
 ```
 
-Run `php bin/console debug:translation en --domain=AcmeEverythingPhp` to list the
+Run `php bin/console debug:translation en --domain=ZetaEverythingPhp` to list the
 messages of the bundle, and `php bin/console lint:xliff translations` to check
 your files. See [How to Override any Part of a Bundle](https://symfony.com/doc/current/bundles/override.html#translations).
 
 ## Console Command
 
-The `acme-everything-php:hello` command greets someone with the greeter:
+The `zeta-everything-php:hello` command greets someone with the greeter:
 
 ```console
-$ php bin/console acme-everything-php:hello Jane
+$ php bin/console zeta-everything-php:hello Jane
 
  [OK] Hello Jane!
 
-$ php bin/console acme-everything-php:hello Jane --yell
+$ php bin/console zeta-everything-php:hello Jane --yell
 
  [OK] HELLO JANE!
 ```
 
-Run `php bin/console acme-everything-php:hello --help` to display its usage, and
-`php bin/console list acme-everything-php` to list the commands of the bundle.
+Run `php bin/console zeta-everything-php:hello --help` to display its usage, and
+`php bin/console list zeta-everything-php` to list the commands of the bundle.
 
 ## Greeting Header
 
@@ -189,14 +189,14 @@ The bundle can add a greeting header to the responses of your application:
 
 ```http
 HTTP/1.1 200 OK
-X-Acme-Everything-Php-Greeting: Hello World!
+X-Zeta-Everything-Php-Greeting: Hello World!
 ```
 
 It is disabled by default. Enable it in the configuration of the bundle:
 
 ```yaml
-# config/packages/acme_everything_php.yaml
-acme_everything_php:
+# config/packages/zeta_everything_php.yaml
+zeta_everything_php:
     greeting_header: true
 ```
 
@@ -207,8 +207,8 @@ among the other listeners of this event.
 
 ## Doctrine Entity
 
-The bundle provides the `Acme\EverythingPhpBundle\Entity\Greeting` entity, stored in the
-`acme_everything_php_greeting` table. It is mapped when your application uses
+The bundle provides the `Zeta\EverythingPhpBundle\Entity\Greeting` entity, stored in the
+`zeta_everything_php_greeting` table. It is mapped when your application uses
 [Doctrine ORM with DoctrineBundle](https://symfony.com/doc/current/doctrine.html):
 
 ```console
@@ -224,9 +224,9 @@ Use the entity like the ones of your application:
 ```php
 namespace App\Service;
 
-use Acme\EverythingPhpBundle\Entity\Greeting;
-use Acme\EverythingPhpBundle\GreeterInterface;
 use Doctrine\ORM\EntityManagerInterface;
+use Zeta\EverythingPhpBundle\Entity\Greeting;
+use Zeta\EverythingPhpBundle\GreeterInterface;
 
 final class GreetingRecorder
 {
@@ -252,8 +252,8 @@ final class GreetingRecorder
 When your application has several entity managers, choose the one mapping the entities of the bundle:
 
 ```yaml
-# config/packages/acme_everything_php.yaml
-acme_everything_php:
+# config/packages/zeta_everything_php.yaml
+zeta_everything_php:
     model_manager_name: customer
 ```
 
@@ -268,13 +268,13 @@ doctrine:
             default:
                 auto_mapping: true
                 mappings:
-                    AcmeEverythingPhpBundle: false
+                    ZetaEverythingPhpBundle: false
 ```
 
 ## Web Assets
 
-The bundle provides a stylesheet, `public/css/acme-everything-php.css`. The
-`assets:install` command installs it in the `public/bundles/acmeeverythingphp/` directory
+The bundle provides a stylesheet, `public/css/zeta-everything-php.css`. The
+`assets:install` command installs it in the `public/bundles/zetaeverythingphp/` directory
 of your application (see the [installation instructions](../README.md#installation)).
 When your application uses AssetMapper, AssetMapper serves it too, with a versioned URL.
 It styles the [templates](#templates) of the bundle.
@@ -286,14 +286,14 @@ the right URL in both cases:
 ```twig
 {# templates/base.html.twig #}
 {% block stylesheets %}
-    <link rel="stylesheet" href="{{ asset('bundles/acmeeverythingphp/css/acme-everything-php.css') }}">
+    <link rel="stylesheet" href="{{ asset('bundles/zetaeverythingphp/css/zeta-everything-php.css') }}">
 {% endblock %}
 ```
 
 ## Stimulus Controller
 
 The bundle is a [Symfony UX](https://ux.symfony.com/) package: it provides the
-`acme/everything-php-bundle/hello` [Stimulus](https://stimulus.hotwired.dev/) controller
+`zeta/everything-php-bundle/hello` [Stimulus](https://stimulus.hotwired.dev/) controller
 (`assets/src/hello_controller.js`), which closes the element it is attached
 to. It is loaded lazily: only when a page uses it.
 The [templates](#templates) use it to close the greeting.
@@ -301,26 +301,26 @@ The [templates](#templates) use it to close the greeting.
 Use it with the `stimulus_*()` Twig functions of StimulusBundle:
 
 ```twig
-<section {{ stimulus_controller('acme/everything-php-bundle/hello') }}>
+<section {{ stimulus_controller('zeta/everything-php-bundle/hello') }}>
     <p>Hello Jane!</p>
-    <button type="button" {{ stimulus_action('acme/everything-php-bundle/hello', 'close') }}>Close</button>
+    <button type="button" {{ stimulus_action('zeta/everything-php-bundle/hello', 'close') }}>Close</button>
 </section>
 ```
 
 Or with the HTML attributes they render:
 
 ```html
-<section data-controller="acme--everything-php-bundle--hello">
+<section data-controller="zeta--everything-php-bundle--hello">
     <p>Hello Jane!</p>
-    <button type="button" data-action="acme--everything-php-bundle--hello#close">Close</button>
+    <button type="button" data-action="zeta--everything-php-bundle--hello#close">Close</button>
 </section>
 ```
 
-Before closing the element, the controller dispatches the `acme--everything-php-bundle--hello:close`
+Before closing the element, the controller dispatches the `zeta--everything-php-bundle--hello:close`
 event. Cancel it to keep the element open:
 
 ```js
-document.addEventListener('acme--everything-php-bundle--hello:close', (event) => {
+document.addEventListener('zeta--everything-php-bundle--hello:close', (event) => {
     if (!confirm('Close the greeting?')) {
         event.preventDefault();
     }
@@ -328,7 +328,7 @@ document.addEventListener('acme--everything-php-bundle--hello:close', (event) =>
 ```
 
 When your application uses AssetMapper, the bundle adds its `assets/src/` directory to
-the AssetMapper paths, under the `@acme/everything-php-bundle` namespace: run
+the AssetMapper paths, under the `@zeta/everything-php-bundle` namespace: run
 `php bin/console debug:asset-map` to list its files. Disable the controller in the
 `assets/controllers.json` file of your application to stop loading it.
 See [Create a UX bundle](https://symfony.com/doc/current/frontend/create_ux_bundle.html).

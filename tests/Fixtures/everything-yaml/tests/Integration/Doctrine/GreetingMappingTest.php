@@ -1,11 +1,11 @@
 <?php
 
-namespace MyVendor\EverythingYamlBundle\Tests\Integration\Doctrine;
+namespace Tito10047\EverythingYamlBundle\Tests\Integration\Doctrine;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Tools\SchemaTool;
-use MyVendor\EverythingYamlBundle\Entity\Greeting;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
+use Tito10047\EverythingYamlBundle\Entity\Greeting;
 
 final class GreetingMappingTest extends KernelTestCase
 {
@@ -17,7 +17,7 @@ final class GreetingMappingTest extends KernelTestCase
     {
         $metadata = $this->getEntityManager()->getClassMetadata(Greeting::class);
 
-        $this->assertSame('my_vendor_everything_yaml_greeting', $metadata->getTableName());
+        $this->assertSame('tito10047_everything_yaml_greeting', $metadata->getTableName());
         $this->assertSame(['id'], $metadata->getIdentifierFieldNames());
         $this->assertEqualsCanonicalizing(['id', 'name', 'message', 'createdAt'], $metadata->getFieldNames());
         $this->assertSame('created_at', $metadata->getColumnName('createdAt'));

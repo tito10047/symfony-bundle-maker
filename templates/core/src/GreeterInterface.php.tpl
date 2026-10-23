@@ -1,13 +1,15 @@
 <?php
 /**
- * @var Tito10047\BundleMaker\Naming\BundleNaming $naming
+ * @var Tito10047\BundleMaker\Naming\BundleNaming     $naming
+ * @var Tito10047\BundleMaker\Template\TemplateHelper $helper
  */
+$imports = $helper->imports([$naming->namespace.'\Exception\InvalidArgumentException'], $naming->namespace);
 ?>
 <?= "<?php\n" ?>
 
 namespace <?= $naming->namespace ?>;
 
-use <?= $naming->namespace ?>\Exception\InvalidArgumentException;
+<?= $imports->render() ?>
 
 /**
  * Greets people.

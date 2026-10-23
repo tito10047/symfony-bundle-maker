@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-    Doctrine ORM mapping of Acme\EverythingPhpBundle\Entity\Greeting.
+    Doctrine ORM mapping of Zeta\EverythingPhpBundle\Entity\Greeting.
     See https://www.doctrine-project.org/projects/doctrine-orm/en/current/reference/xml-mapping.html
 -->
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                   xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
-    <entity name="Acme\EverythingPhpBundle\Entity\Greeting" table="acme_everything_php_greeting">
+    <entity name="Zeta\EverythingPhpBundle\Entity\Greeting" table="zeta_everything_php_greeting">
         <id name="id" type="integer">
             <generator strategy="AUTO"/>
         </id>

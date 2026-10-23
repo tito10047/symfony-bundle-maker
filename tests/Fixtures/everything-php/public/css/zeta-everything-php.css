@@ -1,0 +1,27 @@
+/*
+ * Styles of ZetaEverythingPhpBundle.
+ *
+ * Installed in public/bundles/zetaeverythingphp/css/zeta-everything-php.css by "php bin/console assets:install".
+ */
+
+.zeta-everything-php-hello {
+    margin: 1rem 0;
+    padding: 1rem 1.5rem;
+    border-radius: .5rem;
+    background: #f5f7fa;
+    color: #1f2933;
+}
+
+.zeta-everything-php-hello__title {
+    margin: 0 0 .5rem;
+    font-size: 1.5rem;
+}
+
+.zeta-everything-php-hello__greeting {
+    margin: 0;
+}
+
+.zeta-everything-php-hello__close {
+    margin-top: 1rem;
+    cursor: pointer;
+}

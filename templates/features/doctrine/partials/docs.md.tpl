@@ -6,8 +6,14 @@ use Tito10047\BundleMaker\Feature\SemanticConfigFeature;
 /**
  * @var Tito10047\BundleMaker\Blueprint\BundleBlueprint $blueprint
  * @var Tito10047\BundleMaker\Naming\BundleNaming       $naming
+ * @var Tito10047\BundleMaker\Template\TemplateHelper   $helper
  */
 $entity = $naming->namespace.'\Entity\Greeting';
+$imports = $helper->imports([
+    $entity,
+    GreeterContributor::interfaceName($naming),
+    'Doctrine\ORM\EntityManagerInterface',
+], 'App\Service');
 ?>
 ## Doctrine Entity
 
@@ -28,9 +34,7 @@ Use the entity like the ones of your application:
 ```php
 namespace App\Service;
 
-use <?= $entity ?>;
-use <?= GreeterContributor::interfaceName($naming) ?>;
-use Doctrine\ORM\EntityManagerInterface;
+<?= $imports->render() ?>
 
 final class GreetingRecorder
 {

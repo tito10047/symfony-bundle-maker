@@ -1,6 +1,6 @@
 {
-    "name": "my-vendor/everything-yaml-bundle",
-    "description": "MyVendorEverythingYamlBundle for Symfony",
+    "name": "tito10047/everything-yaml-bundle",
+    "description": "Tito10047EverythingYamlBundle for Symfony",
     "license": "MIT",
     "type": "symfony-bundle",
     "keywords": [
@@ -55,12 +55,12 @@
     },
     "autoload": {
         "psr-4": {
-            "MyVendor\\EverythingYamlBundle\\": "src/"
+            "Tito10047\\EverythingYamlBundle\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "MyVendor\\EverythingYamlBundle\\Tests\\": "tests/"
+            "Tito10047\\EverythingYamlBundle\\Tests\\": "tests/"
         }
     },
     "config": {

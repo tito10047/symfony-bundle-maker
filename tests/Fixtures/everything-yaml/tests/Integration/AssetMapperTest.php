@@ -1,6 +1,6 @@
 <?php
 
-namespace MyVendor\EverythingYamlBundle\Tests\Integration;
+namespace Tito10047\EverythingYamlBundle\Tests\Integration;
 
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\AssetMapper\AssetMapperInterface;
@@ -12,7 +12,7 @@ use Symfony\Component\AssetMapper\MappedAsset;
  */
 final class AssetMapperTest extends KernelTestCase
 {
-    private const PACKAGE_NAME = '@my-vendor/everything-yaml-bundle';
+    private const PACKAGE_NAME = '@tito10047/everything-yaml-bundle';
 
     private const ASSETS_DIR = __DIR__.'/../../assets';
 

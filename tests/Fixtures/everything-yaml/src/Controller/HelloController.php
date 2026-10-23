@@ -1,17 +1,17 @@
 <?php
 
-namespace MyVendor\EverythingYamlBundle\Controller;
+namespace Tito10047\EverythingYamlBundle\Controller;
 
-use MyVendor\EverythingYamlBundle\Exception\InvalidArgumentException;
-use MyVendor\EverythingYamlBundle\GreeterInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
+use Tito10047\EverythingYamlBundle\Exception\InvalidArgumentException;
+use Tito10047\EverythingYamlBundle\GreeterInterface;
 use Twig\Environment;
 
 /**
- * Greets people on a page rendered from the "@MyVendorEverythingYaml/hello.html.twig" template.
+ * Greets people on a page rendered from the "@Tito10047EverythingYaml/hello.html.twig" template.
  *
- * Routed by the "my_vendor_everything_yaml_hello" route.
+ * Routed by the "tito10047_everything_yaml_hello" route.
  */
 final readonly class HelloController
 {
@@ -29,7 +29,7 @@ final readonly class HelloController
             throw new BadRequestHttpException($exception->getMessage(), $exception);
         }
 
-        return new Response($this->twig->render('@MyVendorEverythingYaml/hello.html.twig', [
+        return new Response($this->twig->render('@Tito10047EverythingYaml/hello.html.twig', [
             'greeting' => $greeting,
         ]));
     }

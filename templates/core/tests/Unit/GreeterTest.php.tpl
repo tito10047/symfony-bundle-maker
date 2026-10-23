@@ -1,16 +1,20 @@
 <?php
 /**
- * @var Tito10047\BundleMaker\Naming\BundleNaming $naming
+ * @var Tito10047\BundleMaker\Naming\BundleNaming     $naming
+ * @var Tito10047\BundleMaker\Template\TemplateHelper $helper
  */
+$imports = $helper->imports([
+    $naming->namespace.'\Exception\InvalidArgumentException',
+    $naming->namespace.'\Greeter',
+    'PHPUnit\Framework\Attributes\DataProvider',
+    'PHPUnit\Framework\TestCase',
+], $naming->testsNamespace.'\Unit');
 ?>
 <?= "<?php\n" ?>
 
 namespace <?= $naming->testsNamespace ?>\Unit;
 
-use <?= $naming->namespace ?>\Exception\InvalidArgumentException;
-use <?= $naming->namespace ?>\Greeter;
-use PHPUnit\Framework\Attributes\DataProvider;
-use PHPUnit\Framework\TestCase;
+<?= $imports->render() ?>
 
 final class GreeterTest extends TestCase
 {

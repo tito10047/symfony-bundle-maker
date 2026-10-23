@@ -1,13 +1,13 @@
 <?php
 
-namespace Acme\EverythingPhpBundle;
+namespace Zeta\EverythingPhpBundle;
 
-use Acme\EverythingPhpBundle\Exception\InvalidArgumentException;
+use Zeta\EverythingPhpBundle\Exception\InvalidArgumentException;
 
 /**
  * Greets people.
  *
- * Type-hint this interface in your services to get the "acme_everything_php.greeter" service autowired.
+ * Type-hint this interface in your services to get the "zeta_everything_php.greeter" service autowired.
  */
 interface GreeterInterface
 {

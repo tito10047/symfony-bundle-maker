@@ -1,6 +1,6 @@
 <?php
 
-namespace Acme\EverythingPhpBundle\Tests\Integration\Command;
+namespace Zeta\EverythingPhpBundle\Tests\Integration\Command;
 
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
@@ -43,6 +43,6 @@ final class HelloCommandTest extends KernelTestCase
     {
         $application = new Application(self::bootKernel());
 
-        return new CommandTester($application->find('acme-everything-php:hello'));
+        return new CommandTester($application->find('zeta-everything-php:hello'));
     }
 }

@@ -1,13 +1,13 @@
 <?php
 
-namespace MyVendor\EverythingYamlBundle;
+namespace Tito10047\EverythingYamlBundle;
 
-use MyVendor\EverythingYamlBundle\Exception\InvalidArgumentException;
+use Tito10047\EverythingYamlBundle\Exception\InvalidArgumentException;
 
 /**
  * Greets people.
  *
- * Type-hint this interface in your services to get the "my_vendor_everything_yaml.greeter" service autowired.
+ * Type-hint this interface in your services to get the "tito10047_everything_yaml.greeter" service autowired.
  */
 interface GreeterInterface
 {

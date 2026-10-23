@@ -3,7 +3,7 @@
 use Symfony\Component\Config\Definition\Configurator\DefinitionConfigurator;
 
 /*
- * Configuration tree of the "acme_everything_php" extension.
+ * Configuration tree of the "zeta_everything_php" extension.
  *
  * Keep it static (no environment variables, no container parameters): Symfony
  * dumps it as the configuration reference of the bundle.
@@ -20,7 +20,7 @@ return static function (DefinitionConfigurator $definition): void {
                 ->cannotBeEmpty()
             ->end()
             ->arrayNode('greeting_header')
-                ->info('Adds the greeting to the responses of the application, in the "X-Acme-Everything-Php-Greeting" header.')
+                ->info('Adds the greeting to the responses of the application, in the "X-Zeta-Everything-Php-Greeting" header.')
                 ->canBeEnabled()
             ->end()
             ->scalarNode('model_manager_name')

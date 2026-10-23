@@ -1,14 +1,14 @@
 <?php
 
-namespace Acme\EverythingPhpBundle\Tests\Unit\EventListener;
+namespace Zeta\EverythingPhpBundle\Tests\Unit\EventListener;
 
-use Acme\EverythingPhpBundle\EventListener\GreetingHeaderListener;
-use Acme\EverythingPhpBundle\Greeter;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\ResponseEvent;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
+use Zeta\EverythingPhpBundle\EventListener\GreetingHeaderListener;
+use Zeta\EverythingPhpBundle\Greeter;
 
 final class GreetingHeaderListenerTest extends TestCase
 {

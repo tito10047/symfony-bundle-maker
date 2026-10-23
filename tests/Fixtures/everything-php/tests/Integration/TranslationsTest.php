@@ -1,6 +1,6 @@
 <?php
 
-namespace Acme\EverythingPhpBundle\Tests\Integration;
+namespace Zeta\EverythingPhpBundle\Tests\Integration;
 
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Translation\TranslatorBagInterface;
@@ -8,7 +8,7 @@ use Symfony\Component\Translation\Util\XliffUtils;
 
 final class TranslationsTest extends KernelTestCase
 {
-    private const DOMAIN = 'AcmeEverythingPhp';
+    private const DOMAIN = 'ZetaEverythingPhp';
 
     public function testMessagesAreLoadedInTheDomainOfTheBundle(): void
     {

@@ -1,6 +1,6 @@
 {
-    "name": "acme/everything-php-bundle",
-    "description": "AcmeEverythingPhpBundle for Symfony",
+    "name": "zeta/everything-php-bundle",
+    "description": "ZetaEverythingPhpBundle for Symfony",
     "license": "MIT",
     "type": "symfony-bundle",
     "keywords": [
@@ -54,12 +54,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Acme\\EverythingPhpBundle\\": "src/"
+            "Zeta\\EverythingPhpBundle\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Acme\\EverythingPhpBundle\\Tests\\": "tests/"
+            "Zeta\\EverythingPhpBundle\\Tests\\": "tests/"
         }
     },
     "config": {

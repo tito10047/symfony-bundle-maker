@@ -1,6 +1,6 @@
 <?php
 
-namespace MyVendor\EverythingYamlBundle\Tests\Functional;
+namespace Tito10047\EverythingYamlBundle\Tests\Functional;
 
 use PHPUnit\Framework\Attributes\DataProvider;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;

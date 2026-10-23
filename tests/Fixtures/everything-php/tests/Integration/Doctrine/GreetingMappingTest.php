@@ -1,11 +1,11 @@
 <?php
 
-namespace Acme\EverythingPhpBundle\Tests\Integration\Doctrine;
+namespace Zeta\EverythingPhpBundle\Tests\Integration\Doctrine;
 
-use Acme\EverythingPhpBundle\Entity\Greeting;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Tools\SchemaTool;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
+use Zeta\EverythingPhpBundle\Entity\Greeting;
 
 final class GreetingMappingTest extends KernelTestCase
 {
@@ -17,7 +17,7 @@ final class GreetingMappingTest extends KernelTestCase
     {
         $metadata = $this->getEntityManager()->getClassMetadata(Greeting::class);
 
-        $this->assertSame('acme_everything_php_greeting', $metadata->getTableName());
+        $this->assertSame('zeta_everything_php_greeting', $metadata->getTableName());
         $this->assertSame(['id'], $metadata->getIdentifierFieldNames());
         $this->assertEqualsCanonicalizing(['id', 'name', 'message', 'createdAt'], $metadata->getFieldNames());
         $this->assertSame('created_at', $metadata->getColumnName('createdAt'));

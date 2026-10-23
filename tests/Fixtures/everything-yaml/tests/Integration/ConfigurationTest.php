@@ -1,10 +1,7 @@
 <?php
 
-namespace MyVendor\EverythingYamlBundle\Tests\Integration;
+namespace Tito10047\EverythingYamlBundle\Tests\Integration;
 
-use MyVendor\EverythingYamlBundle\EventListener\GreetingHeaderListener;
-use MyVendor\EverythingYamlBundle\GreeterInterface;
-use MyVendor\EverythingYamlBundle\Tests\App\TestKernel;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
@@ -15,6 +12,9 @@ use Symfony\Component\HttpKernel\Event\ResponseEvent;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\HttpKernel\KernelInterface;
+use Tito10047\EverythingYamlBundle\EventListener\GreetingHeaderListener;
+use Tito10047\EverythingYamlBundle\GreeterInterface;
+use Tito10047\EverythingYamlBundle\Tests\App\TestKernel;
 
 /**
  * Boots the test application with the given configuration of the bundle.
@@ -23,7 +23,7 @@ final class ConfigurationTest extends KernelTestCase
 {
     public function testGreetingIsPassedToTheGreeter(): void
     {
-        self::bootKernel(['extension_configs' => ['my_vendor_everything_yaml' => ['greeting' => 'Hi']]]);
+        self::bootKernel(['extension_configs' => ['tito10047_everything_yaml' => ['greeting' => 'Hi']]]);
 
         $greeter = self::getContainer()->get('test.'.GreeterInterface::class);
 
@@ -40,7 +40,7 @@ final class ConfigurationTest extends KernelTestCase
         $this->expectException(InvalidConfigurationException::class);
         $this->expectExceptionMessage($expectedMessage);
 
-        self::bootKernel(['extension_configs' => ['my_vendor_everything_yaml' => $config]]);
+        self::bootKernel(['extension_configs' => ['tito10047_everything_yaml' => $config]]);
     }
 
     /**
@@ -48,8 +48,8 @@ final class ConfigurationTest extends KernelTestCase
      */
     public static function provideInvalidConfigurations(): iterable
     {
-        yield 'empty greeting' => [['greeting' => ''], 'The path "my_vendor_everything_yaml.greeting" cannot contain an empty value'];
-        yield 'unknown option' => [['unknown' => true], 'Unrecognized option "unknown" under "my_vendor_everything_yaml"'];
+        yield 'empty greeting' => [['greeting' => ''], 'The path "tito10047_everything_yaml.greeting" cannot contain an empty value'];
+        yield 'unknown option' => [['unknown' => true], 'Unrecognized option "unknown" under "tito10047_everything_yaml"'];
     }
 
     public function testGreetingHeaderIsDisabledByDefault(): void
@@ -61,7 +61,7 @@ final class ConfigurationTest extends KernelTestCase
 
     public function testGreetingHeaderCanBeEnabled(): void
     {
-        $response = $this->dispatchResponse(self::bootKernel(['extension_configs' => ['my_vendor_everything_yaml' => ['greeting_header' => true]]]));
+        $response = $this->dispatchResponse(self::bootKernel(['extension_configs' => ['tito10047_everything_yaml' => ['greeting_header' => true]]]));
 
         $this->assertSame('Hello World!', $response->headers->get(GreetingHeaderListener::HEADER));
     }

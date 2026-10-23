@@ -1,15 +1,15 @@
 {#
- # Greets people, rendered by MyVendor\EverythingYamlBundle\Controller\HelloController.
+ # Greets people, rendered by Tito10047\EverythingYamlBundle\Controller\HelloController.
  #
  # Variables:
  #   greeting  string  the greeting, e.g. "Hello Jane!"
  #
  # It is a fragment, without layout, so applications can display it anywhere. Override it in the
- # templates/bundles/MyVendorEverythingYamlBundle/hello.html.twig file of your application,
- # or only its "title" block by extending '@!MyVendorEverythingYaml/hello.html.twig'.
+ # templates/bundles/Tito10047EverythingYamlBundle/hello.html.twig file of your application,
+ # or only its "title" block by extending '@!Tito10047EverythingYaml/hello.html.twig'.
  #}
-<section class="my-vendor-everything-yaml-hello" {{ stimulus_controller('my-vendor/everything-yaml-bundle/hello') }}>
-    <h1 class="my-vendor-everything-yaml-hello__title">{% block title %}{{ 'Welcome!'|trans({}, 'MyVendorEverythingYaml') }}{% endblock %}</h1>
-    <p class="my-vendor-everything-yaml-hello__greeting">{{ greeting }}</p>
-    <button type="button" class="my-vendor-everything-yaml-hello__close" {{ stimulus_action('my-vendor/everything-yaml-bundle/hello', 'close') }}>{{ 'Close'|trans({}, 'MyVendorEverythingYaml') }}</button>
+<section class="tito10047-everything-yaml-hello" {{ stimulus_controller('tito10047/everything-yaml-bundle/hello') }}>
+    <h1 class="tito10047-everything-yaml-hello__title">{% block title %}{{ 'Welcome!'|trans({}, 'Tito10047EverythingYaml') }}{% endblock %}</h1>
+    <p class="tito10047-everything-yaml-hello__greeting">{{ greeting }}</p>
+    <button type="button" class="tito10047-everything-yaml-hello__close" {{ stimulus_action('tito10047/everything-yaml-bundle/hello', 'close') }}>{{ 'Close'|trans({}, 'Tito10047EverythingYaml') }}</button>
 </section>

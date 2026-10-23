@@ -1,6 +1,6 @@
 <?php
 
-namespace Acme\EverythingPhpBundle\Tests\Integration;
+namespace Zeta\EverythingPhpBundle\Tests\Integration;
 
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
@@ -12,7 +12,7 @@ final class PublicAssetsTest extends KernelTestCase
     public function testAssetsAreInstalledInThePublicDirectoryOfTheApplication(): void
     {
         $filesystem = new Filesystem();
-        $publicDir = sys_get_temp_dir().'/'.uniqid('acme-everything-php-public-');
+        $publicDir = sys_get_temp_dir().'/'.uniqid('zeta-everything-php-public-');
         $filesystem->mkdir($publicDir);
         $tester = new CommandTester((new Application(self::bootKernel()))->find('assets:install'));
 
@@ -21,8 +21,8 @@ final class PublicAssetsTest extends KernelTestCase
 
             $tester->assertCommandIsSuccessful();
             $this->assertFileEquals(
-                \dirname(__DIR__, 2).'/public/css/acme-everything-php.css',
-                $publicDir.'/bundles/acmeeverythingphp/css/acme-everything-php.css',
+                \dirname(__DIR__, 2).'/public/css/zeta-everything-php.css',
+                $publicDir.'/bundles/zetaeverythingphp/css/zeta-everything-php.css',
             );
         } finally {
             $filesystem->remove($publicDir);

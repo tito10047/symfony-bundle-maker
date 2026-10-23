@@ -20,12 +20,12 @@
     <php>
         <ini name="display_errors" value="1"/>
         <ini name="error_reporting" value="-1"/>
-        <env name="KERNEL_CLASS" value="Acme\EverythingPhpBundle\Tests\App\TestKernel"/>
+        <env name="KERNEL_CLASS" value="Zeta\EverythingPhpBundle\Tests\App\TestKernel"/>
         <env name="SHELL_VERBOSITY" value="-1"/>
     </php>
 
     <testsuites>
-        <testsuite name="AcmeEverythingPhpBundle Test Suite">
+        <testsuite name="ZetaEverythingPhpBundle Test Suite">
             <directory>tests</directory>
         </testsuite>
     </testsuites>

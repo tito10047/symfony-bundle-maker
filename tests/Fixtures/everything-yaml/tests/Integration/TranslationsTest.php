@@ -1,6 +1,6 @@
 <?php
 
-namespace MyVendor\EverythingYamlBundle\Tests\Integration;
+namespace Tito10047\EverythingYamlBundle\Tests\Integration;
 
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Translation\TranslatorBagInterface;
@@ -8,7 +8,7 @@ use Symfony\Component\Translation\Util\XliffUtils;
 
 final class TranslationsTest extends KernelTestCase
 {
-    private const DOMAIN = 'MyVendorEverythingYaml';
+    private const DOMAIN = 'Tito10047EverythingYaml';
 
     public function testMessagesAreLoadedInTheDomainOfTheBundle(): void
     {

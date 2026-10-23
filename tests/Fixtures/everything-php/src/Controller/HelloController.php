@@ -1,17 +1,17 @@
 <?php
 
-namespace Acme\EverythingPhpBundle\Controller;
+namespace Zeta\EverythingPhpBundle\Controller;
 
-use Acme\EverythingPhpBundle\Exception\InvalidArgumentException;
-use Acme\EverythingPhpBundle\GreeterInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Twig\Environment;
+use Zeta\EverythingPhpBundle\Exception\InvalidArgumentException;
+use Zeta\EverythingPhpBundle\GreeterInterface;
 
 /**
- * Greets people on a page rendered from the "@AcmeEverythingPhp/hello.html.twig" template.
+ * Greets people on a page rendered from the "@ZetaEverythingPhp/hello.html.twig" template.
  *
- * Routed by the "acme_everything_php_hello" route.
+ * Routed by the "zeta_everything_php_hello" route.
  */
 final readonly class HelloController
 {
@@ -29,7 +29,7 @@ final readonly class HelloController
             throw new BadRequestHttpException($exception->getMessage(), $exception);
         }
 
-        return new Response($this->twig->render('@AcmeEverythingPhp/hello.html.twig', [
+        return new Response($this->twig->render('@ZetaEverythingPhp/hello.html.twig', [
             'greeting' => $greeting,
         ]));
     }
