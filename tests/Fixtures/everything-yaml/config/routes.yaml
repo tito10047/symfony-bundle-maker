@@ -1,0 +1,12 @@
+# Import these routes in the application with:
+#
+#     my_vendor_everything_yaml:
+#         resource: '@MyVendorEverythingYamlBundle/config/routes.yaml'
+#
+# See https://symfony.com/doc/current/bundles/best_practices.html#routing
+
+my_vendor_everything_yaml_hello:
+    path: '/hello/{name}'
+    controller: 'my_vendor_everything_yaml.controller.hello'
+    methods: ['GET']
+    defaults: { name: 'World' }

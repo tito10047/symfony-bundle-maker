@@ -15,6 +15,7 @@ declare(strict_types=1);
 namespace Tito10047\BundleMaker\Tests\Feature;
 
 use PHPUnit\Framework\TestCase;
+use Tito10047\BundleMaker\Feature\ControllersFeature;
 use Tito10047\BundleMaker\Feature\FeatureGroup;
 use Tito10047\BundleMaker\Feature\FeatureInterface;
 use Tito10047\BundleMaker\Feature\FeatureRegistry;
@@ -94,10 +95,12 @@ final class FeatureRegistryTest extends TestCase
         $registry = FeatureRegistry::createDefault();
 
         self::assertInstanceOf(SemanticConfigFeature::class, $registry->get(SemanticConfigFeature::NAME));
+        self::assertInstanceOf(ControllersFeature::class, $registry->get(ControllersFeature::NAME));
         // the order of the questions and of the contributions
         self::assertSame(
             [
                 SemanticConfigFeature::NAME,
+                ControllersFeature::NAME,
             ],
             array_map(static fn (FeatureInterface $feature): string => $feature->getName(), $registry->getByGroup(FeatureGroup::Features)),
         );

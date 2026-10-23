@@ -60,3 +60,25 @@ final class Welcome
 ```
 
 Every exception thrown by the bundle implements `MyVendor\EverythingYamlBundle\Exception\ExceptionInterface`.
+
+## Routes
+
+The bundle provides a page greeting people, once its routes are imported
+(see the [installation instructions](../README.md#installation)):
+
+| Route | Path | Controller |
+|---|---|---|
+| `my_vendor_everything_yaml_hello` | `/hello/{name}` | `MyVendor\EverythingYamlBundle\Controller\HelloController` |
+
+With the `/my-vendor-everything-yaml` prefix, `/my-vendor-everything-yaml/hello/Jane` greets "Hello Jane!", and
+`/my-vendor-everything-yaml/hello` greets "Hello World!".
+The page is plain text.
+
+Link to the page by the name of its route, never by its path, which depends
+on the prefix chosen by the application:
+
+```twig
+<a href="{{ path('my_vendor_everything_yaml_hello', {name: 'Jane'}) }}">Greet Jane</a>
+```
+
+Run `php bin/console debug:router my_vendor_everything_yaml_hello` to display the route.

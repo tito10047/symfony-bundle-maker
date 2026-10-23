@@ -46,6 +46,18 @@ return [
 ];
 ```
 
+### Import the Routes
+
+Import the routes of the bundle in your application, under the prefix of
+your choice:
+
+```yaml
+# config/routes/acme_everything_php_array.yaml
+acme_everything_php_array:
+    resource: '@AcmeEverythingPhpArrayBundle/config/routes.php'
+    prefix: /acme-everything-php-array
+```
+
 ## Configuration
 
 The bundle works without configuration. To change its defaults, configure the

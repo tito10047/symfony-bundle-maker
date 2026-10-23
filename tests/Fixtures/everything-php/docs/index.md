@@ -60,3 +60,25 @@ final class Welcome
 ```
 
 Every exception thrown by the bundle implements `Acme\EverythingPhpBundle\Exception\ExceptionInterface`.
+
+## Routes
+
+The bundle provides a page greeting people, once its routes are imported
+(see the [installation instructions](../README.md#installation)):
+
+| Route | Path | Controller |
+|---|---|---|
+| `acme_everything_php_hello` | `/hello/{name}` | `Acme\EverythingPhpBundle\Controller\HelloController` |
+
+With the `/acme-everything-php` prefix, `/acme-everything-php/hello/Jane` greets "Hello Jane!", and
+`/acme-everything-php/hello` greets "Hello World!".
+The page is plain text.
+
+Link to the page by the name of its route, never by its path, which depends
+on the prefix chosen by the application:
+
+```twig
+<a href="{{ path('acme_everything_php_hello', {name: 'Jane'}) }}">Greet Jane</a>
+```
+
+Run `php bin/console debug:router acme_everything_php_hello` to display the route.

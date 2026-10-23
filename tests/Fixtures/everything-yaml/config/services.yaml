@@ -7,5 +7,12 @@ services:
     my_vendor_everything_yaml.greeter:
         class: MyVendor\EverythingYamlBundle\Greeter
 
+    my_vendor_everything_yaml.controller.hello:
+        class: MyVendor\EverythingYamlBundle\Controller\HelloController
+        arguments:
+            - '@my_vendor_everything_yaml.greeter'
+        tags:
+            - { name: 'controller.service_arguments' }
+
     MyVendor\EverythingYamlBundle\GreeterInterface:
         alias: my_vendor_everything_yaml.greeter

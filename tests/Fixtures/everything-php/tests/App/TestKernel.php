@@ -4,11 +4,13 @@ namespace Acme\EverythingPhpBundle\Tests\App;
 
 use Acme\EverythingPhpBundle\AcmeEverythingPhpBundle;
 use Acme\EverythingPhpBundle\GreeterInterface;
+use Psr\Log\NullLogger;
 use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 use Symfony\Component\HttpKernel\Kernel;
+use Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator;
 
 /**
  * Minimal application registering AcmeEverythingPhpBundle, booted by the integration and functional tests.
@@ -78,9 +80,21 @@ final class TestKernel extends Kernel
             ->public()
         ;
 
+        // the default logger prints the errors, e.g. the "404 Not Found" responses of the functional tests,
+        // which PHPUnit reports as risky: the test application logs nothing
+        $container->services()
+            ->set('logger', NullLogger::class)
+        ;
+
         foreach ($this->extensionConfigs as $alias => $config) {
             $container->extension($alias, $config);
         }
+    }
+
+    protected function configureRoutes(RoutingConfigurator $routes): void
+    {
+        // imported like an application does, see README.md
+        $routes->import('@AcmeEverythingPhpBundle/config/routes.php');
     }
 
     /**

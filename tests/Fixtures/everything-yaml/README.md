@@ -46,6 +46,18 @@ return [
 ];
 ```
 
+### Import the Routes
+
+Import the routes of the bundle in your application, under the prefix of
+your choice:
+
+```yaml
+# config/routes/my_vendor_everything_yaml.yaml
+my_vendor_everything_yaml:
+    resource: '@MyVendorEverythingYamlBundle/config/routes.yaml'
+    prefix: /my-vendor-everything-yaml
+```
+
 ## Configuration
 
 The bundle works without configuration. To change its defaults, configure the
