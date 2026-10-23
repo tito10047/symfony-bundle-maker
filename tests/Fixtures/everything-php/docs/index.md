@@ -16,6 +16,10 @@ The bundle works without configuration. These are the options of the
 acme_everything_php:
     # The word people are greeted with, e.g. "Hello" in "Hello Jane!".
     greeting: 'Hello' # Example: 'Hi'
+
+    # Adds the greeting to the responses of the application, in the "X-Acme-Everything-Php-Greeting" header.
+    greeting_header:
+        enabled: false
 ```
 
 The same configuration in PHP:
@@ -27,6 +31,9 @@ namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 return App::config([
     'acme_everything_php' => [
         'greeting' => 'Hello',
+        'greeting_header' => [
+            'enabled' => false,
+        ],
     ],
 ]);
 ```
@@ -171,3 +178,25 @@ $ php bin/console acme-everything-php:hello Jane --yell
 
 Run `php bin/console acme-everything-php:hello --help` to display its usage, and
 `php bin/console list acme-everything-php` to list the commands of the bundle.
+
+## Greeting Header
+
+The bundle can add a greeting header to the responses of your application:
+
+```http
+HTTP/1.1 200 OK
+X-Acme-Everything-Php-Greeting: Hello World!
+```
+
+It is disabled by default. Enable it in the configuration of the bundle:
+
+```yaml
+# config/packages/acme_everything_php.yaml
+acme_everything_php:
+    greeting_header: true
+```
+
+The header is only added to the response of the main request, and a header with
+the same name set by your application is kept as is. Run
+`php bin/console debug:event-dispatcher kernel.response` to display the listener
+among the other listeners of this event.

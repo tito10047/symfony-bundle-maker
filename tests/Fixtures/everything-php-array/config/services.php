@@ -2,6 +2,7 @@
 
 use Acme\EverythingPhpArrayBundle\Command\HelloCommand;
 use Acme\EverythingPhpArrayBundle\Controller\HelloController;
+use Acme\EverythingPhpArrayBundle\EventListener\GreetingHeaderListener;
 use Acme\EverythingPhpArrayBundle\Greeter;
 use Acme\EverythingPhpArrayBundle\GreeterInterface;
 
@@ -35,6 +36,15 @@ return [
             ],
             'tags' => [
                 ['name' => 'console.command'],
+            ],
+        ],
+        'acme_everything_php_array.event_listener.greeting_header' => [
+            'class' => GreetingHeaderListener::class,
+            'arguments' => [
+                '@acme_everything_php_array.greeter',
+            ],
+            'tags' => [
+                ['name' => 'kernel.event_listener', 'event' => 'kernel.response'],
             ],
         ],
         GreeterInterface::class => [

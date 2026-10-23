@@ -30,5 +30,9 @@ final class MyVendorEverythingYamlBundle extends AbstractBundle
             ->get('my_vendor_everything_yaml.greeter')
                 ->arg(0, $config['greeting'])
         ;
+
+        if (!$config['greeting_header']['enabled']) {
+            $builder->removeDefinition('my_vendor_everything_yaml.event_listener.greeting_header');
+        }
     }
 }

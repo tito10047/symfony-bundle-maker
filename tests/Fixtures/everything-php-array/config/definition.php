@@ -19,6 +19,10 @@ return static function (DefinitionConfigurator $definition): void {
                 ->defaultValue('Hello')
                 ->cannotBeEmpty()
             ->end()
+            ->arrayNode('greeting_header')
+                ->info('Adds the greeting to the responses of the application, in the "X-Acme-Everything-Php-Array-Greeting" header.')
+                ->canBeEnabled()
+            ->end()
         ->end()
     ;
 };

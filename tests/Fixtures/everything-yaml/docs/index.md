@@ -16,6 +16,10 @@ The bundle works without configuration. These are the options of the
 my_vendor_everything_yaml:
     # The word people are greeted with, e.g. "Hello" in "Hello Jane!".
     greeting: 'Hello' # Example: 'Hi'
+
+    # Adds the greeting to the responses of the application, in the "X-My-Vendor-Everything-Yaml-Greeting" header.
+    greeting_header:
+        enabled: false
 ```
 
 The same configuration in PHP:
@@ -27,6 +31,9 @@ namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 return App::config([
     'my_vendor_everything_yaml' => [
         'greeting' => 'Hello',
+        'greeting_header' => [
+            'enabled' => false,
+        ],
     ],
 ]);
 ```
@@ -171,3 +178,25 @@ $ php bin/console my-vendor-everything-yaml:hello Jane --yell
 
 Run `php bin/console my-vendor-everything-yaml:hello --help` to display its usage, and
 `php bin/console list my-vendor-everything-yaml` to list the commands of the bundle.
+
+## Greeting Header
+
+The bundle can add a greeting header to the responses of your application:
+
+```http
+HTTP/1.1 200 OK
+X-My-Vendor-Everything-Yaml-Greeting: Hello World!
+```
+
+It is disabled by default. Enable it in the configuration of the bundle:
+
+```yaml
+# config/packages/my_vendor_everything_yaml.yaml
+my_vendor_everything_yaml:
+    greeting_header: true
+```
+
+The header is only added to the response of the main request, and a header with
+the same name set by your application is kept as is. Run
+`php bin/console debug:event-dispatcher kernel.response` to display the listener
+among the other listeners of this event.

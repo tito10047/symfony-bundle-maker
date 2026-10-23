@@ -2,11 +2,19 @@
 
 namespace MyVendor\EverythingYamlBundle\Tests\Integration;
 
+use MyVendor\EverythingYamlBundle\EventListener\GreetingHeaderListener;
 use MyVendor\EverythingYamlBundle\GreeterInterface;
 use MyVendor\EverythingYamlBundle\Tests\App\TestKernel;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Event\ResponseEvent;
+use Symfony\Component\HttpKernel\HttpKernelInterface;
+use Symfony\Component\HttpKernel\KernelEvents;
+use Symfony\Component\HttpKernel\KernelInterface;
 
 /**
  * Boots the test application with the given configuration of the bundle.
@@ -44,6 +52,20 @@ final class ConfigurationTest extends KernelTestCase
         yield 'unknown option' => [['unknown' => true], 'Unrecognized option "unknown" under "my_vendor_everything_yaml"'];
     }
 
+    public function testGreetingHeaderIsDisabledByDefault(): void
+    {
+        $response = $this->dispatchResponse(self::bootKernel());
+
+        $this->assertFalse($response->headers->has(GreetingHeaderListener::HEADER));
+    }
+
+    public function testGreetingHeaderCanBeEnabled(): void
+    {
+        $response = $this->dispatchResponse(self::bootKernel(['extension_configs' => ['my_vendor_everything_yaml' => ['greeting_header' => true]]]));
+
+        $this->assertSame('Hello World!', $response->headers->get(GreetingHeaderListener::HEADER));
+    }
+
     /**
      * Supports the "extension_configs" option, see TestKernel::__construct().
      *
@@ -52,5 +74,16 @@ final class ConfigurationTest extends KernelTestCase
     protected static function createKernel(array $options = []): TestKernel
     {
         return new TestKernel(extensionConfigs: $options['extension_configs'] ?? []);
+    }
+
+    private function dispatchResponse(KernelInterface $kernel): Response
+    {
+        $dispatcher = $kernel->getContainer()->get('event_dispatcher');
+        $this->assertInstanceOf(EventDispatcherInterface::class, $dispatcher);
+
+        $response = new Response();
+        $dispatcher->dispatch(new ResponseEvent($kernel, Request::create('/'), HttpKernelInterface::MAIN_REQUEST, $response), KernelEvents::RESPONSE);
+
+        return $response;
     }
 }

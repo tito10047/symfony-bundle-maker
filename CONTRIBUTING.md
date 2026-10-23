@@ -116,10 +116,10 @@ contributions throw as early as possible.
    previous answers. The name defines the environment variable presetting the answer
    (`event-listener` gives `BUNDLE_MAKER_EVENT_LISTENER`), so never rename one.
    `contribute()` only runs when the feature is enabled.
-   A feature that builds on another one requires it (`REQUIRED_FEATURES`): it is not
-   asked, and stays disabled, when a required feature is disabled, and presets enabling
-   it anyway are rejected without interaction (in interactive mode, presets are only
-   default answers).
+   A feature that builds on another one requires it (`REQUIRED_FEATURES`, e.g. the
+   event listener requires `config`): it is not asked, and stays disabled, when a
+   required feature is disabled, and presets enabling it anyway are rejected without
+   interaction (in interactive mode, presets are only default answers).
 2. Put its templates in `templates/features/<name>/`, mirroring the destination
    paths, and its partials in `partials/`.
 3. Register it in `FeatureRegistry::createDefault()`, at the right place in its

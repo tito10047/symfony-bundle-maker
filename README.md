@@ -18,7 +18,8 @@ for Symfony 7.4 LTS and 8.1+ (`^7.4.17 || ^8.1.5`). It then installs the bundle 
 - [x] Generates a working example (a greeter service, its interface and the exceptions of the bundle) and a
       PHPUnit test suite with a test kernel, fully covered and failing on deprecations caused by the bundle.
 - [x] Optional features, each with its tests and documentation, working alone or together: a controller with its
-      Twig template and translations, and an invokable console command loaded lazily.
+      Twig template and translations, an invokable console command loaded lazily, and
+      a `kernel.response` event listener enabled through the configuration.
 - [x] Writes a complete `composer.json` and installs the dependencies in one `composer update`.
 - [x] Runs without interaction, every answer can be preset with an environment variable.
 
@@ -33,6 +34,7 @@ Each feature is a question of the assistant, and a `BUNDLE_MAKER_<FEATURE>` envi
 | Twig template | `BUNDLE_MAKER_TWIG` | yes with a controller | `templates/hello.html.twig` (`@AcmeBlog` namespace, no layout), rendered by the controller |
 | Translations | `BUNDLE_MAKER_TRANSLATIONS` | no | `translations/AcmeBlog.en.xlf`, in the domain of the bundle, used by the template |
 | Console command | `BUNDLE_MAKER_COMMAND` | no | an invokable command (`acme-blog:hello`), loaded lazily, and its tests |
+| Event listener | `BUNDLE_MAKER_EVENT_LISTENER` | no | a `kernel.response` listener adding a greeting header, enabled by the `greeting_header` option (requires the semantic configuration), and its tests |
 
 ## Requirements
 
@@ -62,8 +64,8 @@ $ BUNDLE_MAKER_NAME=acme/blog-bundle BUNDLE_MAKER_AUTHOR_NAME="Jane Doe" BUNDLE_
 In interactive mode, presets become the proposed default answers. Every preset is
 validated before the first question: an unknown `BUNDLE_MAKER_*` variable is an error. A
 feature is not asked when a feature it requires is disabled. Without interaction, enabling a
-feature whose required feature is disabled is an error too; in interactive mode, the required
-feature is asked first.
+feature whose required feature is disabled is an error too (e.g. `BUNDLE_MAKER_EVENT_LISTENER=1`
+with `BUNDLE_MAKER_CONFIG=0`); in interactive mode, the required feature is asked first.
 
 ## Running the assistant again
 

@@ -22,5 +22,12 @@ services:
         tags:
             - { name: 'console.command' }
 
+    my_vendor_everything_yaml.event_listener.greeting_header:
+        class: MyVendor\EverythingYamlBundle\EventListener\GreetingHeaderListener
+        arguments:
+            - '@my_vendor_everything_yaml.greeter'
+        tags:
+            - { name: 'kernel.event_listener', event: 'kernel.response' }
+
     MyVendor\EverythingYamlBundle\GreeterInterface:
         alias: my_vendor_everything_yaml.greeter

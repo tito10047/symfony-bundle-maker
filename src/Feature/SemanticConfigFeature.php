@@ -22,7 +22,8 @@ use Tito10047\BundleMaker\Blueprint\Slot;
  * by AcmeBlogBundle::configure(). AcmeBlogBundle::loadExtension() passes the processed
  * configuration to the services as arguments, e.g. the greeting to the greeter.
  *
- * The tree configures the greeter of the core domain example (see GreeterContributor).
+ * The tree configures the greeter of the core domain example (see GreeterContributor), and the
+ * features built on it: the greeting header of "event-listener".
  *
  * @see https://symfony.com/doc/current/bundles/configuration.html
  */

@@ -29,6 +29,7 @@ use Symfony\Component\Yaml\Yaml;
 use Tito10047\BundleMaker\Blueprint\ArgumentType;
 use Tito10047\BundleMaker\Blueprint\BundleBlueprint;
 use Tito10047\BundleMaker\Blueprint\ServiceArgument;
+use Tito10047\BundleMaker\Feature\EventListenerFeature;
 use Tito10047\BundleMaker\Options\ConfigFormat;
 use Tito10047\BundleMaker\Tests\Support\Filesystem;
 
@@ -98,7 +99,8 @@ final class GeneratedBundleTest extends TestCase
         $container->setParameter('kernel.build_dir', sys_get_temp_dir());
         $container->registerExtension($extension);
         $bundle->build($container);
-        $extension->load([], $container);
+        // with every opt-in service of the bundle
+        $extension->load($blueprint->hasFeature(EventListenerFeature::NAME) ? [['greeting_header' => true]] : [], $container);
 
         // literal values are escaped ("%%") in every format
         $unescape = $container->getParameterBag()->unescapeValue(...);

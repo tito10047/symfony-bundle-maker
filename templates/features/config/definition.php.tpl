@@ -1,9 +1,11 @@
 <?php
 use Tito10047\BundleMaker\Contributor\Core\GreeterContributor;
+use Tito10047\BundleMaker\Feature\EventListenerFeature;
 
 /**
- * @var Tito10047\BundleMaker\Naming\BundleNaming     $naming
- * @var Tito10047\BundleMaker\Template\TemplateHelper $helper
+ * @var Tito10047\BundleMaker\Blueprint\BundleBlueprint $blueprint
+ * @var Tito10047\BundleMaker\Naming\BundleNaming       $naming
+ * @var Tito10047\BundleMaker\Template\TemplateHelper   $helper
  */
 ?>
 <?= "<?php\n" ?>
@@ -27,6 +29,12 @@ return static function (DefinitionConfigurator $definition): void {
                 ->defaultValue(<?= $helper->php(GreeterContributor::DEFAULT_GREETING) ?>)
                 ->cannotBeEmpty()
             ->end()
+<?php if ($blueprint->hasFeature(EventListenerFeature::NAME)): ?>
+            ->arrayNode('greeting_header')
+                ->info(<?= $helper->php('Adds the greeting to the responses of the application, in the "'.EventListenerFeature::headerName($naming).'" header.') ?>)
+                ->canBeEnabled()
+            ->end()
+<?php endif ?>
         ->end()
     ;
 };

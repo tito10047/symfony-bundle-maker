@@ -30,5 +30,9 @@ final class AcmeEverythingPhpArrayBundle extends AbstractBundle
             ->get('acme_everything_php_array.greeter')
                 ->arg(0, $config['greeting'])
         ;
+
+        if (!$config['greeting_header']['enabled']) {
+            $builder->removeDefinition('acme_everything_php_array.event_listener.greeting_header');
+        }
     }
 }

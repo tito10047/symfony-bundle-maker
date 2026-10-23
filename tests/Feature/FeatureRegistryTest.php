@@ -17,6 +17,7 @@ namespace Tito10047\BundleMaker\Tests\Feature;
 use PHPUnit\Framework\TestCase;
 use Tito10047\BundleMaker\Feature\CommandFeature;
 use Tito10047\BundleMaker\Feature\ControllersFeature;
+use Tito10047\BundleMaker\Feature\EventListenerFeature;
 use Tito10047\BundleMaker\Feature\FeatureGroup;
 use Tito10047\BundleMaker\Feature\FeatureInterface;
 use Tito10047\BundleMaker\Feature\FeatureRegistry;
@@ -102,6 +103,7 @@ final class FeatureRegistryTest extends TestCase
         self::assertInstanceOf(TwigFeature::class, $registry->get(TwigFeature::NAME));
         self::assertInstanceOf(TranslationsFeature::class, $registry->get(TranslationsFeature::NAME));
         self::assertInstanceOf(CommandFeature::class, $registry->get(CommandFeature::NAME));
+        self::assertInstanceOf(EventListenerFeature::class, $registry->get(EventListenerFeature::NAME));
         // the order of the questions and of the contributions; a feature reading the answers of other features
         // comes after them (twig defaults to the answer of controllers)
         self::assertSame(
@@ -111,6 +113,7 @@ final class FeatureRegistryTest extends TestCase
                 TwigFeature::NAME,
                 TranslationsFeature::NAME,
                 CommandFeature::NAME,
+                EventListenerFeature::NAME,
             ],
             array_map(static fn (FeatureInterface $feature): string => $feature->getName(), $registry->getByGroup(FeatureGroup::Features)),
         );
