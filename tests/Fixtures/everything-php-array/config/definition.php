@@ -23,6 +23,10 @@ return static function (DefinitionConfigurator $definition): void {
                 ->info('Adds the greeting to the responses of the application, in the "X-Acme-Everything-Php-Array-Greeting" header.')
                 ->canBeEnabled()
             ->end()
+            ->scalarNode('model_manager_name')
+                ->info('The Doctrine entity manager mapping the entities of the bundle, the default one when null.')
+                ->defaultNull()
+            ->end()
         ->end()
     ;
 };

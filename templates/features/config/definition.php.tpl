@@ -1,5 +1,6 @@
 <?php
 use Tito10047\BundleMaker\Contributor\Core\GreeterContributor;
+use Tito10047\BundleMaker\Feature\DoctrineFeature;
 use Tito10047\BundleMaker\Feature\EventListenerFeature;
 
 /**
@@ -33,6 +34,12 @@ return static function (DefinitionConfigurator $definition): void {
             ->arrayNode('greeting_header')
                 ->info(<?= $helper->php('Adds the greeting to the responses of the application, in the "'.EventListenerFeature::headerName($naming).'" header.') ?>)
                 ->canBeEnabled()
+            ->end()
+<?php endif ?>
+<?php if ($blueprint->hasFeature(DoctrineFeature::NAME)): ?>
+            ->scalarNode('model_manager_name')
+                ->info('The Doctrine entity manager mapping the entities of the bundle, the default one when null.')
+                ->defaultNull()
             ->end()
 <?php endif ?>
         ->end()

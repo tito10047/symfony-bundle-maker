@@ -1,5 +1,6 @@
 <?php
 use Tito10047\BundleMaker\Contributor\Core\GreeterContributor;
+use Tito10047\BundleMaker\Feature\DoctrineFeature;
 use Tito10047\BundleMaker\Feature\EventListenerFeature;
 
 /**
@@ -7,6 +8,7 @@ use Tito10047\BundleMaker\Feature\EventListenerFeature;
  * @var Tito10047\BundleMaker\Naming\BundleNaming       $naming
  */
 $header = $blueprint->hasFeature(EventListenerFeature::NAME);
+$doctrine = $blueprint->hasFeature(DoctrineFeature::NAME);
 ?>
 ## Configuration
 
@@ -24,6 +26,11 @@ The bundle works without configuration. These are the options of the
     greeting_header:
         enabled: false
 <?php endif ?>
+<?php if ($doctrine): ?>
+
+    # The Doctrine entity manager mapping the entities of the bundle, the default one when null.
+    model_manager_name: null
+<?php endif ?>
 ```
 
 The same configuration in PHP:
@@ -39,6 +46,9 @@ return App::config([
         'greeting_header' => [
             'enabled' => false,
         ],
+<?php endif ?>
+<?php if ($doctrine): ?>
+        'model_manager_name' => null,
 <?php endif ?>
     ],
 ]);

@@ -23,7 +23,7 @@ use Tito10047\BundleMaker\Blueprint\Slot;
  * configuration to the services as arguments, e.g. the greeting to the greeter.
  *
  * The tree configures the greeter of the core domain example (see GreeterContributor), and the
- * features built on it: the greeting header of "event-listener".
+ * features built on it: the greeting header of "event-listener", the entity manager of "doctrine".
  *
  * @see https://symfony.com/doc/current/bundles/configuration.html
  */

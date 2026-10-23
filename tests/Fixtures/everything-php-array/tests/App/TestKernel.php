@@ -4,6 +4,8 @@ namespace Acme\EverythingPhpArrayBundle\Tests\App;
 
 use Acme\EverythingPhpArrayBundle\AcmeEverythingPhpArrayBundle;
 use Acme\EverythingPhpArrayBundle\GreeterInterface;
+use Composer\InstalledVersions;
+use Doctrine\Bundle\DoctrineBundle\DoctrineBundle;
 use Psr\Log\NullLogger;
 use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
@@ -46,6 +48,7 @@ final class TestKernel extends Kernel
     {
         yield new FrameworkBundle();
         yield new TwigBundle();
+        yield new DoctrineBundle();
         yield new AcmeEverythingPhpArrayBundle();
     }
 
@@ -99,6 +102,26 @@ final class TestKernel extends Kernel
                 'fallbacks' => ['en'],
             ],
         ]);
+
+        $container->extension('doctrine', [
+            'dbal' => [
+                'url' => 'sqlite:///:memory:',
+            ],
+            'orm' => [],
+        ]);
+
+        // DoctrineBundle 2, the only version supporting PHP 8.2 and 8.3, deprecates the defaults that DoctrineBundle 3 no longer has
+        if (version_compare(InstalledVersions::getVersion('doctrine/doctrine-bundle') ?? '', '3.0.0', '<')) {
+            $container->extension('doctrine', [
+                'orm' => [
+                    'enable_lazy_ghost_objects' => true,
+                    'enable_native_lazy_objects' => \PHP_VERSION_ID >= 80400,
+                    'controller_resolver' => [
+                        'auto_mapping' => false,
+                    ],
+                ],
+            ]);
+        }
 
         foreach ($this->extensionConfigs as $alias => $config) {
             $container->extension($alias, $config);

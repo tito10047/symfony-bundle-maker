@@ -2,6 +2,8 @@
 
 namespace MyVendor\EverythingYamlBundle;
 
+use Doctrine\Bundle\DoctrineBundle\DependencyInjection\Compiler\DoctrineOrmMappingsPass;
+use Doctrine\ORM\Mapping\Driver\XmlDriver;
 use Symfony\Component\Config\Definition\Configurator\DefinitionConfigurator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
@@ -33,6 +35,26 @@ final class MyVendorEverythingYamlBundle extends AbstractBundle
 
         if (!$config['greeting_header']['enabled']) {
             $builder->removeDefinition('my_vendor_everything_yaml.event_listener.greeting_header');
+        }
+
+        $container->parameters()
+            ->set('my_vendor_everything_yaml.model_manager_name', $config['model_manager_name'])
+        ;
+    }
+
+    public function build(ContainerBuilder $container): void
+    {
+        parent::build($container);
+
+        // maps the entities with the XML files of config/doctrine/ when the application uses Doctrine ORM,
+        // in the entity manager named by the "my_vendor_everything_yaml.model_manager_name" parameter, or the default one
+        if (class_exists(DoctrineOrmMappingsPass::class) && class_exists(XmlDriver::class)) {
+            $container->addCompilerPass(DoctrineOrmMappingsPass::createXmlMappingDriver(
+                [$this->getPath().'/config/doctrine' => 'MyVendor\\EverythingYamlBundle\\Entity'],
+                ['my_vendor_everything_yaml.model_manager_name'],
+                'doctrine.default_entity_manager',
+                enableXsdValidation: true,
+            ));
         }
     }
 }

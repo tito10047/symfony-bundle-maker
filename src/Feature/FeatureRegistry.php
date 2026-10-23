@@ -79,6 +79,7 @@ final class FeatureRegistry implements \IteratorAggregate, \Countable
             new TranslationsFeature(),
             new CommandFeature(),
             new EventListenerFeature(),
+            new DoctrineFeature(),
         );
     }
 

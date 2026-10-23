@@ -58,6 +58,16 @@ acme_everything_php:
     prefix: /acme-everything-php
 ```
 
+### Create the Database Table
+
+The bundle stores its entities in the `acme_everything_php_greeting` table. Create it with a
+[migration](https://symfony.com/bundles/DoctrineMigrationsBundle/current/index.html):
+
+```console
+php bin/console doctrine:migrations:diff
+php bin/console doctrine:migrations:migrate
+```
+
 ## Configuration
 
 The bundle works without configuration. To change its defaults, configure the

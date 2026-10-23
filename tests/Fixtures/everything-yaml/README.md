@@ -58,6 +58,16 @@ my_vendor_everything_yaml:
     prefix: /my-vendor-everything-yaml
 ```
 
+### Create the Database Table
+
+The bundle stores its entities in the `my_vendor_everything_yaml_greeting` table. Create it with a
+[migration](https://symfony.com/bundles/DoctrineMigrationsBundle/current/index.html):
+
+```console
+php bin/console doctrine:migrations:diff
+php bin/console doctrine:migrations:migrate
+```
+
 ## Configuration
 
 The bundle works without configuration. To change its defaults, configure the

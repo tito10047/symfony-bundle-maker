@@ -20,6 +20,9 @@ acme_everything_php_array:
     # Adds the greeting to the responses of the application, in the "X-Acme-Everything-Php-Array-Greeting" header.
     greeting_header:
         enabled: false
+
+    # The Doctrine entity manager mapping the entities of the bundle, the default one when null.
+    model_manager_name: null
 ```
 
 The same configuration in PHP:
@@ -34,6 +37,7 @@ return App::config([
         'greeting_header' => [
             'enabled' => false,
         ],
+        'model_manager_name' => null,
     ],
 ]);
 ```
@@ -200,3 +204,69 @@ The header is only added to the response of the main request, and a header with
 the same name set by your application is kept as is. Run
 `php bin/console debug:event-dispatcher kernel.response` to display the listener
 among the other listeners of this event.
+
+## Doctrine Entity
+
+The bundle provides the `Acme\EverythingPhpArrayBundle\Entity\Greeting` entity, stored in the
+`acme_everything_php_array_greeting` table. It is mapped when your application uses
+[Doctrine ORM with DoctrineBundle](https://symfony.com/doc/current/doctrine.html):
+
+```console
+composer require symfony/orm-pack
+```
+
+The bundle maps its entities in the default entity manager of your application, whatever its
+`auto_mapping` setting. Run `php bin/console doctrine:mapping:info` to check it, and create
+the table as explained in the [installation instructions](../README.md#installation).
+
+Use the entity like the ones of your application:
+
+```php
+namespace App\Service;
+
+use Acme\EverythingPhpArrayBundle\Entity\Greeting;
+use Acme\EverythingPhpArrayBundle\GreeterInterface;
+use Doctrine\ORM\EntityManagerInterface;
+
+final class GreetingRecorder
+{
+    public function __construct(
+        private readonly GreeterInterface $greeter,
+        private readonly EntityManagerInterface $entityManager,
+    ) {
+    }
+
+    public function greet(string $name): Greeting
+    {
+        $greeting = new Greeting($name, $this->greeter->greet($name));
+        $this->entityManager->persist($greeting);
+        $this->entityManager->flush();
+
+        return $greeting;
+    }
+}
+```
+
+### Using Another Entity Manager
+
+When your application has several entity managers, choose the one mapping the entities of the bundle:
+
+```yaml
+# config/packages/acme_everything_php_array.yaml
+acme_everything_php_array:
+    model_manager_name: customer
+```
+
+If another entity manager has `auto_mapping` enabled, it maps the entities of the bundle too.
+Exclude them from it:
+
+```yaml
+# config/packages/doctrine.yaml
+doctrine:
+    orm:
+        entity_managers:
+            default:
+                auto_mapping: true
+                mappings:
+                    AcmeEverythingPhpArrayBundle: false
+```
