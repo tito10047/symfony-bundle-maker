@@ -15,6 +15,7 @@ declare(strict_types=1);
 namespace Tito10047\BundleMaker\Tests\Composer;
 
 use Composer\IO\BufferIO;
+use Composer\Util\Platform;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Console\Output\NullOutput;
 use Tito10047\BundleMaker\Composer\CommandRunner;
@@ -23,23 +24,31 @@ use Tito10047\BundleMaker\Tests\Support\Filesystem;
 
 /**
  * Runs real Composer commands, offline: the project has no dependency and Packagist is disabled.
+ *
+ * Composer runs in a Composer home of its own: the global configuration and credentials of the
+ * machine must not change the result, e.g. a GitHub token that the tested Composer version rejects.
  */
 final class CommandRunnerTest extends TestCase
 {
     private string $dir;
-    private string|false $noAudit;
+    /** @var array<non-empty-string, string|false> the environment variables changed by the test, with their original values */
+    private array $env = [];
 
     protected function setUp(): void
     {
         $this->dir = Filesystem::createTempDir('runner');
-        $this->noAudit = getenv('COMPOSER_NO_AUDIT');
-        putenv('COMPOSER_NO_AUDIT=1');
+        $this->setEnv('COMPOSER_NO_AUDIT', '1');
+        $this->setEnv('COMPOSER_HOME', $this->dir.'/composer-home');
+        $this->setEnv('COMPOSER_CACHE_DIR', $this->dir.'/composer-cache');
+        $this->setEnv('COMPOSER_AUTH', false);
     }
 
     protected function tearDown(): void
     {
         Filesystem::remove($this->dir);
-        putenv(false === $this->noAudit ? 'COMPOSER_NO_AUDIT' : 'COMPOSER_NO_AUDIT='.$this->noAudit);
+        foreach ($this->env as $name => $value) {
+            false === $value ? Platform::clearEnv($name) : Platform::putEnv($name, $value);
+        }
     }
 
     public function testUpdateRunsThePluginsOfTheProject(): void
@@ -138,5 +147,15 @@ final class CommandRunnerTest extends TestCase
         file_put_contents($this->dir.'/composer.json', $content);
 
         return $content;
+    }
+
+    /**
+     * @param non-empty-string $name
+     * @param string|false     $value false removes the variable
+     */
+    private function setEnv(string $name, string|false $value): void
+    {
+        $this->env[$name] ??= Platform::getEnv($name);
+        false === $value ? Platform::clearEnv($name) : Platform::putEnv($name, $value);
     }
 }
