@@ -23,7 +23,8 @@
 #                            the lower bounds of the constraints are installed; needs Composer 2.10+)
 #   E2E_SCRIPTS              Composer scripts of the bundle to run, in order (default: "qa rector": "qa"
 #                            runs the tests first, "rector" checks that the generated code needs no
-#                            refactoring, as "qa" does not run Rector); a missing script fails the run
+#                            refactoring, as "qa" does not run Rector); a missing script fails the run,
+#                            so use "qa" for a bundle without Rector, e.g. BUNDLE_MAKER_ALL=0
 #
 # Without E2E_SYMFONY and with the highest dependencies, the bundle is tested as created:
 # with the dependencies installed by the assistant, nothing is reinstalled.

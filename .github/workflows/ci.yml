@@ -139,8 +139,10 @@ jobs:
         config-format: [php, php-array, yaml]
         php: ['8.5']
         include:
+          # the minimal bundle has no Rector configuration
           - preset: minimal
             all-features: '0'
+            scripts: qa
           - preset: all
             all-features: '1'
           # as created with the lowest supported PHP version, so with Symfony 7.4
