@@ -157,6 +157,8 @@ composer test
 | `composer phpstan` | Runs the static analysis (PHPStan) |
 | `composer cs` | Checks the coding standards (PHP-CS-Fixer) |
 | `composer cs:fix` | Fixes the coding standards (PHP-CS-Fixer) |
+| `composer rector` | Lists the automated refactorings (Rector) |
+| `composer rector:fix` | Applies the automated refactorings (Rector) |
 
 The changes of each version are listed in the [changelog](CHANGELOG.md).
 
